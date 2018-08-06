@@ -80,7 +80,7 @@ module.exports = {
         } else {
             var total = json;
         }        
-
+        
         res.send(total);
     },
     getNewData: function(req, res, next, type, id) {
@@ -100,10 +100,46 @@ module.exports = {
         // find if current day of year (x of 365) is before or after october 1
         // if before, use oct-1 of previous year
         // if after, use oct-1 of this year
-        var start = '2017-10-01';
+        
+
+
+
+        // current day of year
+        function isLeapYear(date){         
+            var year = date.getFullYear();
+            if((year & 3) != 0) return false;
+            return ((year % 100) != 0 || (year % 400) == 0);
+        };
+        
+        // Get Day of Year
+        function getDOY(date) {
+            var dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+            var mn = date.getMonth();
+            var dn = date.getDate();
+            var dayOfYear = dayCount[mn] + dn;
+            if(mn > 1 && isLeapYear(date)) dayOfYear++;
+            return dayOfYear;
+        };
 
         // today's date
         var today = new Date();
+       
+
+        var currentDays = getDOY(today);
+        var waterYearStart = new Date(today.getFullYear(),10,1);
+        var waterYearDays = getDOY(waterYearStart);
+
+        //console.log(currentDays);
+        //console.log(waterYearDays);
+
+        if (currentDays < waterYearDays) {
+            var waterYear = (today.getFullYear() - 1);
+        } else {
+            var waterYear = today.getFullYear();
+        }
+        console.log('water year: Oct-1-' + waterYear);
+
+        var start = waterYear + '-10-01';
         var end = formatDate(today);
         
         return axios.get('https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customSingleStationReport/' + reportType + '/start_of_period/' + id + ':' + state + ':SNTL%7Cid=%22%22%7Cname/' + start +',' + end  + '/WTEQ::value,SNWD::value,PREC::value,TOBS::value').then(response => {
