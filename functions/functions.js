@@ -23,6 +23,20 @@ function doesFileExist(type, id) {
     }
 }
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+
+
 module.exports = {
 
     isStation: function (id) {
@@ -81,9 +95,18 @@ module.exports = {
         }
 
         var state = Station[id].state;
-        console.log(state)
+
+        // start of water year
+        // find if current day of year (x of 365) is before or after october 1
+        // if before, use oct-1 of previous year
+        // if after, use oct-1 of this year
+        var start = '2017-10-01';
+
+        // today's date
+        var today = new Date();
+        var end = formatDate(today);
         
-        return axios.get('https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customSingleStationReport/' + reportType + '/start_of_period/' + id + ':' + state + ':SNTL%7Cid=%22%22%7Cname/2017-10-01,2018-07-15/WTEQ::value,SNWD::value,PREC::value,TOBS::value').then(response => {
+        return axios.get('https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customSingleStationReport/' + reportType + '/start_of_period/' + id + ':' + state + ':SNTL%7Cid=%22%22%7Cname/' + start +',' + end  + '/WTEQ::value,SNWD::value,PREC::value,TOBS::value').then(response => {
            
             console.log('data recieved from snotel')
             //res.send(response.data);

@@ -4,6 +4,7 @@ var axios = require('axios');
 
 var Functions = require('../functions/functions');
 var Data = require('../models/data');
+var Station = require('../data/static/station-master.json');
 
 // performs station check
 
@@ -40,6 +41,14 @@ exports.day_detail = function(req, res, next) {
 
 }
 
-exports.hour_list = function(req, res, next) {
-    res.send('need station id')
+exports.station_detail = function(req, res, next) {
+
+    if (Functions.isStation(req.params.id)) {
+        res.send(Station[req.params.id]);
+    } else {
+        var err = new Error('invalid api usage');
+        err.status = 404;
+        return next(err);
+    }
+
 }
