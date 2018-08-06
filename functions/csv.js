@@ -4,19 +4,13 @@ var csvtojson = require('csvtojson');
 
 module.exports = {
 
-    saveData: function (req, res, next, type, id, data) {
+    saveData: function (req, res, next, type, id, url, data) {
         if (type == 'hour') {
             var filtered = data.split('\n').slice(56).join('\n');
         } else {
             var filtered = data.split('\n').slice(57).join('\n');
         }
        
-
-        // var type = 'hour';
-        // var id = '637';
-        
-        //2018-04-02 20:00
-
         csvtojson({
             noheader: true,
             headers: ['date', 'sw', 'sd', 'pa', 'at'],
@@ -33,8 +27,13 @@ module.exports = {
                 } else {
                     var total = json;
                 }        
+
+                var data = {
+                    'request_url': url,
+                    'data': total,
+                };
         
-                res.send(total);
+                res.send(data);
 
                 console.log('caching data')
                 fs.writeFile(path.join(__dirname, '../data/' + type + '/' + id + '.json'), JSON.stringify(json), function(err, data) {
