@@ -5,14 +5,12 @@ var geolib = require('geolib');
 var Station = require('../data/static/station-master.json');
 var Functions = require('../functions/functions');
 
-// performs cache check
-
 module.exports = {
 
     nearStation: function(req, res, next, lat, lon) {
 
         // get total query paran
-        var total = 5;
+        var total = 10;
                 
         // get distance of each station
         var stationDistance = {};
@@ -40,9 +38,6 @@ module.exports = {
         sortable.sort(function(a, b) {
             return a[1] - b[1];
         });
-
-        // remove current station
-        sortable.shift();
 
         // return nearest 10 stations
         var nearestStations = {};
