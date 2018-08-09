@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var axios = require('axios');
 
+
 var Station = require('../data/static/station-master.json');
 
 // https://stackoverflow.com/questions/18082/validate-decimal-numbers-in-javascript-isnumeric
@@ -182,7 +183,6 @@ module.exports = {
 
         return data;
     },
-
     getMesoWest: function(req, res, next, id) {
         axios.get('https://api.mesowest.net/v2/stations/timeseries', {
             params: {
@@ -299,4 +299,23 @@ module.exports = {
             console.log(error)
         })
     },
+    stationMeta: function(id) {
+        var stationMeta = {
+                         
+                "state": Station[id].state,
+                "site_name": Station[id].site_name,
+                "county": Station[id].county,
+                "info": Station[id].info,
+                "latitude": Station[id].latitude,
+                "longitude": Station[id].longitude,
+                "elev": Station[id].elev,
+                "stid": Station[id].station
+          
+        }
+        return stationMeta;
+    },
+    meters_to_miles: function(meters) {
+        return Math.round(((meters*.000621371) + 0.00001) * 100) / 100
+    },
+
 }

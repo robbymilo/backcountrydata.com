@@ -14,6 +14,8 @@ router.get('/day/:id/:points?', bcdController.day_detail);
 
 router.get('/station/:id/', bcdController.station_detail);
 
+router.get('/nearest/:id?/:id2?', bcdController.station_nearest);
+
 router.get('/meso/:id/', bcdController.meso_detail);
 
 

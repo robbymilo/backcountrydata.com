@@ -1,9 +1,11 @@
 var path = require('path');
 var fs = require('fs');
 var axios = require('axios');
+var geolib = require('geolib');
 
 var Functions = require('../functions/functions');
 var Data = require('../models/data');
+var Location = require('../models/location');
 var Station = require('../data/static/station-master.json');
 
 // performs station check
@@ -51,6 +53,42 @@ exports.station_detail = function(req, res, next) {
         err.status = 404;
         return next(err);
     }
+
+}
+
+exports.station_nearest = function(req, res, next) {
+
+    // station entered
+    // returns nearest to station's point
+    if (Functions.isStation(req.params.id)) {
+        
+        console.log('getting nearest stations');
+        var results = Location.nearStation(req, res, next, Station[req.params.id].latitude, Station[req.params.id].longitude);
+        res.send(results);
+
+    }
+    // lat and lon entered
+    // returns nearest to point
+    else if (req.query.lat && req.query.lon) {
+        var lat = req.query.lat;
+        var lon = req.query.lon;
+       
+        var result = lat + ',' + lon;
+    } 
+    
+    // search
+    // returns via query
+    else if (req.query.query) {
+
+    }
+    
+    else {
+        var err = new Error('invalid api usage');
+        err.status = 404;
+        var result = next(err);
+    }
+
+    res.send(result);
 
 }
 
