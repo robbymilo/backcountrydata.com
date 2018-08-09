@@ -2,6 +2,8 @@ var path = require('path');
 var fs = require('fs');
 var csvtojson = require('csvtojson');
 
+var Functions = require('../functions/functions');
+
 module.exports = {
 
     saveData: function (req, res, next, type, id, url, data) {
@@ -28,10 +30,7 @@ module.exports = {
                     var total = json;
                 }        
 
-                var data = {
-                    'request_url': url,
-                    'data': total,
-                };
+                var data = Functions.buildResponse(total, url, id);
         
                 res.send(data);
 

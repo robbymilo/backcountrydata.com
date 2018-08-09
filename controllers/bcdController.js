@@ -70,14 +70,16 @@ exports.meso_detail = function(req, res, next) {
             params: {
                 token: 'b66df2a69170468d96e105380cf25b68',
                 stid: stid,
-                recent: '1880',
+                recent: '240',
                 obtimezone: 'local',
-                units: 'temp|F,speed|mph,precip|in'
+                units: 'temp|F,speed|mph,precip|in',
+                'timeformat': '%Y-%m-%d %I:%M',
+                'network': '25'
             }
         }).then((response) => {	
             
             if (response.data.SUMMARY.RESPONSE_CODE == 1 ) {
-                res.send(response.data.STATION[0].OBSERVATIONS);
+                res.send(response.data);
             } else {
                 res.send(response.data);
                 
