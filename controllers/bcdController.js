@@ -92,10 +92,13 @@ exports.station_nearest = function(req, res, next) {
             if (StationSearch.hasOwnProperty(key)) {
                 
                 if (Functions.stristr( StationSearch[key].site_name, req.query.search ) !== false) {
-                    searchArray.push(StationSearch[key].site_name);
+                    searchArray.push({
+                        'site': StationSearch[key].site_name,
+                        // TODO: add site id
+                    });
                 }
                 
-            }
+            } 
             
         }
 
