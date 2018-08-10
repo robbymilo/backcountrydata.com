@@ -94,7 +94,7 @@ exports.station_nearest = function(req, res, next) {
                 if (Functions.stristr( StationSearch[key].site_name, req.query.search ) !== false) {
                     searchArray.push({
                         'site': StationSearch[key].site_name,
-                        // TODO: add site id
+                        'id': StationSearch[key].id
                     });
                 }
                 
@@ -102,8 +102,7 @@ exports.station_nearest = function(req, res, next) {
             
         }
 
-        console.log(searchArray.length + ' results for ' + req.query.search)
-
+        console.log(searchArray.length + ' results for ' + req.query.search);
         results = searchArray;
 
     }
