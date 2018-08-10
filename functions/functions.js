@@ -122,7 +122,7 @@ module.exports = {
     
         var start = waterYear + '-10-01';
         var end = formatDate(today);
-        var url = 'https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customSingleStationReport,metric/' + reportType + '/start_of_period/' + id + ':' + state + ':SNTL%7Cid=%22%22%7Cname/' + start +',' + end  + '/WTEQ::value,SNWD::value,PREC::value,TOBS::value';
+        var url = 'https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customSingleStationReport,metric/' + reportType + '/start_of_period/' + id + ':' + state + ':SNTL%7Cid=%22%22%7Cname/' + start +',' + end  + '/WTEQ::value,SNWD::value,PREC::value,TOBS::value,WDIRV::value,WSPDV::value,WSPDX::value';
     
         return url;
     },
@@ -132,6 +132,9 @@ module.exports = {
         var snow_depth = [];
         var snow_water_equiv = [];
         var percip_accum = [];
+        var wind_direction = [];
+        var wind_speed = [];
+        var wind_gust = [];
 
         for (i=0; i<total.length; i++) {
             date_stamp.push(total[i].date);
@@ -146,7 +149,25 @@ module.exports = {
             if(total[i].sw < 0 || total[i].sw == "") {
                 snow_water_equiv.push(null);
             } else {
-                snow_water_equiv.push(total[i].snow_depth);
+                snow_water_equiv.push(total[i].sw);
+            }
+
+            if(total[i].wd < 0 || total[i].wd == "") {
+                wind_direction.push(null);
+            } else {
+                wind_direction.push(total[i].wd);
+            }
+
+            if(total[i].ws < 0 || total[i].ws == "") {
+                wind_speed.push(null);
+            } else {
+                wind_speed.push(total[i].ws);
+            }
+
+            if(total[i].wd < 0 || total[i].wd == "") {
+                wind_gust.push(null);
+            } else {
+                wind_gust.push(total[i].wg);
             }
             
             percip_accum.push(total[i].pa);
@@ -178,6 +199,9 @@ module.exports = {
                 'snow_depth': snow_depth,
                 'snow_water_equiv': snow_water_equiv,
                 'percip_accum': percip_accum,
+                'wind_direction': wind_direction,
+                'wind_speed': wind_speed,
+                'wind_gust': wind_gust,
             },
         };
 

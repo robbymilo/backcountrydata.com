@@ -8,14 +8,14 @@ module.exports = {
 
     saveData: function (req, res, next, type, id, url, data) {
         if (type == 'hour') {
-            var filtered = data.split('\n').slice(56).join('\n');
+            var filtered = data.split('\n').slice(59).join('\n');
         } else {
-            var filtered = data.split('\n').slice(57).join('\n');
+            var filtered = data.split('\n').slice(60).join('\n');
         }
        
         csvtojson({
             noheader: true,
-            headers: ['date', 'sw', 'sd', 'pa', 'at'],
+            headers: ['date', 'sw', 'sd', 'pa', 'at', 'wd', 'ws', 'wg'],
             checkType: true
         })
             .fromString(filtered)
