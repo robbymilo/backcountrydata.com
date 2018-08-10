@@ -192,6 +192,9 @@ module.exports = {
                 'snow_depth': 'mm',
                 'snow_water_equiv': 'mm',
                 'percip_accum': 'mm',
+                'wind_direction': 'degrees',
+                'wind_speed': 'km/hr',
+                'wind_gust': 'km/hr',
             },
             'data': {
                 'date_time': date_stamp,
