@@ -40,7 +40,7 @@ module.exports = {
         });
 
         // return nearest 10 stations
-        var nearestStations = {};
+        var nearestStations = [];
         for (i=0; i<total; i++) {
 
             var station = Functions.stationMeta(sortable[i][0]);

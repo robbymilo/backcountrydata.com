@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var axios = require('axios');
 var geolib = require('geolib');
+var parser = require('xml2json');
 
 var Functions = require('../functions/functions');
 var Data = require('../models/data');
@@ -60,7 +61,7 @@ exports.station_detail = function(req, res, next) {
 exports.station_nearest = function(req, res, next) {
 
     var results = '';
-
+    
     // station entered
     // returns nearest to station's point
     if (req.params.id && (Functions.isStation(req.params.id))) {
@@ -80,7 +81,7 @@ exports.station_nearest = function(req, res, next) {
         results = Location.nearStation(req, res, next, lat, lon);
 
     } 
-    
+
     // search
     // returns via query
     else if (req.query.search) {
@@ -93,9 +94,13 @@ exports.station_nearest = function(req, res, next) {
                 
                 if (Functions.stristr( StationSearch[key].site_name, req.query.search ) !== false) {
                     searchArray.push({
-                        'site': StationSearch[key].site_name,
+                        'site_name': StationSearch[key].site_name,
                         'id': StationSearch[key].id
                     });
+                    // searchArray.push([
+                    //     StationSearch[key].site_name,
+                    //     StationSearch[key].id
+                    // ]);
                 }
                 
             } 
@@ -118,6 +123,41 @@ exports.station_nearest = function(req, res, next) {
 }
 
 
+exports.station_discussion = function(req, res, next) {
+
+    if (Functions.isStation(req.params.id)) {
+
+        var response = '';
+        var stationLookupUrl = 'https://api.weather.gov/points/' + Station[req.params.id].latitude + ',' + Station[req.params.id].longitude;
+
+        // find station's forecast office
+        console.log('finding forecast office');
+        axios.get(stationLookupUrl).then((response) => {	
+
+            var nwsOffice = response.data['properties']['forecastOffice'];
+            nwsOffice = nwsOffice.replace('https://api.weather.gov/offices/', '');
+            var discussionUrl =  'https://www.wrh.noaa.gov/total_forecast/getprod.php?afos=xxxafd' + nwsOffice + '&xml';
+
+            console.log('finding forecast discussion');
+            axios.get(discussionUrl).then((response) => {	
+                var json = parser.toJson(response.data, {
+                    object: true                
+                });
+                res.send(json.rss.channel.item);
+
+            }, (error) => {
+                console.log(error);
+                res.send(error);
+            })
+
+        }, (error) => {
+            console.log(error);
+            res.send(error);
+        })
+
+
+    }
+}
 exports.meso_detail = function(req, res, next) {
 
     if (Functions.isStation(req.params.id)) {
@@ -133,9 +173,9 @@ exports.meso_detail = function(req, res, next) {
             params: {
                 token: 'b66df2a69170468d96e105380cf25b68',
                 stid: stid,
-                recent: '240',
+                recent: '240000',
                 obtimezone: 'local',
-                units: 'temp|F,speed|mph,precip|in',
+                units: 'temp|C,speed|mph,precip|in',
                 'timeformat': '%Y-%m-%d %I:%M',
                 'network': '25'
             }

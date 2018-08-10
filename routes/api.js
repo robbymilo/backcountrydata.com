@@ -16,6 +16,8 @@ router.get('/station/:id/', bcdController.station_detail);
 
 router.get('/nearest/:id?/', bcdController.station_nearest);
 
+router.get('/discussion/:id/', bcdController.station_discussion);
+
 router.get('/meso/:id/', bcdController.meso_detail);
 
 
