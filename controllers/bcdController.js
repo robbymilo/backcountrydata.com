@@ -7,6 +7,7 @@ var parser = require('xml2json');
 var Functions = require('../functions/functions');
 var Data = require('../models/data');
 var Location = require('../models/location');
+var Forecast = require('../models/forecast');
 var Station = require('../data/static/station-master.json');
 var StationSearch = require('../data/static/station-search2.json');
 
@@ -127,36 +128,14 @@ exports.station_discussion = function(req, res, next) {
 
     if (Functions.isStation(req.params.id)) {
 
-        var response = '';
-        var stationLookupUrl = 'https://api.weather.gov/points/' + Station[req.params.id].latitude + ',' + Station[req.params.id].longitude;
+        var lat = Station[req.params.id].latitude;
+        var lon = Station[req.params.id].longitude;
 
-        // find station's forecast office
-        console.log('finding forecast office');
-        axios.get(stationLookupUrl).then((response) => {	
-
-            var nwsOffice = response.data['properties']['forecastOffice'];
-            nwsOffice = nwsOffice.replace('https://api.weather.gov/offices/', '');
-            var discussionUrl =  'https://www.wrh.noaa.gov/total_forecast/getprod.php?afos=xxxafd' + nwsOffice + '&xml';
-
-            console.log('finding forecast discussion');
-            axios.get(discussionUrl).then((response) => {	
-                var json = parser.toJson(response.data, {
-                    object: true                
-                });
-                res.send(json.rss.channel.item);
-
-            }, (error) => {
-                console.log(error);
-                res.send(error);
-            })
-
-        }, (error) => {
-            console.log(error);
-            res.send(error);
-        })
-
+        Forecast(req, res, next, lat, lon);  
 
     }
+
+    
 }
 exports.meso_detail = function(req, res, next) {
 
