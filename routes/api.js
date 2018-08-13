@@ -10,9 +10,9 @@ router.get('/', function(req, res, next) {
 	res.redirect('https://backcountrydata.com');
 });
 
-router.get('/hour/:id/:points?', bcdController.hour_detail);
+router.get('/hour/:id/', bcdController.hour_detail);
 
-router.get('/day/:id/:points?', bcdController.day_detail);
+router.get('/day/:id/', bcdController.day_detail);
 
 router.get('/station/:id/', bcdController.station_detail);
 

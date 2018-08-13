@@ -16,7 +16,7 @@ var StationSearch = require('../data/static/station-search2.json');
 exports.hour_detail = function(req, res, next) {
 	if (Functions.isStation(req.params.id)) {
 		console.log('station: ' + req.params.id);
-		console.log('hours: ' + req.params.points);
+		console.log('hours: ' + req.query.total);
 		var type = 'hour';
 		Data(req, res, next, type, req.params.id);
 	} else {
@@ -29,7 +29,7 @@ exports.hour_detail = function(req, res, next) {
 exports.day_detail = function(req, res, next) {
 	if (Functions.isStation(req.params.id)) {
 		console.log('station: ' + req.params.id);
-		console.log('days: ' + req.params.points);
+		console.log('days: ' + req.query.total);
 		var type = 'day';
 		Data(req, res, next, type, req.params.id);
 	} else {

@@ -28,8 +28,8 @@ module.exports = {
 				// send to browser
 				console.log('sending fresh data to browser');
 
-				if (req.params.points) {
-					var total = json.slice(Math.max(json.length - req.params.points, 1));
+				if (req.query.total) {
+					var total = json.slice(Math.max(json.length - req.query.total, 1));
 				} else {
 					var total = json;
 				}
