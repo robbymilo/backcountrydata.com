@@ -102,11 +102,11 @@ module.exports = {
 		var today = new Date();
 		var currentDays = getDOY(today);
 
-		var waterYearStart = new Date(today.getFullYear(), 10, 1);
+		var waterYearStart = new Date(today.getFullYear(), 9, 1);
 		var waterYearDays = getDOY(waterYearStart);
 
-		//console.log(currentDays);
-		//console.log(waterYearDays);
+		console.log(currentDays);
+		console.log(waterYearDays);
 
 		if (currentDays < waterYearDays) {
 			var waterYear = today.getFullYear() - 1;
@@ -170,7 +170,7 @@ module.exports = {
 				wind_speed.push(total[i].ws);
 			}
 
-			if (total[i].wd < 0 || total[i].wd == '') {
+			if (total[i].wg < 0 || total[i].wg == '') {
 				wind_gust.push(null);
 			} else {
 				wind_gust.push(total[i].wg);
