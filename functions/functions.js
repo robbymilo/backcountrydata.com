@@ -195,7 +195,7 @@ module.exports = {
 				time_zone: 'GMT-08:00',
 				elevation: 'm',
 				air_temp: 'celsius',
-				snow_depth: 'mm',
+				snow_depth: 'cm',
 				snow_water_equiv: 'mm',
 				percip_accum: 'mm',
 				wind_direction: 'degrees',
