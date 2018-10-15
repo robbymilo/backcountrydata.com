@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "An API for accessing SNOTEL data in JSON format from the current water year. Data is cached and fetched every 15 minutes.",
   "keywords": ["snotel", "weather"],
+  "author": { 
+      "name" : "Robby Milo", 
+      "email" : "robbymilo@gmail.com"
+  },
   "homepage": "https://backcountrydata.com",
   "private": false,
   "scripts": {
