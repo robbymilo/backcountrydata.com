@@ -1,5 +1,3 @@
-var path = require('path');
-var fs = require('fs');
 var geolib = require('geolib');
 
 var Station = require('../data/static/station-master.json');

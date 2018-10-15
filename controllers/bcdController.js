@@ -1,8 +1,4 @@
-var path = require('path');
-var fs = require('fs');
 var axios = require('axios');
-var geolib = require('geolib');
-var parser = require('xml2json');
 
 var Functions = require('../functions/functions');
 var Data = require('../models/data');

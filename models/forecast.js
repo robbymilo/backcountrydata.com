@@ -1,8 +1,6 @@
 var axios = require('axios');
 var parser = require('xml2json');
 
-var Station = require('../data/static/station-master.json');
-
 module.exports = function(req, res, next, lat, lon) {
 	var result = {};
 	var stationLookupUrl = 'https://api.weather.gov/points/' + lat + ',' + lon;
