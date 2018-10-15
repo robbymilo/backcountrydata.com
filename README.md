@@ -2,6 +2,8 @@
 
 An API for accessing SNOTEL data in JSON format from the current water year. Data is cached and fetched every 15 minutes.
 
+To start, clone the repo and use command `npm start`.
+
 ## To-Do
 
 * Include NWS forecast hazards
