@@ -3466,5 +3466,153 @@
 	{
 		"id": 1033,
 		"site_name": "Zirkel (1033), Jackson County, Colorado (CO)"
-	}
-]
+	},
+		{
+		  "id": 1239,
+		  "site_name": "Althouse (1239), Del Norte County, California (CA)"
+		},
+		{
+		  "id": 1198,
+		  "site_name": "American Beauty (1198), Elko County, Nevada (NV)"
+		},
+		{
+		  "id": 1245,
+		  "site_name": "Anthony Lake (1245), Baker County, Oregon (OR)"
+		},
+		{
+		  "id": 1165,
+		  "site_name": "Ashley Divide (1165), Flathead County, Montana (MT)"
+		},
+		{
+		  "id": 1240,
+		  "site_name": "Bald Mtn AM (1240), Washoe County, Nevada (NV)"
+		},
+		{
+		  "id": 447,
+		  "site_name": "Bald Mtn AM OR (447), UNKNOWN County, Oregon (OR)"
+		},
+		{
+		  "id": 1246,
+		  "site_name": "Barney Creek (1246), Baker County, Oregon (OR)"
+		},
+		{
+		  "id": 1190,
+		  "site_name": "Bassoo Peak (1190), Sanders County, Montana (MT)"
+		},
+		{
+		  "id": 1295,
+		  "site_name": "Battle Creek AM (1295), Owyhee County, Idaho (ID)"
+		},
+		{
+		  "id": 1291,
+		  "site_name": "Bear Flat Meadow AM (1291), Lake County, Oregon (OR)"
+		},
+		{
+		  "id": 1229,
+		  "site_name": "Big Sheep AM (1229), Wallowa County, Oregon (OR)"
+		},
+		{
+		  "id": 1292,
+		  "site_name": "Buckskin Lake AM (1292), Harney County, Oregon (OR)"
+		},
+		{
+		  "id": 1293,
+		  "site_name": "Bull Basin AM (1293), Owyhee County, Idaho (ID)"
+		},
+		{
+		  "id": 1289,
+		  "site_name": "Call Meadows AM (1289), Harney County, Oregon (OR)"
+		},
+		{
+		  "id": 1273,
+		  "site_name": "Cox Flat AM (1273), Lake County, Oregon (OR)"
+		},
+		{
+		  "id": 1274,
+		  "site_name": "Finley Corrals AM (1274), Lake County, Oregon (OR)"
+		},
+		{
+		  "id": 1250,
+		  "site_name": "Government Corrals (1250), Harney County, Oregon (OR)"
+		},
+		{
+		  "id": 1218,
+		  "site_name": "Hart Mountain AM (1218), Lake County, Oregon (OR)"
+		},
+		{
+		  "id": 1193,
+		  "site_name": "Henrys Fork (1193), Summit County, Utah (UT)"
+		},
+		{
+		  "id": 1264,
+		  "site_name": "Horsepasture Pass (1264), Matanuska-Susitna County, Alaska (AK)"
+		},
+		{
+		  "id": 1253,
+		  "site_name": "Hummingbird Saddle (1253), Catron County, New Mexico (NM)"
+		},
+		{
+		  "id": 456,
+		  "site_name": "Jahnke Lake Trail (456), Beaverhead County, Montana (MT)"
+		},
+		{
+		  "id": 1279,
+		  "site_name": "Nicks Valley (1279), Valdez-Cordova County, Alaska (AK)"
+		},
+		{
+		  "id": 1241,
+		  "site_name": "Patton Meadows AM (1241), Lake County, Oregon (OR)"
+		},
+		{
+		  "id": 1290,
+		  "site_name": "Red Canyon AM (1290), Owyhee County, Idaho (ID)"
+		},
+		{
+		  "id": 1199,
+		  "site_name": "Robinson Lake (1199), Elko County, Nevada (NV)"
+		},
+		{
+		  "id": 1220,
+		  "site_name": "Rogger Meadow AM (1220), Lake County, Oregon (OR)"
+		},
+		{
+		  "id": 1219,
+		  "site_name": "Sherman Valley AM (1219), Lake County, Oregon (OR)"
+		},
+		{
+		  "id": 1235,
+		  "site_name": "Smith Creek (1235), Elko County, Nevada (NV)"
+		},
+		{
+		  "id": 1201,
+		  "site_name": "Tent Mtn Upper (1201), Elko County, Nevada (NV)"
+		},
+		{
+		  "id": 1238,
+		  "site_name": "Trout Creek AM (1238), Harney County, Oregon (OR)"
+		},
+		{
+		  "id": 1200,
+		  "site_name": "Trout Creek Upper (1200), Elko County, Nevada (NV)"
+		},
+		{
+		  "id": 1230,
+		  "site_name": "TV Ridge AM (1230), Wallowa County, Oregon (OR)"
+		},
+		{
+		  "id": 1237,
+		  "site_name": "V Lake AM (1237), Harney County, Oregon (OR)"
+		},
+		{
+		  "id": 1294,
+		  "site_name": "Vaught Ranch AM (1294), Owyhee County, Idaho (ID)"
+		},
+		{
+		  "id": 1288,
+		  "site_name": "West Eagle Meadows AM (1288), Union County, Oregon (OR)"
+		},
+		{
+		  "id": 1255,
+		  "site_name": "Whitewater Baldy (1255), Catron County, New Mexico (NM)"
+		}
+	   ]

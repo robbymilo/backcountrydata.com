@@ -74,6 +74,12 @@ module.exports = {
 		}
 
 		var state = Station[id].state;
+		// default SNTL
+		if (Station[id].network){
+			var network = Station[id].network;
+		} else {
+			var network = 'SNTL'
+		}
 
 		// https://stackoverflow.com/questions/8619879/javascript-calculate-the-day-of-the-year-1-366
 		// start of water year
@@ -124,7 +130,9 @@ module.exports = {
 			id +
 			':' +
 			state +
-			':SNTL%7Cid=%22%22%7Cname/' +
+			':' +
+			network +
+			'%7Cid=%22%22%7Cname/' +
 			start +
 			',' +
 			end +
