@@ -8572,335 +8572,373 @@
 		"station": "RYCI1"
 	},
 		"447": {
-		   "state": "OR",
 		   "site_name": "Bald Mtn AM OR",
-		   "county": "UNKNOWN",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 0,
 		   "latitude": 45.21158,
 		   "longitude": -117.6626,
-		   "network": "SNTLT"
+		   "county": "UNKNOWN",
+		   "state name": "Oregon"
 		},
 		"456": {
-		   "state": "MT",
 		   "site_name": "Jahnke Lake Trail",
-		   "county": "Beaverhead",
+		   "state": "MT",
+		   "network": "SNTLT",
+		   "elev": 2160,
 		   "latitude": 45.21665,
 		   "longitude": -113.50143,
-		   "elev": 7200,
-		   "network": "SNTLT"
+		   "county": "Beaverhead",
+		   "state name": "Montana"
 		},
 		"1165": {
-		   "state": "MT",
 		   "site_name": "Ashley Divide",
-		   "county": "Flathead",
+		   "state": "MT",
+		   "network": "SNTLT",
+		   "elev": 1446,
 		   "latitude": 48.20161,
 		   "longitude": -114.51495,
-		   "elev": 4820,
-		   "network": "SNTLT"
+		   "county": "Flathead",
+		   "state name": "Montana"
 		},
 		"1190": {
-		   "state": "MT",
 		   "site_name": "Bassoo Peak",
-		   "county": "Sanders",
+		   "state": "MT",
+		   "network": "SNTLT",
+		   "elev": 1545,
 		   "latitude": 47.85562,
 		   "longitude": -114.75841,
-		   "elev": 5150,
-		   "network": "SNTLT"
+		   "county": "Sanders",
+		   "state name": "Montana"
 		},
 		"1193": {
-		   "state": "UT",
 		   "site_name": "Henrys Fork",
-		   "county": "Summit",
+		   "state": "UT",
+		   "network": "SNTLT",
+		   "elev": 3054.6,
 		   "latitude": 40.86313,
 		   "longitude": -110.38145,
-		   "elev": 10182,
-		   "network": "SNTLT"
+		   "county": "Summit",
+		   "state name": "Utah"
 		},
 		"1198": {
-		   "state": "NV",
 		   "site_name": "American Beauty",
-		   "county": "Elko",
+		   "state": "NV",
+		   "network": "SNTLT",
+		   "elev": 2256.9,
 		   "latitude": 40.5337,
 		   "longitude": -115.4576,
-		   "elev": 7523,
-		   "network": "SNTLT"
+		   "county": "Elko",
+		   "state name": "Nevada"
 		},
 		"1199": {
-		   "state": "NV",
 		   "site_name": "Robinson Lake",
-		   "county": "Elko",
+		   "state": "NV",
+		   "network": "SNTLT",
+		   "elev": 2772.3,
 		   "latitude": 40.7237,
 		   "longitude": -115.2788,
-		   "elev": 9241,
-		   "network": "SNTLT"
+		   "county": "Elko",
+		   "state name": "Nevada"
 		},
 		"1200": {
-		   "state": "NV",
 		   "site_name": "Trout Creek Upper",
-		   "county": "Elko",
+		   "state": "NV",
+		   "network": "SNTLT",
+		   "elev": 2520,
 		   "latitude": 41.0439,
 		   "longitude": -115.0955,
-		   "elev": 8400,
-		   "network": "SNTLT"
+		   "county": "Elko",
+		   "state name": "Nevada"
 		},
 		"1201": {
-		   "state": "NV",
 		   "site_name": "Tent Mtn Upper",
-		   "county": "Elko",
+		   "state": "NV",
+		   "network": "SNTLT",
+		   "elev": 2508.3,
 		   "latitude": 40.9653,
 		   "longitude": -115.1646,
-		   "elev": 8361,
-		   "network": "SNTLT"
+		   "county": "Elko",
+		   "state name": "Nevada"
 		},
 		"1218": {
-		   "state": "OR",
 		   "site_name": "Hart Mountain AM",
-		   "county": "Lake",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1944,
 		   "latitude": 42.47972,
 		   "longitude": -119.71917,
-		   "elev": 6480,
-		   "network": "SNTLT"
+		   "county": "Lake",
+		   "state name": "Oregon"
 		},
 		"1219": {
-		   "state": "OR",
 		   "site_name": "Sherman Valley AM",
-		   "county": "Lake",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1989,
 		   "latitude": 42.3572,
 		   "longitude": -120.22522,
-		   "elev": 6630,
-		   "network": "SNTLT"
+		   "county": "Lake",
+		   "state name": "Oregon"
 		},
 		"1220": {
-		   "state": "OR",
 		   "site_name": "Rogger Meadow AM",
-		   "county": "Lake",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1908,
 		   "latitude": 42.16528,
 		   "longitude": -120.24747,
-		   "elev": 6360,
-		   "network": "SNTLT"
+		   "county": "Lake",
+		   "state name": "Oregon"
 		},
 		"1229": {
-		   "state": "OR",
 		   "site_name": "Big Sheep AM",
-		   "county": "Wallowa",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1872,
 		   "latitude": 45.16842,
 		   "longitude": -117.08631,
-		   "elev": 6240,
-		   "network": "SNTLT"
+		   "county": "Wallowa",
+		   "state name": "Oregon"
 		},
 		"1230": {
-		   "state": "OR",
 		   "site_name": "TV Ridge AM",
-		   "county": "Wallowa",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 2115,
 		   "latitude": 45.39608,
 		   "longitude": -117.38919,
-		   "elev": 7050,
-		   "network": "SNTLT"
+		   "county": "Wallowa",
+		   "state name": "Oregon"
 		},
 		"1235": {
-		   "state": "NV",
 		   "site_name": "Smith Creek",
-		   "county": "Elko",
+		   "state": "NV",
+		   "network": "SNTLT",
+		   "elev": 2276.1,
 		   "latitude": 40.44675,
 		   "longitude": -115.51127,
-		   "elev": 7587,
-		   "network": "SNTLT"
+		   "county": "Elko",
+		   "state name": "Nevada"
 		},
 		"1237": {
-		   "state": "OR",
 		   "site_name": "V Lake AM",
-		   "county": "Harney",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1992,
 		   "latitude": 42.46573,
 		   "longitude": -118.76583,
-		   "elev": 6640,
-		   "network": "SNTLT"
+		   "county": "Harney",
+		   "state name": "Oregon"
 		},
 		"1238": {
-		   "state": "OR",
 		   "site_name": "Trout Creek AM",
-		   "county": "Harney",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 2367,
 		   "latitude": 42.03597,
 		   "longitude": -118.24008,
-		   "elev": 7890,
-		   "network": "SNTLT"
+		   "county": "Harney",
+		   "state name": "Oregon"
 		},
 		"1239": {
-		   "state": "CA",
 		   "site_name": "Althouse",
-		   "county": "Del Norte",
+		   "state": "CA",
+		   "network": "SNTLT",
+		   "elev": 1491,
 		   "latitude": 41.99617,
 		   "longitude": -123.547,
-		   "elev": 4970,
-		   "network": "SNTLT"
+		   "county": "Del Norte",
+		   "state name": "California"
 		},
 		"1240": {
-		   "state": "NV",
 		   "site_name": "Bald Mtn AM",
-		   "county": "Washoe",
+		   "state": "NV",
+		   "network": "SNTLT",
+		   "elev": 2016,
 		   "latitude": 41.78333,
 		   "longitude": -119.61667,
-		   "elev": 6720,
-		   "network": "SNTLT"
+		   "county": "Washoe",
+		   "state name": "Nevada"
 		},
 		"1241": {
-		   "state": "OR",
 		   "site_name": "Patton Meadows AM",
-		   "county": "Lake",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 2034,
 		   "latitude": 42.24522,
 		   "longitude": -120.60527,
-		   "elev": 6780,
-		   "network": "SNTLT"
+		   "county": "Lake",
+		   "state name": "Oregon"
 		},
 		"1245": {
-		   "state": "OR",
 		   "site_name": "Anthony Lake",
-		   "county": "Baker",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 2148,
 		   "latitude": 44.9591,
 		   "longitude": -118.22668,
-		   "elev": 7160,
-		   "network": "SNTLT"
+		   "county": "Baker",
+		   "state name": "Oregon"
 		},
 		"1246": {
-		   "state": "OR",
 		   "site_name": "Barney Creek",
-		   "county": "Baker",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1749,
 		   "latitude": 44.36069,
 		   "longitude": -118.31114,
-		   "elev": 5830,
-		   "network": "SNTLT"
+		   "county": "Baker",
+		   "state name": "Oregon"
 		},
 		"1250": {
-		   "state": "OR",
 		   "site_name": "Government Corrals",
-		   "county": "Harney",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 2220,
 		   "latitude": 42.04308,
 		   "longitude": -118.3195,
-		   "elev": 7400,
-		   "network": "SNTLT"
+		   "county": "Harney",
+		   "state name": "Oregon"
 		},
 		"1253": {
-		   "state": "NM",
 		   "site_name": "Hummingbird Saddle",
-		   "county": "Catron",
+		   "state": "NM",
+		   "network": "SNTLT",
+		   "elev": 0,
 		   "latitude": 33.33333,
 		   "longitude": -108.63333,
-		   "elev": 0,
-		   "network": "SNTLT"
+		   "county": "Catron",
+		   "state name": "New Mexico"
 		},
 		"1255": {
-		   "state": "NM",
 		   "site_name": "Whitewater Baldy",
-		   "county": "Catron",
-		   "latitude": 33.31667,
+		   "state": "NM",
+		   "network": "SNTLT",
+		   "elev": 3225,
+		   "latitude": -108.6333,
 		   "longitude": -108.6333,
-		   "elev": 10750,
-		   "network": "SNTLT"
+		   "county": "Catron",
+		   "state name": "New Mexico"
 		},
 		"1264": {
-		   "state": "AK",
 		   "site_name": "Horsepasture Pass",
-		   "county": "Matanuska-Susitna",
+		   "state": "AK",
+		   "network": "SNTLT",
+		   "elev": 1290,
 		   "latitude": 62.1345,
 		   "longitude": -147.625,
-		   "elev": 4300,
-		   "network": "SNTLT"
+		   "county": "Matanuska-Susitna",
+		   "state name": "Alaska"
 		},
 		"1273": {
-		   "state": "OR",
 		   "site_name": "Cox Flat AM",
-		   "county": "Lake",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1713,
 		   "latitude": 42.36192,
 		   "longitude": -120.60912,
-		   "elev": 5710,
-		   "network": "SNTLT"
+		   "county": "Lake",
+		   "state name": "Oregon"
 		},
 		"1274": {
-		   "state": "OR",
 		   "site_name": "Finley Corrals AM",
-		   "county": "Lake",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1785,
 		   "latitude": 42.45988,
 		   "longitude": -120.78508,
-		   "elev": 5950,
-		   "network": "SNTLT"
+		   "county": "Lake",
+		   "state name": "Oregon"
 		},
 		"1279": {
-		   "state": "AK",
 		   "site_name": "Nicks Valley",
-		   "county": "Valdez-Cordova",
+		   "state": "AK",
+		   "network": "SNTLT",
+		   "elev": 1284,
 		   "latitude": 61.16371,
 		   "longitude": -145.64092,
-		   "elev": 4280,
-		   "network": "SNTLT"
+		   "county": "Valdez-Cordova",
+		   "state name": "Alaska"
 		},
 		"1288": {
-		   "state": "OR",
 		   "site_name": "West Eagle Meadows AM",
-		   "county": "Union",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1647,
 		   "latitude": 45.08467,
 		   "longitude": -117.48167,
-		   "elev": 5490,
-		   "network": "SNTLT"
+		   "county": "Union",
+		   "state name": "Oregon"
 		},
 		"1289": {
-		   "state": "OR",
 		   "site_name": "Call Meadows AM",
-		   "county": "Harney",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1614,
 		   "latitude": 43.81191,
 		   "longitude": -118.78565,
-		   "elev": 5380,
-		   "network": "SNTLT"
+		   "county": "Harney",
+		   "state name": "Oregon"
 		},
 		"1290": {
-		   "state": "ID",
 		   "site_name": "Red Canyon AM",
-		   "county": "Owyhee",
+		   "state": "ID",
+		   "network": "SNTLT",
+		   "elev": 1980,
 		   "latitude": 42.42817,
 		   "longitude": -116.84653,
-		   "elev": 6600,
-		   "network": "SNTLT"
+		   "county": "Owyhee",
+		   "state name": "Idaho"
 		},
 		"1291": {
-		   "state": "OR",
 		   "site_name": "Bear Flat Meadow AM",
-		   "county": "Lake",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1974,
 		   "latitude": 42.41655,
 		   "longitude": -120.47043,
-		   "elev": 6580,
-		   "network": "SNTLT"
+		   "county": "Lake",
+		   "state name": "Oregon"
 		},
 		"1292": {
-		   "state": "OR",
 		   "site_name": "Buckskin Lake AM",
-		   "county": "Harney",
+		   "state": "OR",
+		   "network": "SNTLT",
+		   "elev": 1557,
 		   "latitude": 43.02503,
 		   "longitude": -118.94785,
-		   "elev": 5190,
-		   "network": "SNTLT"
+		   "county": "Harney",
+		   "state name": "Oregon"
 		},
 		"1293": {
-		   "state": "ID",
 		   "site_name": "Bull Basin AM",
-		   "county": "Owyhee",
+		   "state": "ID",
+		   "network": "SNTLT",
+		   "elev": 1644,
 		   "latitude": 42.35673,
 		   "longitude": -116.95906,
-		   "elev": 5480,
-		   "network": "SNTLT"
+		   "county": "Owyhee",
+		   "state name": "Idaho"
 		},
 		"1294": {
-		   "state": "ID",
 		   "site_name": "Vaught Ranch AM",
-		   "county": "Owyhee",
+		   "state": "ID",
+		   "network": "SNTLT",
+		   "elev": 1752,
 		   "latitude": 42.49491,
 		   "longitude": -116.43665,
-		   "elev": 5840,
-		   "network": "SNTLT"
+		   "county": "Owyhee",
+		   "state name": "Idaho"
 		},
 		"1295": {
-		   "state": "ID",
 		   "site_name": "Battle Creek AM",
-		   "county": "Owyhee",
+		   "state": "ID",
+		   "network": "SNTLT",
+		   "elev": 1716,
 		   "latitude": 42.47694,
 		   "longitude": -116.32576,
-		   "elev": 5720,
-		   "network": "SNTLT"
+		   "county": "Owyhee",
+		   "state name": "Idaho"
 		}
 	 }
