@@ -38,7 +38,8 @@ module.exports = async (req, res, next) => {
             );
             
             const region = {
-                "distance": Functions.meters_to_miles(distance),
+                "distance": distance * 0.001,
+                "distanceUnits": "km",
                 "center": avyRegions[i].center,
                 "name": avyRegions[i].name,
                 "id": avyRegions[i].id,
@@ -46,19 +47,29 @@ module.exports = async (req, res, next) => {
 
             regionDistances.push(region);
         }
+
+        // get forecast
+        const avyReport = await avyLookup();
     
+        // sort all regions by distance
         regionDistances.sort(function (a, b) {
             return a.distance - b.distance;
         })
 
+        // limit array to 10 regions max
         const finalRegions = [];
-
         for (i=0; i<10; i++) {
             finalRegions.push(regionDistances[i]);
         }
 
-        const avyReport = await avyLookup();
-
+        // get final region's forecast data
+        for(i=0; i<finalRegions.length; i++) {
+            const found = avyReport.features.find(function(feature) {
+                return feature.id == finalRegions[i].id
+            });
+            finalRegions[i].forecast = found.properties;            
+        }   
+        
 		res.send(finalRegions);
 
 	} else {
