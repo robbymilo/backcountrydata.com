@@ -25,16 +25,16 @@ module.exports = async (req, res, next, type, id) => {
 				path.join(__dirname, '../data/' + type + '/' + id + '.json')
 			)
 		);
-
-		if (req.query.total) {
-			var total = json.slice(Math.max(json.length - req.query.total, 1));
-		} else {
-			var total = json;
-		}
+		var total = req.query.total;
+		// if (req.query.total) {
+		// 	var total = json.slice(Math.max(json.length - req.query.total, 1));
+		// } else {
+		// 	var total = json;
+		// }
 
 		var url = Functions.buildRequest(Station, type, id);
 
-		var data = Functions.buildResponse(total, url, id);
+		var data = Functions.buildResponse(json, total, url, id);
 
 		res.send(data);
 	} else {

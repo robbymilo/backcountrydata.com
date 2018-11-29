@@ -105,21 +105,23 @@ module.exports = {
 		}
 
 		// today's date
+		// var today = new Date('2018-12-31T00:00:02.019Z');
 		var today = new Date();
+		console.log(today)
 		var currentDays = getDOY(today);
 
 		var waterYearStart = new Date(today.getFullYear(), 9, 1);
 		var waterYearDays = getDOY(waterYearStart);
 
-		console.log(currentDays);
-		console.log(waterYearDays);
+		console.log('current day of year: ' + currentDays);
+		console.log('new water year days: ' + waterYearDays);
 
 		if (currentDays < waterYearDays) {
 			var waterYear = today.getFullYear() - 1;
 		} else {
 			var waterYear = today.getFullYear();
 		}
-		console.log('water year: Oct-1-' + waterYear);
+		console.log('start of water year: Oct-1-' + waterYear);
 
 		var start = waterYear + '-10-01';
 		var end = formatDate(today);
@@ -140,7 +142,7 @@ module.exports = {
 
 		return url;
 	},
-	buildResponse: function(total, url, id) {
+	buildResponse: function(json, total, url, id) {
 		var date_stamp = [];
 		var air_temp = [];
 		var snow_depth = [];
@@ -150,42 +152,80 @@ module.exports = {
 		var wind_speed = [];
 		var wind_gust = [];
 
-		for (i = 0; i < total.length; i++) {
-			date_stamp.push(total[i].date);
-			air_temp.push(total[i].at);
+		json.forEach(function(item, index) {		
+			date_stamp.push(item.date);
+			air_temp.push(item.at);
 
-			if (total[i].sd < 0 || total[i].sd == '') {
-				snow_depth.push(null);
-			} else {
-				snow_depth.push(total[i].sd);
-			}
+			// if SNOTEL does not return data for a point in time
+			// get the previous value
+			// if the previous value is empty, return null
+			if (item.sd < 0 || item.sd == '') {
+				if (!index-1 < 0) {
+					json[index].sd = json[index-1].sd;
+				} else {
+					json[index].sd = null;
+				}
+			} 
+			snow_depth.push(item.sd);
 
-			if (total[i].sw < 0 || total[i].sw == '') {
-				snow_water_equiv.push(null);
-			} else {
-				snow_water_equiv.push(total[i].sw);
-			}
+			if (item.sw < 0 || item.sw == '') {
+				if (!index-1 < 0) {
+					json[index].sw = json[index-1].sw;
+				} else {
+					json[index].sw = null;
+				}
+			} 
+			snow_water_equiv.push(item.sw);
 
-			if (total[i].wd < 0 || total[i].wd == '') {
-				wind_direction.push(null);
-			} else {
-				wind_direction.push(total[i].wd);
-			}
+			if (item.pa < 0 || item.pa == '') {
+				if (!index-1 < 0) {
+					json[index].pa = json[index-1].pa;
+				} else {
+					json[index].pa = null;
+				}
+			} 
+			percip_accum.push(item.pa);
+			
+			if (item.wd < 0 || item.wd == '') {
+				if (!index-1 < 0) {
+					json[index].wd = json[index-1].wd;
+				} else {
+					json[index].wd = null;
+				}
+			} 
+			wind_direction.push(item.wd);
 
-			if (total[i].ws < 0 || total[i].ws == '') {
-				wind_speed.push(null);
-			} else {
-				wind_speed.push(total[i].ws);
-			}
+			if (item.ws < 0 || item.ws == '') {
+				if (!index-1 < 0) {
+					json[index].ws = json[index-1].ws;
+				} else {
+					json[index].ws = null;
+				}
+			} 
+			wind_speed.push(item.ws);
 
-			if (total[i].wg < 0 || total[i].wg == '') {
-				wind_gust.push(null);
-			} else {
-				wind_gust.push(total[i].wg);
-			}
+			if (item.wg < 0 || item.wg == '') {
+				if (!index-1 < 0) {
+					json[index].wg = json[index-1].wg;
+				} else {
+					json[index].wg = null;
+				}
+			} 
+			wind_gust.push(item.wg);
 
-			percip_accum.push(total[i].pa);
-		}
+			
+		})
+
+		// slice array to only return requested hours
+		date_stamp = date_stamp.slice(-total)
+		air_temp = air_temp.slice(-total)
+		snow_depth = snow_depth.slice(-total)
+		snow_water_equiv = snow_water_equiv.slice(-total)
+		percip_accum = percip_accum.slice(-total)
+		wind_direction = wind_direction.slice(-total)
+		wind_speed = wind_speed.slice(-total)
+		wind_gust = wind_gust.slice(-total)
+
 
 		var data = {
 			request_url: url,

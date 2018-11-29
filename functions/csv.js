@@ -27,14 +27,14 @@ module.exports = {
 			.then(json => {
 				// send to browser
 				console.log('sending fresh data to browser');
+				var total = req.query.total;
+				// if (req.query.total) {
+				// 	var total = json.slice(Math.max(json.length - req.query.total, 1));
+				// } else {
+				// 	var total = json;
+				// }
 
-				if (req.query.total) {
-					var total = json.slice(Math.max(json.length - req.query.total, 1));
-				} else {
-					var total = json;
-				}
-
-				var data = Functions.buildResponse(total, url, id);
+				var data = Functions.buildResponse(json, total, url, id);
 
 				res.send(data);
 
