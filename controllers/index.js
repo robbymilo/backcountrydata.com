@@ -5,4 +5,5 @@ module.exports = {
     station_nearest: require('./station_nearest'),
     station_discussion: require('./station_discussion'),
     avy_center: require('./avy_center'),
+    state: require('./state'),
 };

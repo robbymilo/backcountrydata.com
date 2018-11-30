@@ -4,4 +4,4 @@ https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customMultiTimeSeriesGroup
 
 https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customMultiTimeSeriesGroupByStationReport,metric/hourly/start_of_period/state=%22CA%22%20AND%20network=%22SNTL%22%20AND%20element=%22SNWD%22%20AND%20outServiceDate=%222100-01-01%22%7Cname/2018-10-01,2019-09-30/stationId,name,SNWD::value
 
-https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customMultiTimeSeriesGroupByStationReport,metric/hourly/start_of_period/state=%22ID%22%20AND%20network=%22SNTL%22%20AND%20element=%22SNWD%22%20AND%20outServiceDate=%222100-01-01%22%7Cname/-167,0/stationId,name,SNWD::value?fitToScreen=false
+https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customMultiTimeSeriesGroupByStationReport,metric/hourly/start_of_period/state=%22ID%22%20AND%20network=%22SNTL%22%20AND%20element=%22SNWD%22%20AND%20outServiceDate=%222100-01-01%22%7Cname/2018-10-01,2019-09-30/stationId,name,SNWD::value?fitToScreen=false

@@ -44,6 +44,14 @@ module.exports = {
 			return false;
 		}
 	},
+	isState: function(input) {
+		const states = ['AK','AZ','CA','CO','ID','MT','NV','NM','OR','SD','UT','WA','WY'];
+		if(states.indexOf(input) > -1) {
+			return true;
+		} else {
+			return false;
+		}
+	},
 	isCacheValid: function(type, id) {
 		// check if file is over 15 minutes old
 		if (doesFileExist(type, id)) {
