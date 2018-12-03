@@ -85,6 +85,10 @@ module.exports = async (req, res, next, lat, lon) => {
 	result['forecast'] = forecast;
 	result['forecastGraphicalUrl'] = graphicalLookupUrl;
 	result['forecastGraphical'] = graphicalForecast.dwml.data.parameters;
-	result['hazard'] = hazardFinal.toString();
+	if(!hazardFinal == null) {
+		result['hazard'] = hazardFinal.toString();
+	} else {
+		result['hazard'] = null;
+	}
 	res.send(result);
 };
