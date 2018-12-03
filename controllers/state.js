@@ -27,11 +27,11 @@ module.exports = async (req, res, next) => {
         var header = stateData.split('\n');
         header = header[1].match(/[0-9]+/g);
         header.unshift('date')
-        console.log(header);
         
         stateData = stateData.split('\n')
 				.slice(2)
                 .join('\n');
+
 
         csvtojson({
             noheader: true,
@@ -42,8 +42,8 @@ module.exports = async (req, res, next) => {
                 return stateData;
             })
             .fromString(stateData)
-            .then(stateData => {
-                res.send(stateData);
+            .then(finalData => {
+                res.send(finalData);
             })
 
         
