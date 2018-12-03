@@ -25,24 +25,12 @@ module.exports = {
 		})
 			.fromString(filtered)
 			.then(json => {
-				// send to browser
-				console.log('sending fresh data to browser');
-				var total = req.query.total;
-				// if (req.query.total) {
-				// 	var total = json.slice(Math.max(json.length - req.query.total, 1));
-				// } else {
-				// 	var total = json;
-				// }
-
-				var data = Functions.buildResponse(json, total, url, id);
-
-				res.send(data);
-
+				var raw = json;
 				console.log('caching data');
 				fs.writeFile(
 					path.join(__dirname, '../data/' + type + '/' + id + '.json'),
-					JSON.stringify(json),
-					function(err, data) {
+					JSON.stringify(raw),
+					function(err) {
 						if (err) {
 							return console.log('cache error: ' + err);
 						} else {
@@ -50,6 +38,16 @@ module.exports = {
 						}
 					}
 				);
+				// send to browser
+				console.log('sending fresh data to browser');
+				var total = req.query.total;
+				var empty = req.query.empty;
+
+				var final = Functions.buildResponse(json, total, url, id, empty);
+
+				res.send(final);
+
+				
 			});
 	}
 };

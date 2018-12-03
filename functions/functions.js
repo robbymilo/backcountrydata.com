@@ -150,7 +150,8 @@ module.exports = {
 
 		return url;
 	},
-	buildResponse: function(json, total, url, id) {
+	buildResponse: function(json, total, url, id, empty) {
+		var rawData = json;
 		var date_stamp = [];
 		var air_temp = [];
 		var snow_depth = [];
@@ -159,68 +160,72 @@ module.exports = {
 		var wind_direction = [];
 		var wind_speed = [];
 		var wind_gust = [];
-
-		json.forEach(function(item, index) {		
+		console.log(empty);
+		
+		rawData.forEach(function(item, index) {		
 			date_stamp.push(item.date);
 			air_temp.push(item.at);
 
 			// if SNOTEL does not return data for a point in time
 			// get the previous value
 			// if the previous value is empty, return null
-			if (item.sd < 0 || item.sd == '') {
-				if (!index-1 < 0) {
-					json[index].sd = json[index-1].sd;
-				} else {
-					json[index].sd = null;
-				}
-			} 
-			snow_depth.push(item.sd);
-
-			if (item.sw < 0 || item.sw == '') {
-				if (!index-1 < 0) {
-					json[index].sw = json[index-1].sw;
-				} else {
-					json[index].sw = null;
-				}
-			} 
-			snow_water_equiv.push(item.sw);
-
-			if (item.pa < 0 || item.pa == '') {
-				if (!index-1 < 0) {
-					json[index].pa = json[index-1].pa;
-				} else {
-					json[index].pa = null;
-				}
-			} 
-			percip_accum.push(item.pa);
 			
-			if (item.wd < 0 || item.wd == '') {
-				if (!index-1 < 0) {
-					json[index].wd = json[index-1].wd;
-				} else {
-					json[index].wd = null;
-				}
-			} 
+			if(empty === true || empty === 'true') {
+				if (item.sd < 0 || item.sd == '') {
+					if (!index-1 < 0) {
+						rawData[index].sd = rawData[index-1].sd;
+					} else {
+						rawData[index].sd = null;
+					}
+				} 
+	
+				if (item.sw < 0 || item.sw == '') {
+					if (!index-1 < 0) {
+						rawData[index].sw = rawData[index-1].sw;
+					} else {
+						rawData[index].sw = null;
+					}
+				} 
+				
+				if (item.pa < 0 || item.pa == '') {
+					if (!index-1 < 0) {
+						rawData[index].pa = rawData[index-1].pa;
+					} else {
+						rawData[index].pa = null;
+					}
+				} 			
+				
+				if (item.wd < 0 || item.wd == '') {
+					if (!index-1 < 0) {
+						rawData[index].wd = rawData[index-1].wd;
+					} else {
+						rawData[index].wd = null;
+					}
+				} 			
+	
+				if (item.ws < 0 || item.ws == '') {
+					if (!index-1 < 0) {
+						rawData[index].ws = rawData[index-1].ws;
+					} else {
+						rawData[index].ws = null;
+					}
+				} 			
+	
+				if (item.wg < 0 || item.wg == '') {
+					if (!index-1 < 0) {
+						rawData[index].wg = rawData[index-1].wg;
+					} else {
+						rawData[index].wg = null;
+					}
+				} 
+			}
+			
+			snow_depth.push(item.sd);
+			snow_water_equiv.push(item.sw);
+			percip_accum.push(item.pa);
 			wind_direction.push(item.wd);
-
-			if (item.ws < 0 || item.ws == '') {
-				if (!index-1 < 0) {
-					json[index].ws = json[index-1].ws;
-				} else {
-					json[index].ws = null;
-				}
-			} 
 			wind_speed.push(item.ws);
-
-			if (item.wg < 0 || item.wg == '') {
-				if (!index-1 < 0) {
-					json[index].wg = json[index-1].wg;
-				} else {
-					json[index].wg = null;
-				}
-			} 
 			wind_gust.push(item.wg);
-
 			
 		})
 

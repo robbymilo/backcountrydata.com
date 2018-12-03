@@ -26,15 +26,11 @@ module.exports = async (req, res, next, type, id) => {
 			)
 		);
 		var total = req.query.total;
-		// if (req.query.total) {
-		// 	var total = json.slice(Math.max(json.length - req.query.total, 1));
-		// } else {
-		// 	var total = json;
-		// }
+		var empty = req.query.empty;
 
 		var url = Functions.buildRequest(Station, type, id);
 
-		var data = Functions.buildResponse(json, total, url, id);
+		var data = Functions.buildResponse(json, total, url, id, empty);
 
 		res.send(data);
 	} else {
