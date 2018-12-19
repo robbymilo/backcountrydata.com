@@ -50,7 +50,6 @@ module.exports = async (req, res, next) => {
 
         // get forecast
         const avyReport = await avyLookup();
-        
         // sort all regions by distance
         regionDistances.sort(function (a, b) {
             return a.distance - b.distance;
@@ -64,10 +63,12 @@ module.exports = async (req, res, next) => {
 
         // get final region's forecast data
         for(i=0; i<finalRegions.length; i++) {
-            const found = avyReport.features.find(function(feature) {                          
+            const found = avyReport.features.find(function(feature) {       
                 return feature.id == finalRegions[i].id
             });
-            finalRegions[i].forecast = found;                        
+            finalRegions[i].forecast = found.properties;     
+            
+                      
         }   
         
 		res.send(finalRegions);
