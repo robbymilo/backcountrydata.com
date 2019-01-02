@@ -61,7 +61,7 @@ module.exports = async (req, res, next, lat, lon) => {
 	const forecastLookupUrl = 'https://forecast.weather.gov/MapClick.php?lat=' + lat + '&lon=' + lon + '&FcstType=json';
 	const forecast = await getForecast(forecastLookupUrl);
 
-	const graphicalLookupUrl = 'https://forecast.weather.gov/MapClick.php?lat=' + lat + '&lon=' + lon + '&unit=0&lg=english&FcstType=digitalDWML'
+	const graphicalLookupUrl = 'https://forecast.weather.gov/MapClick.php?lat=' + lat + '&lon=' + lon + '&unit=1&lg=english&FcstType=digitalDWML'
 	let graphicalForecast = await getForecastGraphical(graphicalLookupUrl);
 	graphicalForecast = parser.toJson(graphicalForecast, {
 		object: true
