@@ -9,6 +9,7 @@ To start, clone the repo and use command `npm start`.
 * Include NWS forecast hazards
 * Include nearst AVY centers and reports
 * Update https://backcountrydata.com with this API
+* Clean up express routes
 
 ## Endpoints
 
