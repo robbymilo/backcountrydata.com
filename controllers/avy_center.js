@@ -62,11 +62,12 @@ module.exports = async (req, res, next) => {
         }
 
         // get final region's forecast data
+        console.log(finalRegions)
         for(i=0; i<finalRegions.length; i++) {
             const found = avyReport.features.find(function(feature) {       
                 return feature.id == finalRegions[i].id
             });
-            finalRegions[i].forecast = found.properties;     
+            finalRegions[i].forecast = found;     
             
                       
         }   
