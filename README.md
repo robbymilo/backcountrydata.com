@@ -4,7 +4,7 @@ An API for accessing SNOTEL data in JSON format from the current water year. Dat
 
 ## Development
 
-To start, clone the repo and use command `npm start`. Then navigate to `localhost:3000`.
+To start, clone the repo, and use command `npm i` and then `npm start`. Then navigate to `localhost:3000`.
 
 ## Endpoints
 
