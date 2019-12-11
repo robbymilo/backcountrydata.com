@@ -97,3 +97,14 @@ Returns NWS forecast time series and scientific discussion for a SNOTEL station.
 `id=[integer]` where `id` is the SNOTEL station ID (required).
 
 Example: https://backcountrydata.herokuapp.com/api/station/978
+
+### Avalanche
+
+Returns the nearest 10 avalanche centers' report for a SNOTEL station.
+
+**URL** : `/api/avy/:id`
+
+
+Example: https://backcountrydata.herokuapp.com/api/avy/978
+
+To fix the avalanche report at the beginning of winter, run `node geo.js`.
