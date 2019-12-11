@@ -59,8 +59,8 @@ module.exports = {
 				path.join(__dirname, '../data/' + type + '/' + id + '.json')
 			);
 
-			var quarterHour = 900000;
-			var age = quarterHour;
+			var fivemin = 300000;
+			var age = fivemin;
 
 			if (Date.now() - stats.mtimeMs < age) {
 				console.log('cache is valid');
