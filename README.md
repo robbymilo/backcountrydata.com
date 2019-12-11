@@ -104,7 +104,6 @@ Returns the nearest 10 avalanche centers' report for a SNOTEL station.
 
 **URL** : `/api/avy/:id`
 
-
 Example: https://backcountrydata.herokuapp.com/api/avy/978
 
 To fix the avalanche report at the beginning of winter, run `node geo.js`.

@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "async": "^2.6.1",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "csvtojson": "^2.0.8",
@@ -27,7 +27,7 @@
     "http-errors": "~1.6.2",
     "morgan": "~1.9.1",
     "node-html-parser": "^1.1.11",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.4",
     "xml2json": "^0.11.2"
   },
   "engines": {
