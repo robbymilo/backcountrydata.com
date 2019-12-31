@@ -82,6 +82,32 @@ module.exports = async (req, res, next, id) => {
 		const forecastLookupUrl = 'https://forecast.weather.gov/MapClick.php?lat=' + lat + '&lon=' + lon + '&FcstType=json';
 		const forecast = await getForecast(forecastLookupUrl);
 
+		let average = (array) => array.reduce((a, b) => parseInt(a) + parseInt(b)) / array.length;
+
+		let snowForecast = [];
+
+		forecast.data.text.forEach(function(element) {
+			if (element.includes('accumulation of')) {
+				const snowRaw = element.split('accumulation of ');
+				const snowArray = snowRaw.pop().match(/\d+/g);
+				if (snowArray === null) {
+					snowForecast.push(0);
+				} else {
+					const snowAverage = average(snowArray);
+					snowForecast.push(snowAverage);
+				}
+				// console.log(snowArray)
+				
+			} else {
+				snowForecast.push(0);
+				// console.log(0)
+			}
+
+		})
+
+		// console.log(snowForecast);
+		
+
 		const graphicalLookupUrl = 'https://forecast.weather.gov/MapClick.php?lat=' + lat + '&lon=' + lon + '&unit=1&lg=english&FcstType=digitalDWML'
 		let graphicalForecast = await getForecastGraphical(graphicalLookupUrl);
 		graphicalForecast = parser.toJson(graphicalForecast, {
@@ -106,6 +132,7 @@ module.exports = async (req, res, next, id) => {
 		result['forecast'] = forecast;
 		result['forecastGraphicalUrl'] = graphicalLookupUrl;
 		result['forecastGraphical'] = graphicalForecast.dwml.data.parameters;
+		result['forecastSnow'] = snowForecast;
 		if(!hazardFinal == null) {
 			result['hazard'] = hazardFinal.toString();
 		} else {
