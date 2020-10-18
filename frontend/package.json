@@ -1,0 +1,77 @@
+{
+  "name": "bcd-ui",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "prettier": "prettier --check '**/*.js' '**/*.vue' --write"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/vue-fontawesome": "^0.1.5",
+    "axios": "^0.18.0",
+    "highcharts": "^7.0.1",
+    "highcharts-vue": "^1.2.0",
+    "lodash.debounce": "^4.0.8",
+    "prettier": "^2.1.2",
+    "vue": "^2.5.17",
+    "vue-analytics": "^5.16.2",
+    "vue-autosuggest": "^1.6.0",
+    "vue-headful": "^2.0.1",
+    "vue-router": "^3.0.1",
+    "vue-sparklines": "^0.2.1",
+    "vue2-autocomplete-js": "^0.2.2",
+    "vuedraggable": "^2.16.0",
+    "vuesax": "^3.8.16",
+    "vuetrend": "^0.3.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.3",
+    "@vue/cli-plugin-eslint": "^3.0.3",
+    "@vue/cli-service": "^3.0.3",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/base",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-console": "off",
+      "no-unused-vars": "off",
+      "no-mixed-spaces-and-tabs": "off"
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "arrowParens": "always"
+  }
+}
