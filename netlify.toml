@@ -1,5 +1,5 @@
 [build]
 publish = "frontend/dist"
-command = "cd frontend && npm run build"
+command = "npm run build"
 [build.environment]
 NODE_VERSION = "14.4"
