@@ -3,10 +3,10 @@
     <vue-autosuggest
       ref="autosuggest"
       :suggestions="results"
+      @input="onInputChange"
       :on-selected="selectHandler"
       :input-props="{
         id: 'autosuggest__input',
-        onInputChange: onInputChange,
         placeholder: 'Search for SNOTEL site',
       }"
       @click="clickHandler"
@@ -67,6 +67,7 @@ export default {
       console.log("click");
     },
     onInputChange(input) {
+      console.log('input')
       this.searchTerm = input;
       if (input.length >= 2) {
         this.doSearch(input);
@@ -75,6 +76,7 @@ export default {
       }
     },
     doSearch(input) {
+      console.log('search')
       this.isAjax = true;
       axios
         .get(
