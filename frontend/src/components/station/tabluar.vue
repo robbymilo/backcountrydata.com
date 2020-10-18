@@ -1,7 +1,7 @@
 <template>
   <div class="expandableBox tabular-data">
     <div class="discussion-wrap">
-      <div class="discussion limit" v-bind:class="{expanded: expanded}">
+      <div class="discussion limit" v-bind:class="{ expanded: expanded }">
         <table class="table" v-if="data.date_time">
           <thead>
             <th class="column date">Date</th>
@@ -50,21 +50,20 @@
 </template>
 
 <script>
-import {functions} from '@/mixins/functions';
-import axios from 'axios';
-import stations from '@/assets/stations.json';
-import trend from 'vuetrend';
+import { functions } from "@/mixins/functions";
+import axios from "axios";
+import stations from "@/assets/stations.json";
 
 export default {
-  name: 'tabluar',
+  name: "tabluar",
   mixins: [functions],
-  props: ['current'],
+  props: ["current"],
   components: {
-    trend,
+    // trend,
   },
   data() {
     return {
-      isMetric: '',
+      isMetric: "",
       station: {},
       currentStation: this.current,
       data: {},
@@ -75,12 +74,12 @@ export default {
     this.routeInfo();
     this.getData();
     this.getCurrentUnits();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
     });
   },
   watch: {
-    '$route.params.id'() {
+    "$route.params.id"() {
       this.routeInfo();
       this.currentStation = this.current;
       this.getData();
@@ -95,9 +94,9 @@ export default {
       var vm = this;
       axios
         .get(
-          'https://backcountrydata.herokuapp.com/api/hour/' +
+          "https://backcountrydata.herokuapp.com/api/hour/" +
             vm.$route.params.id +
-            '?total=72'
+            "?total=72"
         )
         .then((response) => {
           vm.data = response.data.data;
@@ -107,7 +106,7 @@ export default {
         });
     },
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.isMetric = JSON.parse(localUnits);
     },
     reverseArr(input) {

@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import stations from '@/assets/stations.json';
-import tableDetail from '@/components/list/table-detail.vue';
+import stations from "@/assets/stations.json";
+import tableDetail from "@/components/list/table-detail.vue";
 
 export default {
-  name: 'List',
+  name: "List",
   components: {
     tableDetail,
   },
@@ -20,12 +20,12 @@ export default {
   },
   created() {
     this.getStationsURL();
-    this.$root.$on('removeStation', (station) => {
+    this.$root.$on("removeStation", (station) => {
       this.removeStation(station);
     });
-    this.$root.$on('reorderStations', (newStations) => {
+    this.$root.$on("reorderStations", (newStations) => {
       this.stationMaster = newStations;
-      this.$router.push({path: `${this.stationMaster.join(',')}`});
+      this.$router.push({ path: `${this.stationMaster.join(",")}` });
     });
   },
   methods: {
@@ -34,14 +34,14 @@ export default {
       var stationsURL = vm.$route.params.id;
 
       if (stationsURL) {
-        var parsedStations = vm.$route.params.id.split(',');
+        var parsedStations = vm.$route.params.id.split(",");
         parsedStations.forEach(function (id) {
           if (id in stations) {
             vm.stationMaster.push(id);
           }
         });
       } else {
-        vm.$router.push({name: 'home'});
+        vm.$router.push({ name: "home" });
       }
     },
     removeStation(station) {
@@ -52,7 +52,7 @@ export default {
         if (index > -1) {
           vm.stationMaster.splice(index, 1);
         }
-        vm.$router.push({path: `${vm.stationMaster.join(',')}`});
+        vm.$router.push({ path: `${vm.stationMaster.join(",")}` });
       }
     },
   },

@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import navbar from '@/components/header/navbar.vue';
-import search from '@/components/header/search.vue';
-import units from '@/components/header/units.vue';
-import favorites from '@/components/header/favorites.vue';
+import navbar from "@/components/header/navbar.vue";
+import search from "@/components/header/search.vue";
+import units from "@/components/header/units.vue";
+import favorites from "@/components/header/favorites.vue";
 
 export default {
   components: {
@@ -35,9 +35,9 @@ export default {
 
 <style lang="scss">
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
 }
 #nav {
   display: flex;

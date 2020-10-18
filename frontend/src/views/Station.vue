@@ -51,21 +51,21 @@
 </template>
 
 <script>
-import axios from 'axios';
-import stations from '@/assets/stations.json';
-import favorites from '@/components/header/favorites.vue';
-import nearuser from '@/components/header/nearuser.vue';
-import hourly from '@/components/station/hourly.vue';
-import daily from '@/components/station/daily.vue';
-import near from '@/components/station/near.vue';
-import forecast from '@/components/station/forecast.vue';
-import mesowest from '@/components/station/mesowest.vue';
-import avy from '@/components/station/avy.vue';
-import tabluar from '@/components/station/tabluar.vue';
-import forecastChart from '@/components/station/forecast-chart.vue';
+import axios from "axios";
+import stations from "@/assets/stations.json";
+import favorites from "@/components/header/favorites.vue";
+import nearuser from "@/components/header/nearuser.vue";
+import hourly from "@/components/station/hourly.vue";
+import daily from "@/components/station/daily.vue";
+import near from "@/components/station/near.vue";
+import forecast from "@/components/station/forecast.vue";
+import mesowest from "@/components/station/mesowest.vue";
+import avy from "@/components/station/avy.vue";
+import tabluar from "@/components/station/tabluar.vue";
+import forecastChart from "@/components/station/forecast-chart.vue";
 
 export default {
-  name: 'Station',
+  name: "Station",
   components: {
     hourly,
     daily,
@@ -87,12 +87,12 @@ export default {
   created() {
     this.routeInfo();
     this.getCurrentUnits();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
     });
   },
   watch: {
-    '$route.params.id'() {
+    "$route.params.id"() {
       this.routeInfo();
     },
   },
@@ -102,7 +102,7 @@ export default {
       vm.station = stations[vm.$route.params.id];
     },
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.isMetric = JSON.parse(localUnits);
     },
     elevCheck(meters) {
@@ -114,9 +114,9 @@ export default {
     },
     m_ft() {
       if (this.isMetric) {
-        return 'm';
+        return "m";
       } else {
-        return 'ft';
+        return "ft";
       }
     },
   },

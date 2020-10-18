@@ -25,7 +25,7 @@
             </span>
           </div>
           <div v-if="region.forecast">
-            <span :style="{color: region.forecast.stroke}">{{
+            <span :style="{ color: region.forecast.stroke }">{{
               titleCase(region.forecast.danger)
             }}</span>
             - {{ region.forecast.travel_advice }}
@@ -39,33 +39,32 @@
 </template>
 
 <script>
-import {functions} from '@/mixins/functions';
-import axios from 'axios';
-import stations from '@/assets/stations.json';
-import trend from 'vuetrend';
+import { functions } from "@/mixins/functions";
+import axios from "axios";
+import stations from "@/assets/stations.json";
 
 export default {
-  name: 'avy',
+  name: "avy",
   mixins: [functions],
   components: {
-    trend,
+    // trend,
   },
   data() {
     return {
       avyForecast: [],
-      isMetric: '',
+      isMetric: "",
       expanded: false,
     };
   },
   created() {
     this.getData();
     this.getCurrentUnits();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
     });
   },
   watch: {
-    '$route.params.id'() {
+    "$route.params.id"() {
       this.getData();
       this.expanded = false;
     },
@@ -75,7 +74,7 @@ export default {
       var vm = this;
       axios
         .get(
-          'https://backcountrydata.herokuapp.com/api/avy/' + vm.$route.params.id
+          "https://backcountrydata.herokuapp.com/api/avy/" + vm.$route.params.id
         )
         .then((response) => {
           vm.avyForecast = response.data;
@@ -85,7 +84,7 @@ export default {
         });
     },
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.isMetric = JSON.parse(localUnits);
     },
   },

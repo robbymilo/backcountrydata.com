@@ -22,11 +22,11 @@
 
 <script>
 export default {
-  name: 'navbar',
+  name: "navbar",
 
   data() {
     return {
-      units: '',
+      units: "",
     };
   },
   created() {
@@ -34,20 +34,20 @@ export default {
   },
   methods: {
     defaultUnits() {
-      var localUnits = localStorage.getItem('bcd-units');
+      var localUnits = localStorage.getItem("bcd-units");
       if (localUnits) {
         this.units = localUnits;
       } else {
-        this.units = 'metric';
+        this.units = "metric";
       }
     },
     setMetric() {
-      this.units = 'metric';
-      localStorage.setItem('bcd-units', this.units);
+      this.units = "metric";
+      localStorage.setItem("bcd-units", this.units);
     },
     setImperial() {
-      this.units = 'imperial';
-      localStorage.setItem('bcd-units', this.units);
+      this.units = "imperial";
+      localStorage.setItem("bcd-units", this.units);
     },
   },
 };

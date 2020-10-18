@@ -21,8 +21,8 @@
               bearing(
                 currentStation.latitude,
                 currentStation.longitude,
-                station.LATITUDE.replace(/\s/g, ''),
-                station.LONGITUDE.replace(/\s/g, '')
+                station.LATITUDE.replace(/\s/g, ""),
+                station.LONGITUDE.replace(/\s/g, "")
               )
             )
           }}
@@ -125,17 +125,17 @@
 </template>
 
 <script>
-import {functions} from '@/mixins/functions';
-import axios from 'axios';
-import stations from '@/assets/stations.json';
+import { functions } from "@/mixins/functions";
+import axios from "axios";
+import stations from "@/assets/stations.json";
 
 export default {
-  name: 'mesowest',
+  name: "mesowest",
   mixins: [functions],
-  props: ['current'],
+  props: ["current"],
   data() {
     return {
-      isMetric: '',
+      isMetric: "",
       currentStation: this.current,
       mesodata: [],
       mesometa: {},
@@ -144,12 +144,12 @@ export default {
   created() {
     this.getData(this.currentStation.latitude, this.currentStation.longitude);
     this.getCurrentUnits();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
     });
   },
   watch: {
-    '$route.params.id'() {
+    "$route.params.id"() {
       this.mesodata = [];
       this.mesometa = [];
       this.currentStation = this.current;
@@ -160,13 +160,13 @@ export default {
     getData(lat, lon) {
       var vm = this;
       axios
-        .get('https://api.mesowest.net/v2/stations/timeseries', {
+        .get("https://api.mesowest.net/v2/stations/timeseries", {
           params: {
-            token: 'b66df2a69170468d96e105380cf25b68',
-            recent: '10080',
-            limit: '11',
+            token: "b66df2a69170468d96e105380cf25b68",
+            recent: "10080",
+            limit: "11",
             radius: `${lat},${lon},50`,
-            obtimezone: 'local',
+            obtimezone: "local",
           },
         })
         .then((response) => {
@@ -176,7 +176,7 @@ export default {
         });
     },
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.isMetric = JSON.parse(localUnits);
     },
   },

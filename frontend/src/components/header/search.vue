@@ -12,7 +12,7 @@
       @click="clickHandler"
       @keydown.esc="clearInput"
     >
-      <template slot-scope="{suggestion}">
+      <template slot-scope="{ suggestion }">
         <span class="my-suggestion-item">{{ suggestion.item }}</span>
       </template>
     </vue-autosuggest>
@@ -43,18 +43,18 @@
 </template>
 
 <script>
-import stations from '@/assets/stations.json';
-import {VueAutosuggest} from 'vue-autosuggest';
-import axios from 'axios';
+import stations from "@/assets/stations.json";
+import { VueAutosuggest } from "vue-autosuggest";
+import axios from "axios";
 
 export default {
-  name: 'search',
+  name: "search",
   components: {
     VueAutosuggest,
   },
   data: function () {
     return {
-      searchTerm: '',
+      searchTerm: "",
       isAjax: false,
       results: [],
     };
@@ -64,7 +64,7 @@ export default {
       console.log(`Selected "${item.item}"`);
     },
     clickHandler() {
-      console.log('click');
+      console.log("click");
     },
     onInputChange(input) {
       this.searchTerm = input;
@@ -78,7 +78,7 @@ export default {
       this.isAjax = true;
       axios
         .get(
-          'https://backcountrydata.herokuapp.com/api/nearest/?search=' + input
+          "https://backcountrydata.herokuapp.com/api/nearest/?search=" + input
         )
         .then((response) => {
           this.isAjax = false;
@@ -93,7 +93,7 @@ export default {
         });
     },
     clearInput() {
-      this.$refs.autosuggest.searchInput = '';
+      this.$refs.autosuggest.searchInput = "";
       this.results = [];
     },
   },

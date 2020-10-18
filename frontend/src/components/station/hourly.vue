@@ -48,20 +48,20 @@
 </template>
 
 <script>
-import {functions} from '@/mixins/functions';
-import axios from 'axios';
-import stations from '@/assets/stations.json';
-import {Chart} from 'highcharts-vue';
+import { functions } from "@/mixins/functions";
+import axios from "axios";
+import stations from "@/assets/stations.json";
+import { Chart } from "highcharts-vue";
 
 export default {
-  name: 'hourly',
+  name: "hourly",
   mixins: [functions],
   components: {
     highcharts: Chart,
   },
   data() {
     return {
-      isMetric: '',
+      isMetric: "",
       station: {},
       date_time: [],
       air_temp: [],
@@ -71,44 +71,44 @@ export default {
       wind_direction: [],
       wind_speed: [],
       wind_gust: [],
-      updateArgs: [true, true, {duration: 100}],
-      tempUnits: '',
+      updateArgs: [true, true, { duration: 100 }],
+      tempUnits: "",
       sliderValue: 30,
       loading: false,
       chartOptions: {
         chart: {
-          zoomType: 'x',
+          zoomType: "x",
         },
         title: {
-          text: '',
+          text: "",
         },
         series: [
           {
-            name: 'Snow Depth',
+            name: "Snow Depth",
             data: [],
-            type: 'area',
+            type: "area",
             yAxis: 1,
             marker: {
               enabled: false,
             },
             tooltip: {
-              valueSuffix: '',
+              valueSuffix: "",
             },
           },
           {
-            name: 'Snow Water Equivalent',
+            name: "Snow Water Equivalent",
             data: [],
-            type: 'spline',
+            type: "spline",
             yAxis: 1,
             marker: {
               enabled: false,
             },
-            dashStyle: 'shortdot',
+            dashStyle: "shortdot",
           },
           {
-            name: 'Air Temperature',
+            name: "Air Temperature",
             data: [],
-            type: 'spline',
+            type: "spline",
             yAxis: 0,
             marker: {
               enabled: false,
@@ -121,7 +121,7 @@ export default {
           },
         },
         xAxis: {
-          type: 'datetime',
+          type: "datetime",
           crosshair: true,
           tickInterval: 4,
           tickLength: 5,
@@ -132,31 +132,31 @@ export default {
             plotLines: [
               {
                 value: null,
-                color: 'rgba(0,0,255, 0.1)',
+                color: "rgba(0,0,255, 0.1)",
                 width: 2,
                 label: {
                   // text: 'Freezing',
                   style: {
-                    color: 'rgba(0,0,255, 0.3)',
-                    opacity: '0.3',
+                    color: "rgba(0,0,255, 0.3)",
+                    opacity: "0.3",
                   },
                 },
               },
             ],
             title: {
-              text: 'Air Temperature',
+              text: "Air Temperature",
             },
             labels: {
-              format: '{value}°',
+              format: "{value}°",
             },
           },
           {
             // Secondary yAxis
             title: {
-              text: 'Snnow Depth/SWE',
+              text: "Snnow Depth/SWE",
             },
             labels: {
-              format: '{value}',
+              format: "{value}",
             },
             opposite: true,
           },
@@ -176,13 +176,13 @@ export default {
     this.routeInfo();
     this.getData(720);
     this.getCurrentUnits();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
       this.set_chart();
     });
   },
   watch: {
-    '$route.params.id'() {
+    "$route.params.id"() {
       this.getData(720);
       this.sliderValue = 30;
     },
@@ -220,7 +220,7 @@ export default {
         });
     },
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.isMetric = JSON.parse(localUnits);
     },
     set_chart() {
@@ -233,12 +233,12 @@ export default {
 
       if (!vm.isMetric) {
         vm.chartOptions.yAxis[0].plotLines[0].value = 32;
-        vm.chartOptions.yAxis[0].title.text = 'Air Temperature (f)';
-        vm.chartOptions.yAxis[1].title.text = 'Snow Depth/SWE (in)';
+        vm.chartOptions.yAxis[0].title.text = "Air Temperature (f)";
+        vm.chartOptions.yAxis[1].title.text = "Snow Depth/SWE (in)";
       } else {
         vm.chartOptions.yAxis[0].plotLines[0].value = 0;
-        vm.chartOptions.yAxis[0].title.text = 'Air Temperature (c)';
-        vm.chartOptions.yAxis[1].title.text = 'Snow Depth/SWE (cm)';
+        vm.chartOptions.yAxis[0].title.text = "Air Temperature (c)";
+        vm.chartOptions.yAxis[1].title.text = "Snow Depth/SWE (cm)";
       }
     },
     changeSlider(value) {

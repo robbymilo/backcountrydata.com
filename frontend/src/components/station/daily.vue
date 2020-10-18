@@ -5,20 +5,20 @@
 </template>
 
 <script>
-import {functions} from '@/mixins/functions';
-import axios from 'axios';
-import stations from '@/assets/stations.json';
-import {Chart} from 'highcharts-vue';
+import { functions } from "@/mixins/functions";
+import axios from "axios";
+import stations from "@/assets/stations.json";
+import { Chart } from "highcharts-vue";
 
 export default {
-  name: 'daily',
+  name: "daily",
   mixins: [functions],
   components: {
     highcharts: Chart,
   },
   data() {
     return {
-      isMetric: '',
+      isMetric: "",
       data: {
         date_time: [],
         air_temp: [],
@@ -31,31 +31,31 @@ export default {
       },
       chartOptions: {
         title: {
-          text: 'Water Year Daily Points',
+          text: "Water Year Daily Points",
         },
         series: [
           {
-            name: 'Snow Depth',
+            name: "Snow Depth",
             data: [],
-            type: 'area',
+            type: "area",
             yAxis: 1,
             marker: {
               enabled: false,
             },
           },
           {
-            name: 'Snow Water Equivalent',
+            name: "Snow Water Equivalent",
             data: [],
-            type: 'spline',
+            type: "spline",
             yAxis: 1,
             marker: {
               enabled: false,
             },
           },
           {
-            name: 'Air Temperature',
+            name: "Air Temperature",
             data: [],
-            type: 'spline',
+            type: "spline",
             yAxis: 0,
             marker: {
               enabled: false,
@@ -68,7 +68,7 @@ export default {
           },
         },
         xAxis: {
-          type: 'datetime',
+          type: "datetime",
           catgories: [],
           crosshair: true,
           tickInterval: 4,
@@ -84,12 +84,12 @@ export default {
   created() {
     this.getData();
     this.getCurrentUnits();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
     });
   },
   watch: {
-    '$route.params.id'() {
+    "$route.params.id"() {
       this.getData();
     },
   },
@@ -98,9 +98,9 @@ export default {
       var vm = this;
       axios
         .get(
-          'https://backcountrydata.herokuapp.com/api/day/' +
+          "https://backcountrydata.herokuapp.com/api/day/" +
             vm.$route.params.id +
-            '?empty=true'
+            "?empty=true"
         )
         .then((response) => {
           vm.data.date_time = response.data.data.date_time;
@@ -128,7 +128,7 @@ export default {
         });
     },
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.isMetric = JSON.parse(localUnits);
     },
   },

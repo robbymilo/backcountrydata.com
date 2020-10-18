@@ -1,7 +1,7 @@
 <template>
   <div class="nearuser">
     <div v-if="near[0]">
-      <router-link :to="{path: '/station/' + near[0].id}">
+      <router-link :to="{ path: '/station/' + near[0].id }">
         Your Nearest Station:
         <strong>{{ near[0].station.site_name }}</strong>
       </router-link>
@@ -11,16 +11,16 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'nearuser',
+  name: "nearuser",
   data() {
     return {
       near: [],
       coordinates: {
-        lat: '',
-        lon: '',
+        lat: "",
+        lon: "",
       },
     };
   },
@@ -31,10 +31,10 @@ export default {
     getIP() {
       var vm = this;
       axios
-        .get('https://ipinfo.io/json')
+        .get("https://ipinfo.io/json")
         .then((response) => {
-          vm.coordinates.lat = response.data.loc.split(',')[0];
-          vm.coordinates.lon = response.data.loc.split(',')[1];
+          vm.coordinates.lat = response.data.loc.split(",")[0];
+          vm.coordinates.lon = response.data.loc.split(",")[1];
           vm.getStationsNear();
         })
         .catch((error) => {
@@ -44,7 +44,7 @@ export default {
     getUserIP() {
       var vm = this;
       axios
-        .get('https://ipapi.co/json/')
+        .get("https://ipapi.co/json/")
         .then((response) => {
           vm.coordinates.lat = response.data.latitude;
           vm.coordinates.lon = response.data.longitude;
@@ -57,7 +57,7 @@ export default {
     getStationsNear() {
       var vm = this;
       axios
-        .get('https://backcountrydata.herokuapp.com/api/nearest/', {
+        .get("https://backcountrydata.herokuapp.com/api/nearest/", {
           params: {
             lat: vm.coordinates.lat,
             lon: vm.coordinates.lon,

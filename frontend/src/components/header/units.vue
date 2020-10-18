@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'units2',
+  name: "units2",
   data() {
     return {
       metric: true,
@@ -36,17 +36,17 @@ export default {
   },
   methods: {
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.metric = JSON.parse(localUnits);
       if (this.metric == null) {
         this.metric = false;
       }
-      this.$root.$emit('changeUnits', this.metric);
+      this.$root.$emit("changeUnits", this.metric);
     },
     setUnits() {
       console.log(this.metric);
-      this.$root.$emit('changeUnits', this.metric);
-      localStorage.setItem('bcd-metric', this.metric);
+      this.$root.$emit("changeUnits", this.metric);
+      localStorage.setItem("bcd-metric", this.metric);
     },
   },
 };

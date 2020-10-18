@@ -4,7 +4,7 @@
       <h3>Nearby SNOTEL Stations:</h3>
       <span class="" v-for="(station, index) in near">
         <div class="station" v-if="index >= 1">
-          <router-link :to="{path: '/station/' + station.id}">
+          <router-link :to="{ path: '/station/' + station.id }">
             {{ station.station.site_name.trim() }}
           </router-link>
           <div>
@@ -28,30 +28,30 @@
 </template>
 
 <script>
-import {functions} from '@/mixins/functions';
-import axios from 'axios';
-import stations from '@/assets/stations.json';
+import { functions } from "@/mixins/functions";
+import axios from "axios";
+import stations from "@/assets/stations.json";
 
 export default {
-  name: 'near',
+  name: "near",
   mixins: [functions],
-  props: ['current'],
+  props: ["current"],
   data() {
     return {
       near: [],
       currentStation: this.current,
-      isMetric: '',
+      isMetric: "",
     };
   },
   created() {
     this.getData();
     this.getCurrentUnits();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
     });
   },
   watch: {
-    '$route.params.id'() {
+    "$route.params.id"() {
       this.getData();
       this.currentStation = this.current;
     },
@@ -61,7 +61,7 @@ export default {
       var vm = this;
       axios
         .get(
-          'https://backcountrydata.herokuapp.com/api/nearest/' +
+          "https://backcountrydata.herokuapp.com/api/nearest/" +
             vm.$route.params.id
         )
         .then((response) => {
@@ -72,7 +72,7 @@ export default {
         });
     },
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.isMetric = JSON.parse(localUnits);
     },
     distanceCheck(miles) {
@@ -84,9 +84,9 @@ export default {
     },
     mi_km() {
       if (this.isMetric) {
-        return 'km';
+        return "km";
       } else {
-        return 'mi';
+        return "mi";
       }
     },
   },

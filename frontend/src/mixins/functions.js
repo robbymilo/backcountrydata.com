@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 Number.prototype.toFixedNumber = function (x, base) {
   var pow = Math.pow(base || 10, x);
@@ -24,7 +24,7 @@ export const functions = {
       return array;
     },
     timezone(date_time) {
-      return date_time.map((x) => new Date(x + ' GMT-8'));
+      return date_time.map((x) => new Date(x + " GMT-8"));
     },
     zeroCheck(integer) {
       return integer <= 0 ? 0 : integer;
@@ -72,7 +72,7 @@ export const functions = {
     },
     qpfCheck(array) {
       return array.map(function (x) {
-        if (typeof x === 'string') {
+        if (typeof x === "string") {
           x = Number(x);
         } else {
           x = 0;
@@ -133,70 +133,70 @@ export const functions = {
     },
     mi_km() {
       if (this.isMetric) {
-        return 'km';
+        return "km";
       } else {
-        return 'mi';
+        return "mi";
       }
     },
     cm_in() {
       if (this.isMetric) {
-        return 'cm';
+        return "cm";
       } else {
-        return 'in';
+        return "in";
       }
     },
     mm_in() {
       if (this.isMetric) {
-        return 'mm';
+        return "mm";
       } else {
-        return 'in';
+        return "in";
       }
     },
     c_f() {
       if (this.isMetric) {
-        return 'C';
+        return "C";
       } else {
-        return 'F';
+        return "F";
       }
     },
     m_ft() {
       if (this.isMetric) {
-        return 'm';
+        return "m";
       } else {
-        return 'ft';
+        return "ft";
       }
     },
     ms_mph() {
       if (this.isMetric) {
-        return 'm/s';
+        return "m/s";
       } else {
-        return 'mph';
+        return "mph";
       }
     },
     degToCompass(num) {
       var val = Math.floor(num / 22.5 + 0.5);
       var arr = [
-        'N',
-        'NNE',
-        'NE',
-        'ENE',
-        'E',
-        'ESE',
-        'SE',
-        'SSE',
-        'S',
-        'SSW',
-        'SW',
-        'WSW',
-        'W',
-        'WNW',
-        'NW',
-        'NNW',
+        "N",
+        "NNE",
+        "NE",
+        "ENE",
+        "E",
+        "ESE",
+        "SE",
+        "SSE",
+        "S",
+        "SSW",
+        "SW",
+        "WSW",
+        "W",
+        "WNW",
+        "NW",
+        "NNW",
       ];
       return arr[val % 16];
     },
     ampReplace(string) {
-      return string.replace(/&amp;/g, '&');
+      return string.replace(/&amp;/g, "&");
     },
     bearing(startLat, startLng, destLat, destLng) {
       startLat = toRadians(startLat);
@@ -213,7 +213,7 @@ export const functions = {
       return (brng + 360) % 360;
     },
     getCurrentUnits: function () {
-      const localUnits = localStorage.getItem('bcd-metric');
+      const localUnits = localStorage.getItem("bcd-metric");
       return JSON.parse(localUnits);
     },
     lastArray(array) {
@@ -230,14 +230,14 @@ export const functions = {
     },
     fetchData(station, type, options) {
       return axios({
-        method: 'get',
+        method: "get",
         url: `https://backcountrydata.herokuapp.com/api/${type}/${station}${options}`,
       }).then(function (response) {
         return response.data;
       });
     },
     capitalize(s) {
-      if (typeof s !== 'string') return '';
+      if (typeof s !== "string") return "";
       return s.charAt(0).toUpperCase() + s.slice(1);
     },
   },

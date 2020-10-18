@@ -12,7 +12,7 @@
           <draggable class="item" v-model="favorites" @end="dragged">
             <div v-for="site of favorites" :key="site.id">
               <div class="favorite">
-                <router-link :to="{path: '/station/' + site}">{{
+                <router-link :to="{ path: '/station/' + site }">{{
                   getMeta(site).site_name.trim()
                 }}</router-link>
                 <button @click="removeFav(site)">x</button>
@@ -37,11 +37,11 @@
 </template>
 
 <script>
-import stations from '@/assets/stations.json';
-import draggable from 'vuedraggable';
+import stations from "@/assets/stations.json";
+import draggable from "vuedraggable";
 
 export default {
-  name: 'favorites',
+  name: "favorites",
   components: {
     draggable,
   },
@@ -58,14 +58,14 @@ export default {
     this.isFav();
   },
   watch: {
-    '$route.params.id'(id) {
+    "$route.params.id"(id) {
       this.isFav();
     },
   },
   methods: {
     showFavs() {
       var vm = this;
-      var currentFavs = JSON.parse(localStorage.getItem('bcd-favorites'));
+      var currentFavs = JSON.parse(localStorage.getItem("bcd-favorites"));
       if (!currentFavs) {
         vm.favorites = null;
       } else {
@@ -74,39 +74,39 @@ export default {
     },
     addFav() {
       // get current favorites
-      var currentFavs = JSON.parse(localStorage.getItem('bcd-favorites'));
+      var currentFavs = JSON.parse(localStorage.getItem("bcd-favorites"));
       if (!currentFavs) {
         currentFavs = [];
         currentFavs[0] = this.$route.params.id;
-        localStorage.setItem('bcd-favorites', JSON.stringify(currentFavs));
+        localStorage.setItem("bcd-favorites", JSON.stringify(currentFavs));
         this.showFavs();
       } else {
         if (currentFavs.includes(this.$route.params.id)) {
-          alert('favorite already exists');
+          alert("favorite already exists");
         } else {
           currentFavs.push(this.$route.params.id);
-          localStorage.setItem('bcd-favorites', JSON.stringify(currentFavs));
+          localStorage.setItem("bcd-favorites", JSON.stringify(currentFavs));
           this.showFavs();
         }
       }
       this.isFav();
     },
     removeFav(site) {
-      var currentFavs = JSON.parse(localStorage.getItem('bcd-favorites'));
+      var currentFavs = JSON.parse(localStorage.getItem("bcd-favorites"));
 
       if (currentFavs.includes(site)) {
         var index = currentFavs.indexOf(site);
         if (index > -1) {
           currentFavs.splice(index, 1);
         }
-        localStorage.setItem('bcd-favorites', JSON.stringify(currentFavs));
+        localStorage.setItem("bcd-favorites", JSON.stringify(currentFavs));
         this.showFavs();
       }
       console.log(currentFavs);
       this.isFav();
     },
     dragged() {
-      localStorage.setItem('bcd-favorites', JSON.stringify(this.favorites));
+      localStorage.setItem("bcd-favorites", JSON.stringify(this.favorites));
       this.showFavs();
     },
     getMeta(id) {
@@ -117,7 +117,7 @@ export default {
     },
     isFav() {
       var vm = this;
-      var currentFavs = JSON.parse(localStorage.getItem('bcd-favorites'));
+      var currentFavs = JSON.parse(localStorage.getItem("bcd-favorites"));
       if (currentFavs && currentFavs.includes(this.$route.params.id)) {
         vm.isFavorite = true;
       } else {

@@ -19,13 +19,13 @@
           @end="dragged"
           :list="stationList"
           :element="'tbody'"
-          :options="{handle: '.move'}"
+          :options="{ handle: '.move' }"
         >
           <tr
             class="station"
             v-for="station of stationList"
             :key="station.id"
-            v-bind:class="{expanded: expanded[station]}"
+            v-bind:class="{ expanded: expanded[station] }"
           >
             <td class="column order">
               <button class="remove" @click="removeStation(station)">
@@ -46,7 +46,7 @@
               </button>
             </td>
             <td class="column name">
-              <router-link :to="{path: '/station/' + station}">{{
+              <router-link :to="{ path: '/station/' + station }">{{
                 getMeta(station).site_name.trim()
               }}</router-link>
               <small class="float-right">({{ station }})</small>
@@ -271,7 +271,7 @@
               <span v-if="avyData[station] && avyData[station][0]">
                 <div
                   class="avy-box"
-                  :style="{background: avyData[station][0].forecast.color}"
+                  :style="{ background: avyData[station][0].forecast.color }"
                 ></div>
                 <span
                   :title="
@@ -294,7 +294,7 @@
                 </span>
                 <span
                   class="mobile"
-                  :style="{color: avyData[station][0].forecast.stroke}"
+                  :style="{ color: avyData[station][0].forecast.stroke }"
                 >
                   <div>
                     <h5>{{ avyData[station][0].center }}</h5>
@@ -321,15 +321,15 @@
 </template>
 
 <script>
-import axios from 'axios';
-import stations from '@/assets/stations.json';
-import draggable from 'vuedraggable';
-import {functions} from '@/mixins/functions';
+import axios from "axios";
+import stations from "@/assets/stations.json";
+import draggable from "vuedraggable";
+import { functions } from "@/mixins/functions";
 
-import nearuser from '@/components/header/nearuser.vue';
+import nearuser from "@/components/header/nearuser.vue";
 
 export default {
-  name: 'table-detail',
+  name: "table-detail",
   mixins: [functions],
   props: {
     stationList: Array,
@@ -340,7 +340,7 @@ export default {
   },
   data() {
     return {
-      isMetric: '',
+      isMetric: "",
       hourlyData: {},
       weeklyData: {},
       forecastData: {},
@@ -351,7 +351,7 @@ export default {
   created() {
     this.isMetric = this.getCurrentUnits();
     this.getStationData();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
     });
   },
@@ -366,34 +366,34 @@ export default {
       if (vm.stationList) {
         vm.stationList.forEach(function (station, index) {
           // hourly
-          vm.fetchData(station, 'hour', '?total=169&empty=true').then(function (
+          vm.fetchData(station, "hour", "?total=169&empty=true").then(function (
             response
           ) {
             vm.$set(vm.hourlyData, station, response);
           });
 
           // daily
-          vm.fetchData(station, 'day', '').then(function (response) {
+          vm.fetchData(station, "day", "").then(function (response) {
             vm.$set(vm.weeklyData, station, response);
           });
 
           // forecast
-          vm.fetchData(station, 'forecast', '').then(function (response) {
+          vm.fetchData(station, "forecast", "").then(function (response) {
             vm.$set(vm.forecastData, station, response);
           });
 
           // avy
-          vm.fetchData(station, 'avy', '').then(function (response) {
+          vm.fetchData(station, "avy", "").then(function (response) {
             vm.$set(vm.avyData, station, response);
           });
         });
       }
     },
     removeStation(station) {
-      this.$root.$emit('removeStation', station);
+      this.$root.$emit("removeStation", station);
     },
     dragged() {
-      this.$root.$emit('reorderStations', this.stationList);
+      this.$root.$emit("reorderStations", this.stationList);
     },
     expandStation(station) {
       var vm = this;

@@ -8,83 +8,83 @@
 </template>
 
 <script>
-import {functions} from '@/mixins/functions';
-import axios from 'axios';
-import stations from '@/assets/stations.json';
-import {Chart} from 'highcharts-vue';
+import { functions } from "@/mixins/functions";
+import axios from "axios";
+import stations from "@/assets/stations.json";
+import { Chart } from "highcharts-vue";
 
 export default {
-  name: 'forecastChart',
+  name: "forecastChart",
   mixins: [functions],
   components: {
     highcharts: Chart,
   },
   data() {
     return {
-      isMetric: '',
+      isMetric: "",
       station: {},
       air_temp: [],
       pop: [],
       qpf: [],
       sky: [],
-      updateArgs: [true, true, {duration: 100}],
+      updateArgs: [true, true, { duration: 100 }],
       loading: false,
       chartOptions: {
         chart: {
-          zoomType: 'x',
+          zoomType: "x",
         },
         title: {
-          text: '',
+          text: "",
         },
         series: [
           {
-            name: 'Air Temp',
+            name: "Air Temp",
             data: [],
-            type: 'spline',
+            type: "spline",
             yAxis: 0,
             marker: {
               enabled: false,
             },
             tooltip: {
-              valueSuffix: '',
+              valueSuffix: "",
             },
           },
           {
-            name: 'Possibility of Precip',
+            name: "Possibility of Precip",
             data: [],
-            type: 'area',
+            type: "area",
             yAxis: 1,
             marker: {
               enabled: false,
             },
             tooltip: {
-              valueSuffix: '',
+              valueSuffix: "",
             },
           },
           {
-            name: 'Hourly Precip Total',
+            name: "Hourly Precip Total",
             data: [],
-            type: 'area',
+            type: "area",
             yAxis: 2,
             marker: {
               enabled: false,
             },
             tooltip: {
-              valueSuffix: '',
+              valueSuffix: "",
             },
           },
           {
-            name: 'Sky Cover %',
+            name: "Sky Cover %",
             data: [],
-            type: 'area',
+            type: "area",
             yAxis: 3,
             marker: {
               enabled: false,
             },
             tooltip: {
-              valueSuffix: '',
+              valueSuffix: "",
             },
-            zIndex: '-1',
+            zIndex: "-1",
           },
         ],
         plotOptions: {
@@ -93,7 +93,7 @@ export default {
           },
         },
         xAxis: {
-          type: 'datetime',
+          type: "datetime",
           crosshair: true,
           tickInterval: 4,
           tickLength: 5,
@@ -102,25 +102,25 @@ export default {
           {
             // Primary yAxis
             title: {
-              text: 'Air Temperature (c)',
+              text: "Air Temperature (c)",
             },
             labels: {
-              format: '{value}°',
+              format: "{value}°",
             },
           },
           {
             title: {
-              text: 'Possibility of Precip %',
+              text: "Possibility of Precip %",
             },
           },
           {
             title: {
-              text: 'Hourly Precip Total (in)',
+              text: "Hourly Precip Total (in)",
             },
           },
           {
             title: {
-              text: 'Sky Cover %',
+              text: "Sky Cover %",
             },
           },
         ],
@@ -134,13 +134,13 @@ export default {
     this.routeInfo();
     this.getData();
     this.getCurrentUnits();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
       this.set_chart();
     });
   },
   watch: {
-    '$route.params.id'() {
+    "$route.params.id"() {
       this.getData();
     },
     air_temp() {
@@ -158,17 +158,17 @@ export default {
       vm.loading = true;
       axios
         .get(
-          'https://backcountrydata.herokuapp.com/api/forecast/' +
+          "https://backcountrydata.herokuapp.com/api/forecast/" +
             vm.$route.params.id
         )
         .then((response) => {
           vm.air_temp = response.data.forecastGraphical.temperature[0].value;
           vm.pop =
             response.data.forecastGraphical[
-              'probability-of-precipitation'
+              "probability-of-precipitation"
             ].value;
-          vm.qpf = response.data.forecastGraphical['hourly-qpf'].value;
-          vm.sky = response.data.forecastGraphical['cloud-amount'].value;
+          vm.qpf = response.data.forecastGraphical["hourly-qpf"].value;
+          vm.sky = response.data.forecastGraphical["cloud-amount"].value;
           vm.loading = false;
         })
         .catch((error) => {
@@ -177,7 +177,7 @@ export default {
         });
     },
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.isMetric = JSON.parse(localUnits);
     },
     set_chart() {

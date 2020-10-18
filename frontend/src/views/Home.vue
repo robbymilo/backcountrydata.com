@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import navbar from '@/components/header/navbar.vue';
-import search from '@/components/header/search.vue';
-import tableDetail from '@/components/list/table-detail.vue';
+import navbar from "@/components/header/navbar.vue";
+import search from "@/components/header/search.vue";
+import tableDetail from "@/components/list/table-detail.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     navbar,
     search,
@@ -38,10 +38,10 @@ export default {
   },
   created() {
     this.getFavoriteStations();
-    this.$root.$on('removeStation', (station) => {
+    this.$root.$on("removeStation", (station) => {
       this.removeStation(station);
     });
-    this.$root.$on('reorderStations', (newStations) => {
+    this.$root.$on("reorderStations", (newStations) => {
       this.stationMaster = newStations;
       this.reorderFavorites();
     });
@@ -49,7 +49,7 @@ export default {
   methods: {
     getFavoriteStations() {
       var vm = this;
-      var currentFavs = JSON.parse(localStorage.getItem('bcd-favorites'));
+      var currentFavs = JSON.parse(localStorage.getItem("bcd-favorites"));
       if (!currentFavs) {
         vm.stationMaster = null;
       } else {
@@ -64,11 +64,11 @@ export default {
         if (index > -1) {
           vm.stationMaster.splice(index, 1);
         }
-        vm.$router.push({path: `${vm.stationMaster.join(',')}`});
+        vm.$router.push({ path: `${vm.stationMaster.join(",")}` });
       }
     },
     reorderFavorites() {
-      localStorage.setItem('bcd-favorites', JSON.stringify(this.stationMaster));
+      localStorage.setItem("bcd-favorites", JSON.stringify(this.stationMaster));
     },
   },
 };

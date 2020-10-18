@@ -29,7 +29,7 @@
           forecast.discussion.rss.channel.item.title
         }}</a>
         <div class="discussion-wrap">
-          <div class="discussion" v-bind:class="{expanded: expanded}">
+          <div class="discussion" v-bind:class="{ expanded: expanded }">
             {{ forecast.discussion.rss.channel.item.description }}
           </div>
           <div class="expand-wrap">
@@ -75,12 +75,12 @@
 </template>
 
 <script>
-import {functions} from '@/mixins/functions';
-import axios from 'axios';
-import stations from '@/assets/stations.json';
+import { functions } from "@/mixins/functions";
+import axios from "axios";
+import stations from "@/assets/stations.json";
 
 export default {
-  name: 'forecast',
+  name: "forecast",
   mixins: [functions],
   data() {
     return {
@@ -90,15 +90,15 @@ export default {
           rss: {
             channel: {
               item: {
-                link: '',
-                title: '',
-                description: '',
+                link: "",
+                title: "",
+                description: "",
               },
             },
           },
         },
       },
-      isMetric: '',
+      isMetric: "",
       expanded: false,
       local: [],
     };
@@ -106,12 +106,12 @@ export default {
   created() {
     this.getData();
     this.getCurrentUnits();
-    this.$root.$on('changeUnits', (input) => {
+    this.$root.$on("changeUnits", (input) => {
       this.isMetric = input;
     });
   },
   watch: {
-    '$route.params.id'() {
+    "$route.params.id"() {
       this.getData();
       this.expanded = false;
     },
@@ -132,7 +132,7 @@ export default {
         });
     },
     getCurrentUnits() {
-      var localUnits = localStorage.getItem('bcd-metric');
+      var localUnits = localStorage.getItem("bcd-metric");
       this.isMetric = JSON.parse(localUnits);
     },
     removeLineBreaks(input) {
@@ -149,18 +149,18 @@ export default {
       today.setDate(today.getDate());
       todayString =
         today.getFullYear() +
-        ('0' + (today.getMonth() + 1)).slice(-2) +
-        '' +
-        ('0' + today.getDate()).slice(-2);
+        ("0" + (today.getMonth() + 1)).slice(-2) +
+        "" +
+        ("0" + today.getDate()).slice(-2);
 
       var yesterday = new Date();
       var yesterdayString;
       yesterday.setDate(yesterday.getDate() - 7);
       yesterdayString =
         yesterday.getFullYear() +
-        ('0' + (yesterday.getMonth() + 1)).slice(-2) +
-        '' +
-        ('0' + yesterday.getDate()).slice(-2);
+        ("0" + (yesterday.getMonth() + 1)).slice(-2) +
+        "" +
+        ("0" + yesterday.getDate()).slice(-2);
 
       axios
         .get(
@@ -188,7 +188,7 @@ export default {
     position: relative;
     // font-family: monospace;
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       z-index: 1;
       bottom: 0;
