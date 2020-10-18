@@ -316,6 +316,7 @@
           </tr>
         </draggable>
       </table>
+      <a target="_blank" :href="`https://github.com/robbymilo/backcountrydata.com`">Contribute</a>
     </div>
   </div>
 </template>
