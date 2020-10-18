@@ -1,6 +1,6 @@
 Source of backcountrydata.com
 
-## backcountrydata.com frontend app
+# backcountrydata.com frontend app
 
 ```
 cd frontend
@@ -8,7 +8,7 @@ npm i
 npm run serve
 ```
 
-## backcountrydata.com API
+# backcountrydata.com API
 
 An API for accessing SNOTEL data in JSON format from the current water year. Data is cached and fetched every 15 minutes.
 
@@ -17,7 +17,7 @@ An API for accessing SNOTEL data in JSON format from the current water year. Dat
 ```
 cd api
 npm i 
-node app.jsp
+node app.js
 ```
 
 ## Endpoints
