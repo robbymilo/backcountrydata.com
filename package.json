@@ -4,7 +4,9 @@
   "description": "An API for accessing SNOTEL data in JSON format from the current water year. Data is cached and fetched every 15 minutes.",
   "keywords": [
     "snotel",
-    "weather"
+    "weather",
+    "skiing",
+    "snow"
   ],
   "author": {
     "name": "Robby Milo",
@@ -13,10 +15,11 @@
   "homepage": "https://backcountrydata.com",
   "private": false,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node app.js",
+    "prettier": "prettier --check '**/*.js' --write"
   },
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.20.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "csvtojson": "^2.0.8",
@@ -26,9 +29,19 @@
     "http-errors": "~1.6.2",
     "morgan": "~1.9.1",
     "node-html-parser": "^1.1.11",
+    "prettier": "^2.1.2",
     "xml2json": "^0.11.2"
   },
   "engines": {
-    "node": "10.16.2"
+    "node": "14.14.0"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "arrowParens": "always"
   }
 }

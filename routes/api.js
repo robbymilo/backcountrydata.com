@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var controller = require('../controllers')
+var controller = require('../controllers');
 
-router.get('/', function(req, res, next) {
-	res.redirect('https://backcountrydata.com');
+router.get('/', function (req, res, next) {
+  res.redirect('https://backcountrydata.com');
 });
 
 router.get('/hour/:id/', controller.hour_detail);
