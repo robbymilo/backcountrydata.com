@@ -13,7 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/vue-fontawesome": "^0.1.5",
     "axios": "^0.18.0",
-    "highcharts": "^7.0.1",
+    "highcharts": "^7.2.2",
     "highcharts-vue": "^1.2.0",
     "lodash.debounce": "^4.0.8",
     "prettier": "^2.1.2",
