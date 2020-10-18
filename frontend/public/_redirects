@@ -1,3 +1,2 @@
-https://backcountrydata.netlify.com/* https://backcountrydata.com/:splat 301!
-http://backcountrydata.com/* https://backcountrydata.com/:splat 301!
-/api*  https://backcountrydata.herokuapp.com/:splat
+/*   /index.html   200
+/api/*  https://backcountrydata.herokuapp.com/:splat 200
