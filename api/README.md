@@ -20,7 +20,7 @@ Returns hourly data for a SNOTEL station. Points include air temp, snow depth, s
 
 `hours=[integer]` where `hours` is the most recent hours to return (optional).
 
-Example: https://backcountrydata.herokuapp.com/api/hour/978?total=2
+Example: /api/hour/978?total=2
 
 ### Daily Data
 
@@ -34,7 +34,7 @@ Returns start of day (GMT-8) data for a SNOTEL station. Points include air temp,
 
 `days=[integer]` where `days` is the most recent days to return (optional).
 
-Example: https://backcountrydata.herokuapp.com/api/day/978?total=2
+Example: /api/day/978?total=2
 
 ### Station Meta
 
@@ -46,7 +46,7 @@ Returns meta data about a SNOTEL station.
 
 `id=[integer]` where `id` is the SNOTEL station ID (required).
 
-Example: https://backcountrydata.herokuapp.com/api/station/978
+Example: /api/station/978
 
 ### Nearest from Station
 
@@ -58,7 +58,7 @@ Returns an array of the 10 closest stations to a SNOTEL station.
 
 `id=[integer]` where `id` is the SNOTEL station ID (required).
 
-Example: https://backcountrydata.herokuapp.com/api/nearest/978
+Example: /api/nearest/978
 
 ### Nearest from Coordinates
 
@@ -72,7 +72,7 @@ Returns an array of the 10 closest stations to a lat/lon coordinates.
 
 `longitude=[integer]` (required).
 
-Example: https://backcountrydata.herokuapp.com/api/nearest/?lat=43.7018976&lon=-116.3025711
+Example: /api/nearest/?lat=43.7018976&lon=-116.3025711
 
 ### Search
 
@@ -84,7 +84,7 @@ Returns an array of stations that are similar to query.
 
 `query=[string]` (required).
 
-Example: https://backcountrydata.herokuapp.com/api/nearest/?search=boise
+Example: /api/nearest/?search=boise
 
 ### Forecast
 
@@ -96,7 +96,7 @@ Returns NWS forecast time series and scientific discussion for a SNOTEL station.
 
 `id=[integer]` where `id` is the SNOTEL station ID (required).
 
-Example: https://backcountrydata.herokuapp.com/api/station/978
+Example: /api/station/978
 
 ### Avalanche
 
@@ -104,6 +104,6 @@ Returns the nearest 10 avalanche centers' report for a SNOTEL station.
 
 **URL** : `/api/avy/:id`
 
-Example: https://backcountrydata.herokuapp.com/api/avy/978
+Example: /api/avy/978
 
 To fix the avalanche report at the beginning of winter, run `node geo.js`.

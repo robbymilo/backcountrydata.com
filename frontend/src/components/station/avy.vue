@@ -74,7 +74,7 @@ export default {
       var vm = this;
       axios
         .get(
-          "https://backcountrydata.herokuapp.com/api/avy/" + vm.$route.params.id
+          "/api/avy/" + vm.$route.params.id
         )
         .then((response) => {
           vm.avyForecast = response.data;

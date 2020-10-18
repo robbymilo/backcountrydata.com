@@ -158,7 +158,7 @@ export default {
       vm.loading = true;
       axios
         .get(
-          "https://backcountrydata.herokuapp.com/api/forecast/" +
+          "/api/forecast/" +
             vm.$route.params.id
         )
         .then((response) => {

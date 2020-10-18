@@ -61,7 +61,7 @@ export default {
       var vm = this;
       axios
         .get(
-          "https://backcountrydata.herokuapp.com/api/nearest/" +
+          "/api/nearest/" +
             vm.$route.params.id
         )
         .then((response) => {

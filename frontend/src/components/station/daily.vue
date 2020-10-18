@@ -98,7 +98,7 @@ export default {
       var vm = this;
       axios
         .get(
-          "https://backcountrydata.herokuapp.com/api/day/" +
+          "/api/day/" +
             vm.$route.params.id +
             "?empty=true"
         )

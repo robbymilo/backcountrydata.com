@@ -80,7 +80,7 @@ export default {
       this.isAjax = true;
       axios
         .get(
-          "https://backcountrydata.herokuapp.com/api/nearest/?search=" + input
+          "/api/nearest/?search=" + input
         )
         .then((response) => {
           this.isAjax = false;

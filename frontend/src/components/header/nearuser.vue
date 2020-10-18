@@ -57,7 +57,7 @@ export default {
     getStationsNear() {
       var vm = this;
       axios
-        .get("https://backcountrydata.herokuapp.com/api/nearest/", {
+        .get("/api/nearest/", {
           params: {
             lat: vm.coordinates.lat,
             lon: vm.coordinates.lon,

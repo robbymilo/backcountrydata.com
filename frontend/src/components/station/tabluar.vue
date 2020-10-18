@@ -94,7 +94,7 @@ export default {
       var vm = this;
       axios
         .get(
-          "https://backcountrydata.herokuapp.com/api/hour/" +
+          "/api/hour/" +
             vm.$route.params.id +
             "?total=72"
         )

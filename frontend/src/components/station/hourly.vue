@@ -201,7 +201,7 @@ export default {
       vm.loading = true;
       axios
         .get(
-          `https://backcountrydata.herokuapp.com/api/hour/${vm.$route.params.id}?empty=true&total=${total}`
+          `/api/hour/${vm.$route.params.id}?empty=true&total=${total}`
         )
         .then((response) => {
           vm.date_time = response.data.data.date_time;

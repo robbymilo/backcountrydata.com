@@ -231,7 +231,7 @@ export const functions = {
     fetchData(station, type, options) {
       return axios({
         method: "get",
-        url: `https://backcountrydata.herokuapp.com/api/${type}/${station}${options}`,
+        url: `/api/${type}/${station}${options}`,
       }).then(function (response) {
         return response.data;
       });
