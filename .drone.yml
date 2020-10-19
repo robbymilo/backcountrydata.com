@@ -8,10 +8,11 @@ platform:
   arch: amd64
 
 steps:
-- name: build-website
-  image: klakegg/hugo:0.76.3-ext-ubuntu-onbuild
-  commands:
-  - echo "test"
+  - name: docker  
+    image: plugins/docker
+    settings:
+      repo: backcountrydata/api
+      dockerfile: api/Dockerfile
 
 trigger:
   event:
