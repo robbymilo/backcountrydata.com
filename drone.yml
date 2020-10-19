@@ -1,0 +1,18 @@
+---
+kind: pipeline
+type: docker
+name: website
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: build-website
+  image: klakegg/hugo:0.76.3-ext-ubuntu-onbuild
+  commands:
+  - echo "test"
+
+trigger:
+  event:
+  - push
