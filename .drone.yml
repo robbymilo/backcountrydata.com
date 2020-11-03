@@ -11,7 +11,7 @@ steps:
   - name: docker  
     image: plugins/docker
     settings:
-      repo: backcountrydata/api
+      repo: robbymilo/backcountrydata
       dockerfile: api/Dockerfile
 
 trigger:
