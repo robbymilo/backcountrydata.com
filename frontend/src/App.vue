@@ -30,6 +30,14 @@ export default {
     units,
     favorites,
   },
+  mounted() {
+    let plausible = document.createElement('script');
+    plausible.setAttribute('src', 'https://meta.olimr.com/js/plausible.js');
+    plausible.setAttribute('data-domain', 'backcountrydata.com');
+    plausible.setAttribute('defer', 'defer');
+    plausible.setAttribute('async', 'async');
+    document.head.appendChild(plausible);
+  },
 };
 </script>
 
