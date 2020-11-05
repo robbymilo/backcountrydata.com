@@ -46,7 +46,7 @@ steps:
       - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- frontend); then exit 78; fi
 
   - name: build_frontend
-    image: cimg/node:12.8
+    image: robbymilo/node-netlify
     commands:
       - make build-frontend
 
