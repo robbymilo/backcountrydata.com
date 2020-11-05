@@ -40,8 +40,13 @@ platform:
   arch: amd64
 
 steps:
+  - name: frontend_only
+    image: alpine/git
+    commands:
+      - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- api); then exit 78; fi
+
   - name: build_frontend
-    image: cimg/node
+    image: cimg/node:12.8
     commands:
       - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- api); then exit 78; fi
       - make build-frontend
