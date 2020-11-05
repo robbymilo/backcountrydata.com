@@ -52,7 +52,7 @@ steps:
         from_secret: netlify_auth_token
     commands:
       - make build-frontend
-      - netlify deploy --dir dist --site c227ef54-b0f6-434b-9c19-7db3ff8e416c --auth $TOKEN --prod
+      - netlify deploy --dir frontend/dist --site c227ef54-b0f6-434b-9c19-7db3ff8e416c --auth $TOKEN --prod
 
 trigger:
   event:
