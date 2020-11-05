@@ -11,7 +11,7 @@ steps:
   - name: api_only
     image: alpine/git
     commands:
-      - if (git diff --exit-code api); then exit 78; fi
+      - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- api); then exit 78; fi
 
   - name: build_push_image
     image: plugins/docker
@@ -43,7 +43,7 @@ steps:
   - name: frontend_only
     image: alpine/git
     commands:
-      - if (git diff --exit-code frontend); then exit 78; fi
+      - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- frontend); then exit 78; fi
 
   - name: build_frontend
     image: cimg/node:12.8
