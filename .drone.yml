@@ -8,6 +8,11 @@ platform:
   arch: amd64
 
 steps:
+  - name: api_only
+    image: alpine/git
+    commands:
+      - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- frontend); then exit 78; fi
+
   - name: build_push_image
     image: plugins/docker
     settings:
@@ -18,6 +23,28 @@ steps:
       repo: robbymilo/backcountrydata
       tags: latest
       dockerfile: api/Dockerfile
+
+trigger:
+  event:
+  - push
+  branch:
+  - master
+
+---
+kind: pipeline
+type: docker
+name: frontend
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: build_frontend
+    image: cimg/node
+    commands:
+      - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- api); then exit 78; fi
+      - make build-frontend
 
 trigger:
   event:
