@@ -1,21 +1,27 @@
 ---
 kind: pipeline
 type: docker
-name: website
+name: api
 
 platform:
   os: linux
   arch: amd64
 
 steps:
-  - name: docker
+  - name: api_changes_only
+    image: alpine/git
+    commands:
+      - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- api); then exit 78; fi
+
+  - name: build_push_image
     image: plugins/docker
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
     settings:
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
       repo: robbymilo/backcountrydata
+      tags: latest
       dockerfile: api/Dockerfile
 
 trigger:
