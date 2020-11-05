@@ -8,11 +8,6 @@ platform:
   arch: amd64
 
 steps:
-  - name: api_changes_only
-    image: alpine/git
-    commands:
-      - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- api); then exit 78; fi
-
   - name: build_push_image
     image: plugins/docker
     settings:
