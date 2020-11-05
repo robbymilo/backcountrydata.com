@@ -49,7 +49,7 @@ steps:
     image: robbymilo/node-netlify
     environment:
       TOKEN:
-        from_secret: drone-netlify-token
+        from_secret: netlify_auth_token
     commands:
       - make build-frontend
       - netlify deploy --dir dist --site c227ef54-b0f6-434b-9c19-7db3ff8e416c --auth $TOKEN --prod
