@@ -130,22 +130,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.sortable-chosen {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-.remove.small {
-  padding: 0px 4px 2px 4px;
-  margin-left: 4px;
-}
-.favsBox {
-  cursor: pointer;
-}
-.favorites-box {
-  position: absolute;
-  background: white;
-  z-index: 10;
-  border: 1px solid gray;
-}
-</style>

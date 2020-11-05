@@ -1,6 +1,5 @@
 <template>
   <nav>
-    <p>nav</p>
     <input
       type="radio"
       id="metric"

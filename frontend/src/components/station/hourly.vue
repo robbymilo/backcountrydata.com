@@ -249,18 +249,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.trend {
-  width: 200px;
-}
-.loading {
-  float: right;
-}
-.days-select {
-  display: flex;
-  padding: 8px 0;
-  .vs-component {
-    padding: 0 8px 0 0;
-  }
-}
-</style>

@@ -73,9 +73,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.float-right {
-  float: right;
-}
-</style>

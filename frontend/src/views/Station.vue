@@ -4,9 +4,6 @@
       :title="station.site_name + '| SNOTEL and Winter Weather Data'"
     />
 
-    <nearuser></nearuser>
-    <hr />
-
     <div class="current">
       <div class="container current-station">
         <h2>{{ station.site_name }} ({{ station.station }})</h2>
@@ -124,20 +121,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.station {
-  & > div {
-    padding: 8px 0;
-  }
-}
-.current {
-  @media (min-width: 768px) {
-    display: flex;
-    justify-content: space-between;
-  }
 
-  .current-station,
-  .favorites {
-    // border-right: 1px solid gray;
-  }
-}
+
 </style>

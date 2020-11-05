@@ -7,15 +7,17 @@
           <th class="column name">Station</th>
           <th class="column elevation">Location</th>
           <th class="column elevation">Elevation</th>
-          <th class="column data" title="Start of Day Value">7-Day Depth</th>
-          <th class="column data">24-Hour Depth</th>
-          <th class="column data">Current Depth</th>
-          <th class="column data">Current Temp</th>
-          <th class="column nws">NWS Forecast</th>
-          <th class="column nws">12/24-hr Forecast</th>
+          <th class="column data" title="Start of Day Value">7-Day<br>depth</th>
+          <th class="column data">24-Hour<br>depth</th>
+          <th class="column data">Current<br>depth</th>
+          <th class="column data">Current<br>temp</th>
+          <th class="column nws">NWS forecast</th>
+          <th class="column nws">12/24-hr forecast</th>
           <th class="column avy">Avalanche</th>
         </thead>
         <draggable
+          v-for="station of stationList"
+          :key="station.id"
           @end="dragged"
           :list="stationList"
           :element="'tbody'"
@@ -23,9 +25,6 @@
         >
           <tr
             class="station"
-            v-for="station of stationList"
-            :key="station.id"
-            v-bind:class="{ expanded: expanded[station] }"
           >
             <td class="column order">
               <button class="remove" @click="removeStation(station)">
@@ -67,9 +66,6 @@
             </td>
             <td class="column data">
               <span class="mobile">7-Day Depth: </span>
-              <div class="descriptor" v-if="expanded[station] === true">
-                Depth
-              </div>
               <span
                 v-if="
                   weeklyData[station] && weeklyData[station].data.snow_depth
@@ -87,23 +83,10 @@
                 {{ weekArray(cmCheck(weeklyData[station].data.snow_depth))
                 }}<small>{{ cm_in() }}</small>
 
-                <div v-if="expanded[station] === true">
-                  <div class="descriptor" v-if="expanded[station] === true">
-                    SWE
-                  </div>
-                  {{
-                    weekArray(
-                      mmCheck(weeklyData[station].data.snow_water_equiv)
-                    )
-                  }}<small>{{ cm_in() }}</small>
-                </div>
               </span>
             </td>
             <td class="column data">
               <span class="mobile">24-Hour Depth: </span>
-              <div class="descriptor" v-if="expanded[station] === true">
-                Depth
-              </div>
               <span
                 v-if="
                   hourlyData[station] && hourlyData[station].data.snow_depth
@@ -118,23 +101,10 @@
               >
                 {{ dayArray(cmCheck(hourlyData[station].data.snow_depth))
                 }}<small>{{ cm_in() }}</small>
-                <div v-if="expanded[station] === true">
-                  <div class="descriptor" v-if="expanded[station] === true">
-                    SWE
-                  </div>
-                  {{
-                    weekArray(
-                      mmCheck(hourlyData[station].data.snow_water_equiv)
-                    )
-                  }}<small>{{ cm_in() }}</small>
-                </div>
               </span>
             </td>
             <td class="column data">
               <span class="mobile">Current Depth: </span>
-              <div class="descriptor" v-if="expanded[station] === true">
-                Depth
-              </div>
               <span
                 v-if="
                   hourlyData[station] && hourlyData[station].data.snow_depth
@@ -161,18 +131,7 @@
                   ]"
                 >
                   {{ lastArray(cmCheck(hourlyData[station].data.snow_depth))
-                  }}<small style="color: black">{{ cm_in() }}</small>
-                  <div v-if="expanded[station] === true" style="color: black">
-                    <div class="descriptor" v-if="expanded[station] === true">
-                      SWE
-                    </div>
-                    <span>{{
-                      lastArray(
-                        mmCheck(hourlyData[station].data.snow_water_equiv)
-                      )
-                    }}</span
-                    ><small>{{ cm_in() }}</small>
-                  </div>
+                  }}<small>{{ cm_in() }}</small>
                 </span>
               </span>
             </td>
@@ -199,13 +158,9 @@
                 </span>
                 <span
                   class="desktop"
-                  v-if="expanded[station] !== true"
                   :title="forecastData[station].forecast.data.text[0]"
                 >
                   {{ forecastData[station].forecast.data.weather[0] }}
-                </span>
-                <span class="desktop" v-if="expanded[station] === true">
-                  {{ forecastData[station].forecast.data.text[0] }}
                 </span>
               </span>
               <span
@@ -281,15 +236,8 @@
                   "
                   class="desktop"
                 >
-                  <span v-if="expanded[station] !== true">
+                  <span>
                     {{ capitalize(avyData[station][0].forecast.danger) }}
-                  </span>
-                  <span v-if="expanded[station] === true">
-                    <h5>{{ avyData[station][0].center }}</h5>
-                    <div>
-                      <small>{{ avyData[station][0].name }}</small>
-                    </div>
-                    <div>{{ avyData[station][0].forecast.travel_advice }}</div>
                   </span>
                 </span>
                 <span
@@ -312,6 +260,11 @@
                   </a>
                 </span>
               </span>
+            </td>
+          </tr>
+          <tr v-show="expanded[station]">
+            <td colspan="11">
+              expanded info
             </td>
           </tr>
         </draggable>
@@ -411,7 +364,7 @@ export default {
 <style lang="scss">
 .station {
   height: 100%;
-  transition: all 0.2s;
+  transition: all 0.1s;
   @media screen and(min-width: 800px) {
     &.expanded {
       transition: all 0.2s;
@@ -423,10 +376,13 @@ export default {
       }
     }
   }
+
+  &:hover {
+    background: #484848;
+  }
 }
 .sortable-chosen {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  background: #cacaca !important;
 }
 .remove,
 .move,
@@ -538,13 +494,14 @@ export default {
   }
 }
 table.table {
+  font-size: 15px;  
   width: 100%;
 }
 
 table,
 th,
 td {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #515151;
 }
 
 table {
@@ -589,7 +546,7 @@ td {
 
 tr:nth-child(even),
 thead {
-  background: #eee;
+  // background: #eee;
 }
 a.hazard {
   color: red;
@@ -613,12 +570,9 @@ a.hazard {
   float: right;
 }
 
-h5 {
-  margin: 0;
-}
 
 .increase {
-  color: green;
+  color:#00d500;
 }
 
 .decrease {

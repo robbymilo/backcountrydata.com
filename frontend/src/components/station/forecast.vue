@@ -22,7 +22,6 @@
           </a>
         </div>
       </div>
-      <hr />
       <div class="discussion-wrap">
         <h3>Forecast Discussion</h3>
         <a :href="forecast.discussion.rss.channel.item.link">{{
@@ -65,7 +64,6 @@
                   ></small
                 >
               </div>
-              <hr />
             </div>
           </div>
         </div>
@@ -176,55 +174,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.expandableBox {
-  padding: 8px;
-  border: 1px solid gray;
-  .discussion {
-    white-space: pre-wrap;
-    max-height: 200px;
-    overflow: hidden;
-    position: relative;
-    // font-family: monospace;
-    &:before {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      bottom: 0;
-      left: 0;
-      pointer-events: none;
-      background-image: linear-gradient(
-        to top,
-        rgba(255, 255, 255, 1),
-        rgba(255, 255, 255, 0) 90%
-      );
-      width: 100%;
-      height: 4em;
-    }
-  }
-  .expand-wrap {
-    margin: 8px 0 0 0;
-  }
-  .expanded {
-    max-height: 100%;
-    &:before {
-      background: none;
-    }
-  }
-}
-
-.fa-exclamation-triangle {
-  padding-right: 4px;
-}
-
-.discussion-wrap {
-  margin-top: 8px;
-  h3 {
-    padding-left: 0;
-  }
-}
-.current {
-  padding: 4px 0;
-}
-</style>
