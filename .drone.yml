@@ -45,10 +45,14 @@ steps:
     commands:
       - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- frontend); then exit 78; fi
 
-  - name: build_frontend
+  - name: build__deploy_frontend
     image: robbymilo/node-netlify
+    environment:
+      TOKEN:
+        from_secret: drone-netlify-token
     commands:
       - make build-frontend
+      - netlify deploy --dir dist --site c227ef54-b0f6-434b-9c19-7db3ff8e416c --auth $TOKEN --prod
 
 trigger:
   event:
