@@ -10,15 +10,12 @@ platform:
 steps:
   - name: docker
     image: plugins/docker
-    environment:
-      USERNAME:
-        from_secret: docker_username
-      PASSWORD:
-        from_secret: docker_password
-    repo: robbymilo/backcountrydata
-    username: ${USERNAME}
-    password: ${PASSWORD}
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
     settings:
+      repo: robbymilo/backcountrydata
       dockerfile: api/Dockerfile
 
 trigger:
