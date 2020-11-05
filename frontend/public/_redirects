@@ -1,2 +1,2 @@
-/api/*  https://backcountrydata.herokuapp.com/api/:splat 200!
+/api/*  https://backcountrydata.olimr.com/api/:splat 200!
 /*   /index.html   200
