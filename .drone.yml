@@ -8,12 +8,21 @@ platform:
   arch: amd64
 
 steps:
-  - name: docker  
+  - name: docker
     image: plugins/docker
+    environment:
+      USERNAME:
+        from_secret: docker_username
+      PASSWORD:
+        from_secret: docker_password
+    repo: robbymilo/backcountrydata
+    username: ${USERNAME}
+    password: ${PASSWORD}
     settings:
-      repo: robbymilo/backcountrydata
       dockerfile: api/Dockerfile
 
 trigger:
   event:
   - push
+  branch:
+  - master
