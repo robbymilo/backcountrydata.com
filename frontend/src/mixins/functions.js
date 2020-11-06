@@ -20,8 +20,9 @@ export const functions = {
     tempCheck: function (array) {
       if (!this.isMetric) {
         return array.map((x) => Math.round(x * 1.8 + 32));
+      } else {
+        return array.map((x) => Math.round(x));
       }
-      return array;
     },
     timezone(date_time) {
       return date_time.map((x) => new Date(x + " GMT-8"));

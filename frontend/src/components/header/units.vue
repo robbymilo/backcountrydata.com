@@ -61,7 +61,7 @@ label {
     min-width: 77px;
     padding: 0 10px;
     label {
-      font-size: 12px;
+      font-size: 10px;
     }
   }
 }

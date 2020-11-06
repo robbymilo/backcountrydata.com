@@ -4,13 +4,11 @@
       <table class="table" v-if="stationList.length > 0">
         <thead>
           <th></th>
-          <th class="column name">Station</th>
-          <th class="column data" title="Start of Day Value">7-Day<br>depth</th>
-          <th class="column data">24-Hour<br>depth</th>
-          <th class="column data">Current<br>depth</th>
-          <th class="column data">Current<br>temp</th>
-          <th class="column data">NWS forecast</th>
-          <th class="column data">12/24-hr forecast</th>
+          <th class="column text-left">SNOTEL station</th>
+          <th class="column ">Depth of snow:<br><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small></th>
+          <th class="column text-center">Temp<br><small>current</small></th>
+          <th class="column data">Forecast<br><small>NWS</small></th>
+          <th class="column data">Forecast<br><small>12/24-hr</small></th>
           <th class="column data">Avalanche</th>
         </thead>
         <draggable
@@ -26,12 +24,14 @@
             @click="expandStation(station)"
           >
             <td class="column order">
-              <button class="remove" @click="removeStation(station)">
-                <font-awesome-icon icon="times-circle"></font-awesome-icon>
-              </button>
-              <button class="move">
-                <font-awesome-icon icon="grip-lines"></font-awesome-icon>
-              </button>
+              <div class="btn-row">
+                <button class="btn remove" @click="removeStation(station)" title="Remove station">
+                  <font-awesome-icon icon="times-circle"></font-awesome-icon>
+                </button>
+                <button class="btn move" title="Drag to reorder station">
+                  <font-awesome-icon icon="grip-lines"></font-awesome-icon>
+                </button>
+              </div>
               <!-- <button class="expand">
                 <font-awesome-icon
                   v-if="expanded[station] !== true"
@@ -47,15 +47,11 @@
               <router-link :to="{ path: '/station/' + station }">{{
                 getMeta(station).site_name.trim()
               }}</router-link>
-              <small class="elev">
-                {{ getMeta(station).county }},
-                {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small>{{ m_ft() }}</small>
-              </small>
-              <small class="float-right">({{ station }})</small>
             </td>
-            <td class="column data">
-              <span class="mobile">7-Day depth: </span>
-              <span
+            <td class="column">
+              <span class="mobile text-center">Depth of snow:<br><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small> </span>
+              <div class="td-flex">
+                <span
                 v-if="
                   weeklyData[station] && weeklyData[station].data.snow_depth
                 "
@@ -70,62 +66,59 @@
                 "
               >
                 {{ weekArray(cmCheck(weeklyData[station].data.snow_depth))
-                }}<small>{{ cm_in() }}</small>
+                }}<small class="unit">{{ cm_in() }}</small>
 
-              </span>
-            </td>
-            <td class="column data">
-              <span class="mobile">24-Hour depth: </span>
-              <span
-                v-if="
-                  hourlyData[station] && hourlyData[station].data.snow_depth
-                "
-                :title="
-                  'Reported: ' +
-                  dayArray(hourlyData[station].data.date_time) +
-                  ', SWE: ' +
-                  dayArray(mmCheck(hourlyData[station].data.snow_water_equiv)) +
-                  cm_in()
-                "
-              >
-                {{ dayArray(cmCheck(hourlyData[station].data.snow_depth))
-                }}<small>{{ cm_in() }}</small>
-              </span>
-            </td>
-            <td class="column data">
-              <span class="mobile">Current depth: </span>
-              <span
-                v-if="
-                  hourlyData[station] && hourlyData[station].data.snow_depth
-                "
-                :title="`Reported: ${lastArray(
-                  hourlyData[station].data.date_time
-                )}, SWE: ${lastArray(
-                  mmCheck(hourlyData[station].data.snow_water_equiv)
-                )}${mm_in()}`"
-              >
-                <span
-                  v-bind:class="[
-                    lastArray(cmCheck(hourlyData[station].data.snow_depth)) >
-                      dayArray(cmCheck(hourlyData[station].data.snow_depth)) ||
-                    lastArray(cmCheck(hourlyData[station].data.snow_depth)) <
-                      dayArray(cmCheck(hourlyData[station].data.snow_depth))
-                      ? lastArray(
-                          cmCheck(hourlyData[station].data.snow_depth)
-                        ) >
-                        dayArray(cmCheck(hourlyData[station].data.snow_depth))
-                        ? 'increase'
-                        : 'decrease'
-                      : 'nochange',
-                  ]"
-                >
-                  {{ lastArray(cmCheck(hourlyData[station].data.snow_depth))
-                  }}<small>{{ cm_in() }}</small>
                 </span>
-              </span>
+                <span class="arrow">&rarr;</span>
+                <span
+                  v-if="
+                    hourlyData[station] && hourlyData[station].data.snow_depth
+                  "
+                  :title="
+                    'Reported: ' +
+                    dayArray(hourlyData[station].data.date_time) +
+                    ', SWE: ' +
+                    dayArray(mmCheck(hourlyData[station].data.snow_water_equiv)) +
+                    cm_in()
+                  "
+                >
+                  {{ dayArray(cmCheck(hourlyData[station].data.snow_depth))
+                  }}<small class="unit">{{ cm_in() }}</small>
+                </span>
+                <span class="arrow">&rarr;</span>
+                <span
+                  v-if="
+                    hourlyData[station] && hourlyData[station].data.snow_depth
+                  "
+                  :title="`Reported: ${lastArray(
+                    hourlyData[station].data.date_time
+                  )}, SWE: ${lastArray(
+                    mmCheck(hourlyData[station].data.snow_water_equiv)
+                  )}${mm_in()}`"
+                >
+                  <span
+                    v-bind:class="[
+                      lastArray(cmCheck(hourlyData[station].data.snow_depth)) >
+                        dayArray(cmCheck(hourlyData[station].data.snow_depth)) ||
+                      lastArray(cmCheck(hourlyData[station].data.snow_depth)) <
+                        dayArray(cmCheck(hourlyData[station].data.snow_depth))
+                        ? lastArray(
+                            cmCheck(hourlyData[station].data.snow_depth)
+                          ) >
+                          dayArray(cmCheck(hourlyData[station].data.snow_depth))
+                          ? 'increase'
+                          : 'decrease'
+                        : 'nochange',
+                    ]"
+                  >
+                    {{ lastArray(cmCheck(hourlyData[station].data.snow_depth))
+                    }}<small class="unit">{{ cm_in() }}</small>
+                  </span>
+                </span>
+              </div>
             </td>
-            <td class="column data">
-              <span class="mobile">Current Temperature: </span>
+            <td class="column text-center">
+              <span class="mobile">Temp current: </span>
               <span
                 v-if="hourlyData[station] && hourlyData[station].data.air_temp"
                 :title="
@@ -134,55 +127,26 @@
               >
                 {{
                   lastArray(tempCheck(hourlyData[station].data.air_temp))
-                }}°<small>{{ c_f() }}</small>
+                }}<span class="unit">°</span><small class="unit">{{ c_f() }}</small>
               </span>
             </td>
             <td class="column data">
-              <span
+              <div
                 v-if="forecastData[station] && forecastData[station].forecast"
+                class="text-right overflow"
               >
-                <span class="mobile"
+                <div class="mobile"
                   >NWS Forecast:
                   <div>{{ forecastData[station].forecast.data.text[0] }}</div>
-                </span>
-                <span
+                </div>
+                <div
                   class="desktop"
                   :title="forecastData[station].forecast.data.text[0]"
                 >
                   {{ forecastData[station].forecast.data.weather[0] }}
-                </span>
-              </span>
-              <span
-                v-if="
-                  forecastData[station] &&
-                  forecastData[station].forecast.data.hazard.length >= 1
-                "
-              >
-                <span
-                  v-for="(hazard, index) in forecastData[station].forecast.data
-                    .hazard"
-                >
-                  <div class="mobile" v-if="index == 0">
-                    {{ forecastData[station].forecast.data.text[0] }}
-                  </div>
-                  <a
-                    target="_blank"
-                    class="hazard"
-                    :title="hazard"
-                    :href="
-                      ampReplace(
-                        forecastData[station].forecast.data.hazardUrl[index]
-                      )
-                    "
-                  >
-                    <span class="mobile">{{ hazard }} </span>
-                    <font-awesome-icon
-                      icon="exclamation-triangle"
-                    ></font-awesome-icon>
-                  </a>
-                </span>
-              </span>
-              <span class="external">
+                </div>
+              </div>
+              <!-- <span class="external">
                 <a
                   target="_blank"
                   v-bind:href="`https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w16u=1&w17u=1&AheadHour=0&Submit=Submit&FcstType=graphical&textField1=${
@@ -195,43 +159,74 @@
                     icon="external-link-alt"
                   ></font-awesome-icon>
                 </a>
-              </span>
+              </span> -->
             </td>
             <td class="column data">
               <span class="mobile">12/24-hr Forecast: </span>
-              <span
-                v-if="
-                  forecastData[station] &&
-                  forecastData[station].forecastSnow.length >= 1
-                "
-              >
-                {{ inCheck(forecastData[station].forecastSnow[0])
-                }}<small>{{ cm_in() }}</small
-                >/{{ inCheck(forecastData[station].forecastSnow[1])
-                }}<small>{{ cm_in() }}</small>
-              </span>
+              <div class="d-flex align-items-center justify-content-space-between">
+                <div
+                  v-if="
+                    forecastData[station] &&
+                    forecastData[station].forecast.data.hazard.length >= 1
+                  "
+                >
+                  <span
+                    v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index"
+                  >
+                    <div class="mobile" v-if="index == 0">
+                      {{ forecastData[station].forecast.data.text[0] }}
+                    </div>
+                    <a
+                      target="_blank"
+                      class="hazard"
+                      :title="hazard"
+                      :href="
+                        ampReplace(
+                          forecastData[station].forecast.data.hazardUrl[index]
+                        )
+                      "
+                    >
+                      <span class="mobile">{{ hazard }} </span>
+                      <font-awesome-icon
+                        icon="exclamation-triangle"
+                      ></font-awesome-icon>
+                    </a>
+                  </span>
+                </div>
+                <div v-else>&nbsp;</div>
+                <span
+                  v-if="
+                    forecastData[station] &&
+                    forecastData[station].forecastSnow.length >= 1
+                  "
+                >
+                  {{ inCheck(forecastData[station].forecastSnow[0])
+                  }}<small class="unit">{{ cm_in() }}</small
+                  >/{{ inCheck(forecastData[station].forecastSnow[1])
+                  }}<small class="unit">{{ cm_in() }}</small>
+                </span>
+              </div>
             </td>
             <td class="column data">
-              <span v-if="avyData[station] && avyData[station][0]">
+              <div v-if="avyData[station] && avyData[station][0]" class="d-flex align-items-center justify-content-space-between">
                 <div
                   class="avy-box"
                   :style="{ background: avyData[station][0].forecast.color }"
                 ></div>
-                <span
+                <div
                   :title="
                     avyData[station][0].forecast.name +
                     ' - ' +
                     avyData[station][0].forecast.travel_advice
                   "
-                  class="desktop"
+                  class="desktop avy-rating"
                 >
                   <span>
                     {{ capitalize(avyData[station][0].forecast.danger) }}
                   </span>
-                </span>
-                <span
+                </div>
+                <div
                   class="mobile"
-                  :style="{ color: avyData[station][0].forecast.stroke }"
                 >
                   <div>
                     <h5>{{ avyData[station][0].center }}</h5>
@@ -240,36 +235,39 @@
                     </div>
                     <div>{{ avyData[station][0].forecast.travel_advice }}</div>
                   </div>
-                </span>
-                <span class="external">
+                </div>
+                <!-- <span class="external">
                   <a target="_blank" :href="avyData[station][0].forecast.link">
                     <font-awesome-icon
                       icon="external-link-alt"
                     ></font-awesome-icon>
                   </a>
-                </span>
-              </span>
+                </span> -->
+              </div>
             </td>
           </tr>
           <tr v-show="expanded[station]" >
             <td>&nbsp;</td>
-            <td colspan="8">
-              chart
+            <td colspan="6">
+              <div class="content-extra">
+                {{ getMeta(station).county }}, {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small>{{ m_ft() }}</small> ({{ station }})
+              </div>
               <span
                 v-if="forecastData[station] && forecastData[station].forecast"
               >
-                <div>Forecast</div>
-                <small
-                  class="desktop"
-                  :title="forecastData[station].forecast.data.text[0]"
-                >
-                  {{ forecastData[station].forecast.data.text[0] }}
-                </small>
+                <div class="content-extra">
+                  <div><strong>NWS Forecast</strong></div>
+                  <p
+                    class="desktop"
+                    :title="forecastData[station].forecast.data.text[0]"
+                  >
+                    {{ forecastData[station].forecast.data.text[0] }}
+                  </p>
+                </div>
               </span>
               <span v-if="avyData[station] && avyData[station][0]">
-                <div>{{ avyData[station][0].center }}</div>
-                <div><small>{{ avyData[station][0].name }}</small></div>
-                <small>{{ avyData[station][0].forecast.travel_advice }}</small>
+                <div><strong>{{ avyData[station][0].center }}</strong> - {{ avyData[station][0].name }}</div>
+                <p>{{ avyData[station][0].forecast.travel_advice }}</p>
               </span>
 
             </td>
@@ -363,6 +361,7 @@ export default {
       if (vm.expanded[station] === true) {
         status = false;
       }
+      vm.expanded = {};
       vm.$set(vm.expanded, station, status);
     },
   },
@@ -371,48 +370,73 @@ export default {
 
 <style lang="scss">
 .table {
-  font-size: 15px;
-  width: 100%;
+  font-size: 14px;
   border-collapse: separate;
   border-spacing: 0px;
-  border: .5px solid #6f6f6f;
+  border: .5px solid #424242;
   margin-bottom: 24px;
-  width: 100%;
+  background: #1e262c;
 
-  @media (min-width: 1600px) {
-    table-layout: fixed;
+  @media (min-width: 1300px) {
+    width: 50vw;
+    max-width: 50vw;
   }
 
   th,
   td {
     font-weight: normal;
-    text-align: left;
 
     @media (min-width: 1600px) {
 
       &:nth-of-type(1) {
-        min-width: 100px;
-        width: 100px;
-        max-width: 100px;
+        min-width: 60px;
+        width: 60px;
+        max-width: 60px;
         text-align: center;
+        padding: 0;
       }
 
       &:nth-of-type(2) {
-        min-width: 400px;
-        width: 400px;
-        max-width: 400px;
+        min-width: 150px;
+        width: 150px;
+        max-width: 150px;
       }
 
-      &:nth-of-type(3),
-      &:nth-of-type(4),
-      &:nth-of-type(5),
+
+      &:nth-of-type(3) {
+        min-width: 150px;
+        width: 150px;
+        max-width: 150px;
+      }
+
+      &:nth-of-type(4) {
+        min-width: 30px;
+        width: 30px;
+        max-width: 30px;
+      }
+
+      &:nth-of-type(5)
+      {
+        min-width: 100px;
+        width: 100px;
+        max-width: 100px;
+        white-space: nowrap;
+        padding-left: 1rem;
+      }
+
       &:nth-of-type(6)
       {
-        min-width: 80px;
-        width: 80px;
-        max-width: 80px;
+        min-width: 60px;
+        width: 60px;
+        max-width: 60px;
       }
 
+      &:nth-of-type(7)
+      {
+        min-width: 100px;
+        width: 100px;
+        max-width: 100px;
+      }
     }
   }
 
@@ -421,18 +445,32 @@ export default {
     font-weight: bold;
     display: table-cell;
     vertical-align: middle;
-    text-align: left;
+    background: #31404c;
   }
 
   td, th {
-    border: 1px solid #6f6f6f;
+    border: 1px solid #424242;
     border-width: 0 1px 1px 0;
+    vertical-align: middle;
+    padding: 4px 3px;
+  }
+
+  .td-flex {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    span {
+      // width: 15%;
+      // display: inline-block;
+      // text-align: right;
+    }
   }
 
   tr {
     &.expand {
       &:hover {
-        background: #2d2d2d;
+        background: #263139;
       }
     }
   }
@@ -452,9 +490,8 @@ export default {
       display: none;
     }
     .mobile {
-      display: inline-block;
-      float: left;
-      text-align: left;
+      // float: left;
+      // text-align: left;
     }
     .desktop {
       display: none;
@@ -500,12 +537,6 @@ a.hazard {
   width: 14px !important;
 }
 .avy-box {
-  @media screen and(min-width: 800px) {
-    position: absolute;
-  }
-  @media screen and(max-width: 799px) {
-    // float: right;
-  }
   height: 20px;
   width: 20px;
 }
@@ -513,16 +544,65 @@ a.hazard {
   float: right;
 }
 
+.arrow {
+  color: gray;
+}
+
+.unit {
+  color: lightgray;
+}
 
 .increase {
   color:#00d500;
 }
 
 .decrease {
-  color: red;
+  color: #f33;
 }
 
 .descriptor {
   float: left;
+}
+
+.external {
+  font-size: 10px;
+  svg {
+    color: gray;
+  }
+}
+
+.btn-row {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  background: transparent;
+  padding: 3px;
+  svg {
+    color: white;
+  }
+}
+
+.content-extra {
+  padding-bottom: 1rem;
+}
+
+.overflow {
+  overflow-x: scroll;
+  width: 100%;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+}
+
+.avy-rating {
+  @media (max-width: 1600px) {
+    display: none;
+  }
 }
 </style>

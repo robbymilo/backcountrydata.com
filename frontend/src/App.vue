@@ -392,12 +392,6 @@ textarea {
     resize: vertical;
 }
 
-small {
-  font-size: 12px;
-}
-
-
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
@@ -405,7 +399,19 @@ body {
   background-color: rgb(20, 29, 36);
   color: white;
   padding: 1rem;
-  font-size: 15px;
+  font-size: 14px;
+}
+
+span, div, a, p {
+  line-height: 22px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+small {
+  font-size: 10px;
 }
 
 a {
@@ -419,5 +425,37 @@ a {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+p {
+  max-width: 400px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
 }
 </style>
