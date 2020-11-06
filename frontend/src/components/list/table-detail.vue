@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="table-wrap">
     <div v-if="stationList">
       <table class="table" v-if="stationList.length > 0">
         <thead>
@@ -274,8 +274,6 @@
           </tr>
         </draggable>
       </table>
-      <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com">Contribute</a> |
-      <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com/issues/new/choose">Request feature / Report bug </a>
     </div>
   </div>
 </template>
@@ -369,6 +367,12 @@ export default {
 </script>
 
 <style lang="scss">
+.table-wrap {
+  @media (min-width: 1300px) {
+    width: 50vw;
+    max-width: 50vw;
+  }
+}
 .table {
   font-size: 14px;
   border-collapse: separate;

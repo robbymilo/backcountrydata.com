@@ -13,6 +13,10 @@
       <units></units>
     </div>
     <router-view />
+    <footer>
+       <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com">Contribute</a> |
+      <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com/issues/new/choose">Request feature / Report bug </a>
+    </footer>
   </div>
 </template>
 
@@ -457,5 +461,11 @@ p {
 
 .justify-content-end {
   justify-content: flex-end;
+}
+
+.wrap {
+  @media (min-width: 1300px) {
+    display: flex;
+  }
 }
 </style>

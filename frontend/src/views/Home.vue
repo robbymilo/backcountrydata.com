@@ -4,7 +4,10 @@
       title="Backcountry Data"
       description="Follow and visualize the snowpack, weather, and forecast of your favorite backcountry locations in the western US."
     />
-    <tableDetail :station-list="stationMaster"></tableDetail>
+    <div class="wrap">
+      <tableDetail :station-list="stationMaster"></tableDetail>
+      <mapDetail :station-list="stationMaster"></mapDetail>
+    </div>
     <div v-if="stationMaster">
       <div v-if="stationMaster.length > 0">
         <a target="_blank" :href="'/list/' + stationMaster">Share</a>
@@ -23,6 +26,7 @@
 import navbar from "@/components/header/navbar.vue";
 import search from "@/components/header/search.vue";
 import tableDetail from "@/components/list/table-detail.vue";
+import mapDetail from "@/components/map-detail.vue";
 
 export default {
   name: "Home",
@@ -30,6 +34,7 @@ export default {
     navbar,
     search,
     tableDetail,
+    mapDetail,
   },
   data() {
     return {
