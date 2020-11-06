@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" class="nav">
       <div class="nav-items">
         <router-link class="home" to="/">
           <font-awesome-icon icon="home"></font-awesome-icon>
@@ -392,6 +392,10 @@ textarea {
     resize: vertical;
 }
 
+small {
+  font-size: 12px;
+}
+
 
 
 body {
@@ -411,4 +415,9 @@ a {
   }
 }
 
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
 </style>

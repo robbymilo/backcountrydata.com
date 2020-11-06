@@ -5,15 +5,13 @@
         <thead>
           <th></th>
           <th class="column name">Station</th>
-          <th class="column elevation">Location</th>
-          <th class="column elevation">Elevation</th>
           <th class="column data" title="Start of Day Value">7-Day<br>depth</th>
           <th class="column data">24-Hour<br>depth</th>
           <th class="column data">Current<br>depth</th>
           <th class="column data">Current<br>temp</th>
-          <th class="column nws">NWS forecast</th>
-          <th class="column nws">12/24-hr forecast</th>
-          <th class="column avy">Avalanche</th>
+          <th class="column data">NWS forecast</th>
+          <th class="column data">12/24-hr forecast</th>
+          <th class="column data">Avalanche</th>
         </thead>
         <draggable
           v-for="station of stationList"
@@ -24,7 +22,8 @@
           :options="{ handle: '.move' }"
         >
           <tr
-            class="station"
+            class="station expand"
+            @click="expandStation(station)"
           >
             <td class="column order">
               <button class="remove" @click="removeStation(station)">
@@ -33,7 +32,7 @@
               <button class="move">
                 <font-awesome-icon icon="grip-lines"></font-awesome-icon>
               </button>
-              <button class="expand" @click="expandStation(station)">
+              <!-- <button class="expand">
                 <font-awesome-icon
                   v-if="expanded[station] !== true"
                   icon="expand"
@@ -42,30 +41,20 @@
                   v-if="expanded[station] === true"
                   icon="compress"
                 ></font-awesome-icon>
-              </button>
+              </button> -->
             </td>
             <td class="column name">
               <router-link :to="{ path: '/station/' + station }">{{
                 getMeta(station).site_name.trim()
               }}</router-link>
+              <small class="elev">
+                {{ getMeta(station).county }},
+                {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small>{{ m_ft() }}</small>
+              </small>
               <small class="float-right">({{ station }})</small>
             </td>
-            <td class="column elevation">
-              <span class="mobile">Location: </span>
-              <span class="elev"
-                >{{ getMeta(station).county }},
-                {{ getMeta(station).state }}</span
-              >
-            </td>
-            <td class="column elevation">
-              <span class="mobile">Elevation: </span>
-              <span class="elev"
-                >{{ metersCheck(getMeta(station).elev)
-                }}<small>{{ m_ft() }}</small></span
-              >
-            </td>
             <td class="column data">
-              <span class="mobile">7-Day Depth: </span>
+              <span class="mobile">7-Day depth: </span>
               <span
                 v-if="
                   weeklyData[station] && weeklyData[station].data.snow_depth
@@ -86,7 +75,7 @@
               </span>
             </td>
             <td class="column data">
-              <span class="mobile">24-Hour Depth: </span>
+              <span class="mobile">24-Hour depth: </span>
               <span
                 v-if="
                   hourlyData[station] && hourlyData[station].data.snow_depth
@@ -104,7 +93,7 @@
               </span>
             </td>
             <td class="column data">
-              <span class="mobile">Current Depth: </span>
+              <span class="mobile">Current depth: </span>
               <span
                 v-if="
                   hourlyData[station] && hourlyData[station].data.snow_depth
@@ -148,7 +137,7 @@
                 }}°<small>{{ c_f() }}</small>
               </span>
             </td>
-            <td class="column nws">
+            <td class="column data">
               <span
                 v-if="forecastData[station] && forecastData[station].forecast"
               >
@@ -208,7 +197,7 @@
                 </a>
               </span>
             </td>
-            <td class="column nws">
+            <td class="column data">
               <span class="mobile">12/24-hr Forecast: </span>
               <span
                 v-if="
@@ -222,7 +211,7 @@
                 }}<small>{{ cm_in() }}</small>
               </span>
             </td>
-            <td class="column avy">
+            <td class="column data">
               <span v-if="avyData[station] && avyData[station][0]">
                 <div
                   class="avy-box"
@@ -262,14 +251,33 @@
               </span>
             </td>
           </tr>
-          <tr v-show="expanded[station]">
-            <td colspan="11">
-              expanded info
+          <tr v-show="expanded[station]" >
+            <td>&nbsp;</td>
+            <td colspan="8">
+              chart
+              <span
+                v-if="forecastData[station] && forecastData[station].forecast"
+              >
+                <div>Forecast</div>
+                <small
+                  class="desktop"
+                  :title="forecastData[station].forecast.data.text[0]"
+                >
+                  {{ forecastData[station].forecast.data.text[0] }}
+                </small>
+              </span>
+              <span v-if="avyData[station] && avyData[station][0]">
+                <div>{{ avyData[station][0].center }}</div>
+                <div><small>{{ avyData[station][0].name }}</small></div>
+                <small>{{ avyData[station][0].forecast.travel_advice }}</small>
+              </span>
+
             </td>
           </tr>
         </draggable>
       </table>
-      <a target="_blank" :href="`https://github.com/robbymilo/backcountrydata.com`">Contribute</a>
+      <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com">Contribute</a> |
+      <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com/issues/new/choose">Request feature / Report bug </a>
     </div>
   </div>
 </template>
@@ -362,192 +370,127 @@ export default {
 </script>
 
 <style lang="scss">
-.station {
-  height: 100%;
-  transition: all 0.1s;
-  @media screen and(min-width: 800px) {
-    &.expanded {
-      transition: all 0.2s;
-      td {
-        vertical-align: top;
-      }
-      .external {
-        display: block;
-      }
-    }
-  }
-
-  &:hover {
-    background: #484848;
-  }
-}
-.sortable-chosen {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-.remove,
-.move,
-.expand {
-  cursor: pointer;
-  padding-right: 4px;
-  border: none;
-  margin: 0;
-  width: auto;
-  overflow: visible;
-
-  background: transparent;
-
-  /* inherit font & color from ancestor */
-  color: inherit;
-  font: inherit;
-
-  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
-  line-height: normal;
-
-  /* Corrects font smoothing for webkit */
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-
-  /* Corrects inability to style clickable `input` types in iOS */
-  -webkit-appearance: none;
-}
-@media screen and(max-width: 800px) {
-  .expand {
-    display: none;
-  }
-}
-.column {
-  &.nws,
-  &.avy,
-  &.data,
-  &.elevation {
-    text-align: right;
-  }
-  .name {
-    width: 30%;
-  }
-  &.avy {
-    min-width: 140px;
-  }
-  &.order {
-    display: flex;
-    justify-content: space-evenly;
-  }
-}
 .table {
-  th {
-    text-align: left;
-    padding: 0.25em;
-  }
-  td {
-    text-align: left;
-    @media screen and(min-width: 800px) {
-      padding: 0.25em;
-      max-width: 237px;
-    }
-  }
-  tr {
-    border-bottom: 1px solid #ddd;
-  }
-}
-.mobile {
-  display: none;
-  font-size: 12px;
-}
-@media screen and(max-width: 800px) {
-  table.table {
-    border: 0;
-  }
-  thead {
-    display: none;
-  }
-  .mobile {
-    display: inline-block;
-    float: left;
-    text-align: left;
-  }
-  .desktop {
-    display: none;
-  }
-  tr {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0.5em 0;
-    border: 1px solid rgba(3, 3, 3, 0.2);
-  }
-  td {
-    flex: 1 1 500px;
-    border: 0.5px solid rgba(3, 3, 3, 0.2);
-  }
-  th {
-    flex: 1 1 500px;
-    border: 0.5px solid rgba(3, 3, 3, 0.2);
-  }
-  a.hazard {
-    display: block;
-    svg {
-      max-width: 15px;
-    }
-  }
-  .current-text {
-    display: block;
-  }
-}
-table.table {
-  font-size: 15px;  
+  font-size: 15px;
   width: 100%;
-}
-
-table,
-th,
-td {
-  border: 1px solid #515151;
-}
-
-table {
   border-collapse: separate;
   border-spacing: 0px;
-  border-width: 1px 0 0 1px;
+  border: .5px solid #6f6f6f;
   margin-bottom: 24px;
   width: 100%;
+
+  @media (min-width: 1600px) {
+    table-layout: fixed;
+  }
+
+  th,
+  td {
+    font-weight: normal;
+    text-align: left;
+
+    @media (min-width: 1600px) {
+
+      &:nth-of-type(1) {
+        min-width: 100px;
+        width: 100px;
+        max-width: 100px;
+        text-align: center;
+      }
+
+      &:nth-of-type(2) {
+        min-width: 400px;
+        width: 400px;
+        max-width: 400px;
+      }
+
+      &:nth-of-type(3),
+      &:nth-of-type(4),
+      &:nth-of-type(5),
+      &:nth-of-type(6)
+      {
+        min-width: 80px;
+        width: 80px;
+        max-width: 80px;
+      }
+
+    }
+  }
+
+  th {
+    border-width: 0 1px 1px 0;
+    font-weight: bold;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+  }
+
+  td, th {
+    border: 1px solid #6f6f6f;
+    border-width: 0 1px 1px 0;
+  }
+
+  tr {
+    &.expand {
+      &:hover {
+        background: #2d2d2d;
+      }
+    }
+  }
+
+  .mobile {
+    @media (min-width: 800px) {
+      display: none;
+    }
+  }
+
+  .data {
+    text-align: right;
+  }
+
+  @media screen and(max-width: 800px) {
+    thead {
+      display: none;
+    }
+    .mobile {
+      display: inline-block;
+      float: left;
+      text-align: left;
+    }
+    .desktop {
+      display: none;
+    }
+    tr {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin: 0.5em 0;
+      border: 1px solid rgba(3, 3, 3, 0.2);
+    }
+    td {
+      flex: 1 1 500px;
+      border: 0.5px solid rgba(3, 3, 3, 0.2);
+    }
+    th {
+      flex: 1 1 500px;
+      border: 0.5px solid rgba(3, 3, 3, 0.2);
+    }
+    a.hazard {
+      display: block;
+      svg {
+        max-width: 15px;
+      }
+    }
+    .current-text {
+      display: block;
+    }
+  }
+
 }
 
-caption,
-th,
-td {
-  font-weight: normal;
-  text-align: left;
+.expand {
+  cursor: zoom-in;
 }
 
-th {
-  border-width: 0 1px 1px 0;
-  font-weight: bold;
-  line-height: 24px;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: left;
-  padding: 10px;
-}
-
-td {
-  border-width: 0 1px 1px 0;
-  padding: 10px;
-}
-.move {
-  padding-right: 4px;
-}
-.move:hover {
-  cursor: grab;
-}
-
-.move:active {
-  cursor: grabbing;
-}
-
-tr:nth-child(even),
-thead {
-  // background: #eee;
-}
 a.hazard {
   color: red;
   padding: 0 2px;

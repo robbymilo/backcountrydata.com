@@ -73,7 +73,7 @@ module.exports = {
         path.join(__dirname, '../data/' + type + '/' + id + '.json')
       );
 
-      var fivemin = 300000;
+      var fivemin = 9000000;
       var age = fivemin;
 
       if (Date.now() - stats.mtimeMs < age) {
