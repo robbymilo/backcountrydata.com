@@ -11,13 +11,20 @@
           <th class="column data">Forecast<br><small>12 / 24-hr</small></th>
           <th class="column data">Avalanche</th>
         </thead>
-        <draggable
+      </table>
+      <draggable
+        class="table draggable"
+        v-if="stationList.length > 0"
+        @start="drag=true"
+        @end="endDrag"
+        :list="stationList"
+        tag="table"
+        :class="{ dragging: drag }"
+      >
+        <tbody
           v-for="station of stationList"
           :key="station.id"
-          @end="dragged"
-          :list="stationList"
-          :element="'tbody'"
-          :options="{ handle: '.move' }"
+
         >
           <tr
             class="station expand"
@@ -299,15 +306,17 @@
                   </p>
                 </div>
               </span>
+              <hr>
               <span v-if="avyData[station] && avyData[station][0]">
                 <div><strong>{{ avyData[station][0].center }}</strong> - {{ avyData[station][0].name }}</div>
+                <p>{{ capitalize(avyData[station][0].forecast.danger) }} danger</p>
                 <p>{{ avyData[station][0].forecast.travel_advice }}</p>
               </span>
 
             </td>
           </tr>
-        </draggable>
-      </table>
+        </tbody>
+      </draggable>
     </div>
   </div>
 </template>
@@ -332,6 +341,7 @@ export default {
   },
   data() {
     return {
+      drag: false,
       isMetric: "",
       hourlyData: {},
       weeklyData: {},
@@ -384,8 +394,9 @@ export default {
     removeStation(station) {
       this.$root.$emit("removeStation", station);
     },
-    dragged() {
+    endDrag() {
       this.$root.$emit("reorderStations", this.stationList);
+      this.drag = false;
     },
     expandStation(station) {
       var vm = this;
@@ -416,7 +427,6 @@ export default {
   border-collapse: separate;
   border-spacing: 0px;
   border: .5px solid #424242;
-  margin-bottom: 24px;
   background: #1e262c;
   width: 100%;
 
@@ -569,11 +579,6 @@ export default {
   }
 
 }
-
-.expand {
-  cursor: zoom-in;
-}
-
 .hazard {
   color: red;
   padding: 0 2px;
@@ -653,5 +658,17 @@ export default {
   @media (max-width: 1600px) {
     display: none;
   }
+}
+
+.expand {
+  cursor: zoom-in;
+}
+
+.draggable {
+  cursor: grab;
+}
+
+.dragging {
+  cursor: grabbing;
 }
 </style>

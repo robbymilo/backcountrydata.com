@@ -423,6 +423,10 @@ a {
   }
 }
 
+hr {
+  border-width: .5px;
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
