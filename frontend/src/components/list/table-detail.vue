@@ -24,7 +24,6 @@
         <tbody
           v-for="station of stationList"
           :key="station.id"
-
         >
           <tr
             class="station expand"
@@ -256,14 +255,40 @@
               </div>
             </td>
           </tr>
-          <tr v-show="expanded[station]" >
+          <tr class="content-expand" v-show="expanded[station]" >
             <td>&nbsp;</td>
             <td colspan="2">
               <div class="content-extra">
                 {{ getMeta(station).county }}, {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small class="unit">{{ m_ft() }}</small>
+                <hr>
+                <div v-if="hourlyData[station] && hourlyData[station].data.snow_depth">
+                  <la-cartesian :data="remapData(hourlyData[station].data.snow_depth)">
+                    <la-line dot curve :label="`Snow depth`" prop="sd"></la-line>
+                    <la-tooltip>
+                      <div class="tooltip" slot-scope="props">
+                        <div class="title">{{ props.label }}</div>
+                        <ul class="list">
+                          <li
+                            :key="item.label"
+                            v-for="item in props.actived"
+                            :style="{ borderTop: '3px solid ' + item.color }">
+                            <div class="label">{{ item.label }} - {{ cm_to_in(item.value) }}<small class="unit">{{ cm_in() }}</small></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </la-tooltip>
+                  </la-cartesian>
+                </div>
+
               </div>
             </td>
             <td colspan="4">
+              <span v-if="avyData[station] && avyData[station][0]">
+                <div><strong>{{ avyData[station][0].center }}</strong> - {{ avyData[station][0].name }}</div>
+                <p>{{ capitalize(avyData[station][0].forecast.danger) }} danger</p>
+                <p>{{ avyData[station][0].forecast.travel_advice }}</p>
+              </span>
+              <hr>
               <span
                 v-if="forecastData[station] && forecastData[station].forecast"
               >
@@ -299,20 +324,14 @@
                     </div>
                   </div>
                   <p
-                    class="desktop"
                     :title="forecastData[station].forecast.data.text[0]"
                   >
-                    {{ forecastData[station].forecast.data.text[0] }}
+                    <div>Created: {{ forecastData[station].forecast.creationDateLocal }}</div>
+                    <div>Area: {{ forecastData[station].forecast.location.areaDescription }}</div>
+                    <p>{{ forecastData[station].forecast.data.text[0] }}</p>
                   </p>
                 </div>
               </span>
-              <hr>
-              <span v-if="avyData[station] && avyData[station][0]">
-                <div><strong>{{ avyData[station][0].center }}</strong> - {{ avyData[station][0].name }}</div>
-                <p>{{ capitalize(avyData[station][0].forecast.danger) }} danger</p>
-                <p>{{ avyData[station][0].forecast.travel_advice }}</p>
-              </span>
-
             </td>
           </tr>
         </tbody>
@@ -348,6 +367,7 @@ export default {
       forecastData: {},
       avyData: {},
       expanded: {},
+      options: {},
     };
   },
   created() {
@@ -407,6 +427,13 @@ export default {
       vm.expanded = {};
       vm.$set(vm.expanded, station, status);
     },
+    remapData(sd, sw, at) {
+      let finalValues = [];
+      sd.forEach(value => {
+        finalValues.push({ sd: value })
+      })
+      return finalValues;
+    }
   },
 };
 </script>
@@ -439,7 +466,7 @@ export default {
   td {
     font-weight: normal;
 
-    @media (min-width: 1600px) {
+    @media (min-width: 801px) {
 
       &:nth-of-type(1) {
         min-width: 30px;
@@ -479,9 +506,9 @@ export default {
 
       &:nth-of-type(6)
       {
-        min-width: 30px;
-        width: 30px;
-        max-width: 30px;
+        min-width: 60px;
+        width: 60px;
+        max-width: 60px;
       }
 
       &:nth-of-type(7)
@@ -639,6 +666,10 @@ export default {
   }
 }
 
+.content-expand td {
+  padding: 1rem;
+}
+
 .content-extra {
   padding-bottom: 1rem;
 }
@@ -655,7 +686,7 @@ export default {
 }
 
 .avy-rating {
-  @media (max-width: 1600px) {
+  @media (max-width: 800px) {
     display: none;
   }
 }
@@ -664,11 +695,11 @@ export default {
   cursor: zoom-in;
 }
 
-.draggable {
-  cursor: grab;
-}
+// .draggable {
+//   cursor: grab;
+// }
 
-.dragging {
-  cursor: grabbing;
-}
+// .dragging {
+//   cursor: grabbing;
+// }
 </style>

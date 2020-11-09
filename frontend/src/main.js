@@ -2,9 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import VueAnalytics from "vue-analytics";
-import VueLayers from 'vuelayers'
-import 'vuelayers/lib/style.css' // needs css-loader
-// import Sparkline from 'vue-sparklines'
+import { Laue } from 'laue';
 
 // begin font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -36,9 +34,7 @@ Vue.use(VueAnalytics, {
   router,
 });
 
-// Vue.use(Sparkline)
-
-Vue.use(VueLayers)
+Vue.use(Laue);
 
 Vue.config.productionTip = false;
 

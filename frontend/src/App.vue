@@ -424,7 +424,7 @@ a {
 }
 
 hr {
-  border-width: .5px;
+  border-width: .25px;
 }
 
 .nav {

@@ -25,39 +25,29 @@ export default {
     };
   },
   created() {
-    this.getUserIP();
+    this.getUserLocation();
   },
   methods: {
-    getIP() {
+    getUserLocation() {
       var vm = this;
-      axios
-        .get("https://ipinfo.io/json")
-        .then((response) => {
-          vm.coordinates.lat = response.data.loc.split(",")[0];
-          vm.coordinates.lon = response.data.loc.split(",")[1];
-          vm.getStationsNear();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    getUserIP() {
-      var vm = this;
-      axios
-        .get("https://ipapi.co/json/")
-        .then((response) => {
-          vm.coordinates.lat = response.data.latitude;
-          vm.coordinates.lon = response.data.longitude;
-          vm.getStationsNear();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+
+      function success(position) {
+        vm.coordinates.lat = position.coords.latitude;
+        vm.coordinates.lon = position.coords.longitude;
+        vm.getStationsNear();
+      }
+
+      function error() {
+        console.log('geo error')
+      }
+
+      navigator.geolocation.getCurrentPosition(success, error);
+
     },
     getStationsNear() {
       var vm = this;
       axios
-        .get("/api/nearest/", {
+        .get('/api/nearest/', {
           params: {
             lat: vm.coordinates.lat,
             lon: vm.coordinates.lon,
@@ -65,11 +55,19 @@ export default {
         })
         .then((response) => {
           vm.near = response.data;
+          vm.forward();
         })
         .catch((error) => {
           console.log(error);
         });
     },
+    forward() {
+      let stations = [];
+      this.near.forEach(station => {
+        stations.push(station.id);
+      })
+      this.$router.push({ path: `/list/${stations.join(",")}` })
+    }
   },
 };
 </script>
