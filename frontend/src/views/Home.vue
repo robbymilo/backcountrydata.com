@@ -7,12 +7,12 @@
     <div class="wrap">
       <tableDetail :station-list="stationMaster"></tableDetail>
     </div>
-    <div v-if="stationMaster">
+    <div v-if="stationMaster.length">
       <div v-if="stationMaster.length > 0">
         <a target="_blank" :href="'/list/' + stationMaster">Share</a>
       </div>
     </div>
-    <div v-if="!stationMaster">
+    <div v-if="!stationMaster.length">
       No favorite SNOTEL sites :( Try searching!
       <nearuser></nearuser>
     </div>

@@ -346,8 +346,6 @@ import stations from "@/assets/stations.json";
 import draggable from "vuedraggable";
 import { functions } from "@/mixins/functions";
 
-import nearuser from "@/components/header/nearuser.vue";
-
 export default {
   name: "table-detail",
   mixins: [functions],
@@ -356,7 +354,6 @@ export default {
   },
   components: {
     draggable,
-    nearuser,
   },
   data() {
     return {

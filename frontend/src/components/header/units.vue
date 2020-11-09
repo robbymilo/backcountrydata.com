@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "units2",
+  name: "units",
   data() {
     return {
       metric: true,
@@ -44,7 +44,6 @@ export default {
       this.$root.$emit("changeUnits", this.metric);
     },
     setUnits() {
-      console.log(this.metric);
       this.$root.$emit("changeUnits", this.metric);
       localStorage.setItem("bcd-metric", this.metric);
     },
