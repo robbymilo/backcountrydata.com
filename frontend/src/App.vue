@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav" class="nav">
-      <div class="nav-items">
+      <div class="nav-items d-flex">
         <router-link class="home" to="/">
           <font-awesome-icon icon="home"></font-awesome-icon>
         </router-link>
@@ -14,21 +14,19 @@
     </div>
     <router-view />
     <footer>
-       <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com">Contribute</a> |
+      <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com">Contribute</a> |
       <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com/issues/new/choose">Request feature / Report bug </a>
     </footer>
   </div>
 </template>
 
 <script>
-import navbar from "@/components/header/navbar.vue";
 import search from "@/components/header/search.vue";
 import units from "@/components/header/units.vue";
 import favorites from "@/components/header/favorites.vue";
 
 export default {
   components: {
-    navbar,
     search,
     units,
     favorites,

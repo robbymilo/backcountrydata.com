@@ -1,7 +1,6 @@
 <template>
   <div class="wrap">
     <tableDetail :station-list="stationMaster"></tableDetail>
-    <mapDetail :station-list="stationMaster"></mapDetail>
   </div>
 </template>
 

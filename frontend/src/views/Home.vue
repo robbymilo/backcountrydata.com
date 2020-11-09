@@ -6,7 +6,6 @@
     />
     <div class="wrap">
       <tableDetail :station-list="stationMaster"></tableDetail>
-      <mapDetail :station-list="stationMaster"></mapDetail>
     </div>
     <div v-if="stationMaster">
       <div v-if="stationMaster.length > 0">
@@ -23,7 +22,6 @@
 </template>
 
 <script>
-import navbar from "@/components/header/navbar.vue";
 import search from "@/components/header/search.vue";
 import tableDetail from "@/components/list/table-detail.vue";
 import mapDetail from "@/components/map-detail.vue";
@@ -31,7 +29,6 @@ import mapDetail from "@/components/map-detail.vue";
 export default {
   name: "Home",
   components: {
-    navbar,
     search,
     tableDetail,
     mapDetail,

@@ -8,7 +8,7 @@
           <th class="column ">Depth of snow:<br><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small></th>
           <th class="column text-center">Temp<br><small>current</small></th>
           <th class="column data">Forecast<br><small>NWS</small></th>
-          <th class="column data">Forecast<br><small>12/24-hr</small></th>
+          <th class="column data">Forecast<br><small>12 / 24-hr</small></th>
           <th class="column data">Avalanche</th>
         </thead>
         <draggable
@@ -46,7 +46,7 @@
             <td class="column name">
               <router-link :to="{ path: '/station/' + station }">{{
                 getMeta(station).site_name.trim()
-              }}</router-link>
+              }}</router-link> <small class="unit">({{ station }})</small>
             </td>
             <td class="column">
               <span class="mobile text-center">Depth of snow:<br><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small> </span>
@@ -133,37 +133,12 @@
             <td class="column data">
               <div
                 v-if="forecastData[station] && forecastData[station].forecast"
-                class="text-right overflow"
+                class="d-flex justify-content-space-between overflow"
               >
                 <div class="mobile"
                   >NWS Forecast:
                   <div>{{ forecastData[station].forecast.data.text[0] }}</div>
                 </div>
-                <div
-                  class="desktop"
-                  :title="forecastData[station].forecast.data.text[0]"
-                >
-                  {{ forecastData[station].forecast.data.weather[0] }}
-                </div>
-              </div>
-              <!-- <span class="external">
-                <a
-                  target="_blank"
-                  v-bind:href="`https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w16u=1&w17u=1&AheadHour=0&Submit=Submit&FcstType=graphical&textField1=${
-                    getMeta(station).latitude
-                  }&textField2=${
-                    getMeta(station).longitude
-                  }&station=all&unit=0&dd=&bw=`"
-                >
-                  <font-awesome-icon
-                    icon="external-link-alt"
-                  ></font-awesome-icon>
-                </a>
-              </span> -->
-            </td>
-            <td class="column data">
-              <span class="mobile">12/24-hr Forecast: </span>
-              <div class="d-flex align-items-center justify-content-space-between">
                 <div
                   v-if="
                     forecastData[station] &&
@@ -194,16 +169,44 @@
                   </span>
                 </div>
                 <div v-else>&nbsp;</div>
+                <div
+                  class="desktop"
+                  :title="forecastData[station].forecast.data.text[0]"
+                >
+                  {{ forecastData[station].forecast.data.weather[0] }}
+                </div>
+              </div>
+              <!-- <span class="external">
+                <a
+                  target="_blank"
+                  v-bind:href="`https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w16u=1&w17u=1&AheadHour=0&Submit=Submit&FcstType=graphical&textField1=${
+                    getMeta(station).latitude
+                  }&textField2=${
+                    getMeta(station).longitude
+                  }&station=all&unit=0&dd=&bw=`"
+                >
+                  <font-awesome-icon
+                    icon="external-link-alt"
+                  ></font-awesome-icon>
+                </a>
+              </span> -->
+            </td>
+            <td class="column data">
+              <span class="mobile">12 / 24-hr Forecast: </span>
+              <div class="text-right">
                 <span
                   v-if="
                     forecastData[station] &&
                     forecastData[station].forecastSnow.length >= 1
                   "
                 >
-                  {{ inCheck(forecastData[station].forecastSnow[0])
-                  }}<small class="unit">{{ cm_in() }}</small
-                  >/{{ inCheck(forecastData[station].forecastSnow[1])
-                  }}<small class="unit">{{ cm_in() }}</small>
+                  <span :class="{ increase: inCheck(forecastData[station].forecastSnow[0]) > 0 }">
+                    {{ inCheck(forecastData[station].forecastSnow[0]) }}<small class="unit">{{ cm_in() }}</small>
+                  </span>
+                  <span> / </span>
+                  <span :class="{ increase: inCheck(forecastData[station].forecastSnow[1]) > 0 }">
+                    {{ inCheck(forecastData[station].forecastSnow[1]) }}<small class="unit">{{ cm_in() }}</small>
+                  </span>
                 </span>
               </div>
             </td>
@@ -248,15 +251,46 @@
           </tr>
           <tr v-show="expanded[station]" >
             <td>&nbsp;</td>
-            <td colspan="6">
+            <td colspan="2">
               <div class="content-extra">
-                {{ getMeta(station).county }}, {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small>{{ m_ft() }}</small> ({{ station }})
+                {{ getMeta(station).county }}, {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small class="unit">{{ m_ft() }}</small>
               </div>
+            </td>
+            <td colspan="4">
               <span
                 v-if="forecastData[station] && forecastData[station].forecast"
               >
                 <div class="content-extra">
                   <div><strong>NWS Forecast</strong></div>
+                  <div
+                    v-if="
+                      forecastData[station] &&
+                      forecastData[station].forecast.data.hazard.length >= 1
+                    "
+                  >
+                    <div
+                      v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index"
+                    >
+                      <div class="mobile" v-if="index == 0">
+                        {{ forecastData[station].forecast.data.text[0] }}
+                      </div>
+                      <a
+                        target="_blank"
+                        class="hazard"
+                        :title="hazard"
+                        :href="
+                          ampReplace(
+                            forecastData[station].forecast.data.hazardUrl[index]
+                          )
+                        "
+                      >
+                        <font-awesome-icon
+                          icon="exclamation-triangle"
+                        ></font-awesome-icon>
+                        <span class="hazard-text">{{ hazard }} </span>
+                      </a>
+                    </div>
+                  </div>
                   <p
                     class="desktop"
                     :title="forecastData[station].forecast.data.text[0]"
@@ -367,12 +401,16 @@ export default {
 </script>
 
 <style lang="scss">
+// .table-wrap {
+//   @media (min-width: 1300px) {
+//     width: 50vw;
+//     max-width: 50vw;
+//   }
+// }
 .table-wrap {
-  @media (min-width: 1300px) {
-    width: 50vw;
-    max-width: 50vw;
-  }
+  width: 100%;
 }
+
 .table {
   font-size: 14px;
   border-collapse: separate;
@@ -380,11 +418,12 @@ export default {
   border: .5px solid #424242;
   margin-bottom: 24px;
   background: #1e262c;
+  width: 100%;
 
-  @media (min-width: 1300px) {
-    width: 50vw;
-    max-width: 50vw;
-  }
+  // @media (min-width: 1300px) {
+  //   width: 50vw;
+  //   max-width: 50vw;
+  // }
 
   th,
   td {
@@ -393,17 +432,17 @@ export default {
     @media (min-width: 1600px) {
 
       &:nth-of-type(1) {
-        min-width: 60px;
-        width: 60px;
-        max-width: 60px;
+        min-width: 30px;
+        width: 30px;
+        max-width: 30px;
         text-align: center;
         padding: 0;
       }
 
       &:nth-of-type(2) {
-        min-width: 150px;
-        width: 150px;
-        max-width: 150px;
+        min-width: 100px;
+        width: 100px;
+        max-width: 100px;
       }
 
 
@@ -430,9 +469,9 @@ export default {
 
       &:nth-of-type(6)
       {
-        min-width: 60px;
-        width: 60px;
-        max-width: 60px;
+        min-width: 30px;
+        width: 30px;
+        max-width: 30px;
       }
 
       &:nth-of-type(7)
@@ -520,6 +559,9 @@ export default {
       svg {
         max-width: 15px;
       }
+      &-text {
+        padding-left: .5rem;
+      }
     }
     .current-text {
       display: block;
@@ -532,9 +574,12 @@ export default {
   cursor: zoom-in;
 }
 
-a.hazard {
+.hazard {
   color: red;
   padding: 0 2px;
+  &-text {
+    padding-left: .5rem;
+  }
 }
 .external svg {
   padding-left: 2px;

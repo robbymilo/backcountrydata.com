@@ -1,5 +1,5 @@
 <template>
-  <div class="units">
+  <div class="units d-flex">
     <div>
       <input
         type="radio"
