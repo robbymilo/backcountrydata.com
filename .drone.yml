@@ -45,17 +45,38 @@ steps:
     commands:
       - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- frontend); then exit 78; fi
 
-  - name: build__deploy_frontend
+  - name: build__frontend
     image: robbymilo/node-netlify
     environment:
       TOKEN:
         from_secret: netlify_auth_token
     commands:
       - make build-frontend
+
+  - name: deploy_frontend
+    image: robbymilo/node-netlify
+    when:
+      branch:
+        include:
+          - master
+    environment:
+      TOKEN:
+        from_secret: netlify_auth_token
+    commands:
       - netlify deploy --dir frontend/dist --site c227ef54-b0f6-434b-9c19-7db3ff8e416c --auth $TOKEN --prod
+
+  - name: deploy_frontend
+    image: robbymilo/node-netlify
+    when:
+      branch:
+        exclude:
+          - master
+    environment:
+      TOKEN:
+        from_secret: netlify_auth_token
+    commands:
+      - netlify deploy --dir frontend/dist --site c227ef54-b0f6-434b-9c19-7db3ff8e416c --auth $TOKEN --alias ${DRONE_BRANCH}
 
 trigger:
   event:
   - push
-  branch:
-  - master
