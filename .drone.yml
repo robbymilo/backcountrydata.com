@@ -45,7 +45,7 @@ steps:
     commands:
       - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- frontend); then exit 78; fi
 
-  - name: build__frontend
+  - name: build_frontend
     image: robbymilo/node-netlify
     environment:
       TOKEN:
@@ -53,7 +53,7 @@ steps:
     commands:
       - make build-frontend
 
-  - name: deploy_frontend
+  - name: deploy_production_frontend
     image: robbymilo/node-netlify
     when:
       branch:
@@ -65,7 +65,7 @@ steps:
     commands:
       - netlify deploy --dir frontend/dist --site c227ef54-b0f6-434b-9c19-7db3ff8e416c --auth $TOKEN --prod
 
-  - name: deploy_frontend
+  - name: deploy_staging_frontend
     image: robbymilo/node-netlify
     when:
       branch:
