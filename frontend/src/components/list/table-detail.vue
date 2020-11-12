@@ -206,12 +206,12 @@
                     forecastData[station].forecastSnow.length >= 1
                   "
                 >
-                  <span :class="{ increase: inCheck(forecastData[station].forecastSnow[0]) > 0 }">
-                    {{ inCheck(forecastData[station].forecastSnow[0]) }}<small class="unit">{{ cm_in() }}</small>
+                  <span :class="{ increase: inCheck(forecastData[station].forecastSnow[0]) > 0 }" :title="inCheck(forecastData[station].forecastSnow[0]) + cm_in()">
+                    {{ Math.round(inCheck(forecastData[station].forecastSnow[0])) }}<small class="unit">{{ cm_in() }}</small>
                   </span>
                   <span> / </span>
-                  <span :class="{ increase: inCheck(forecastData[station].forecastSnow[1]) > 0 }">
-                    {{ inCheck(forecastData[station].forecastSnow[1]) }}<small class="unit">{{ cm_in() }}</small>
+                  <span :class="{ increase: inCheck(forecastData[station].forecastSnow[1]) > 0 }" :title="inCheck(forecastData[station].forecastSnow[1]) + cm_in()">
+                    {{ Math.round(inCheck(forecastData[station].forecastSnow[1])) }}<small class="unit">{{ cm_in() }}</small>
                   </span>
                 </span>
               </div>
@@ -262,7 +262,7 @@
                 {{ getMeta(station).county }}, {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small class="unit">{{ m_ft() }}</small>
                 <hr>
                 <div v-if="hourlyData[station] && hourlyData[station].data.snow_depth">
-                  <la-cartesian :data="remapData(hourlyData[station].data.snow_depth)">
+                  <!-- <la-cartesian :data="remapData(hourlyData[station].data.snow_depth)">
                     <la-line dot curve :label="`Snow depth`" prop="sd"></la-line>
                     <la-tooltip>
                       <div class="tooltip" slot-scope="props">
@@ -277,7 +277,50 @@
                         </ul>
                       </div>
                     </la-tooltip>
-                  </la-cartesian>
+                  </la-cartesian> -->
+                <span
+                  v-if="forecastData[station] && forecastData[station].forecast"
+                >
+                  <div class="content-extra">
+                    <div><strong>NWS Forecast</strong></div>
+                    <div
+                      v-if="
+                        forecastData[station] &&
+                        forecastData[station].forecast.data.hazard.length >= 1
+                      "
+                    >
+                      <div
+                        v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index"
+                      >
+                        <div class="mobile" v-if="index == 0">
+                          {{ forecastData[station].forecast.data.text[0] }}
+                        </div>
+                        <a
+                          target="_blank"
+                          class="hazard"
+                          :title="hazard"
+                          :href="
+                            ampReplace(
+                              forecastData[station].forecast.data.hazardUrl[index]
+                            )
+                          "
+                        >
+                          <font-awesome-icon
+                            icon="exclamation-triangle"
+                          ></font-awesome-icon>
+                          <span class="hazard-text">{{ hazard }} </span>
+                        </a>
+                      </div>
+                    </div>
+                    <p
+                      :title="forecastData[station].forecast.data.text[0]"
+                    >
+                      <div>Created: {{ forecastData[station].forecast.creationDateLocal }}</div>
+                      <div>Area: {{ forecastData[station].forecast.location.areaDescription }}</div>
+                      <p>{{ forecastData[station].forecast.data.text[0] }}</p>
+                    </p>
+                  </div>
+                </span>
                 </div>
 
               </div>
@@ -287,50 +330,6 @@
                 <div><strong>{{ avyData[station][0].center }}</strong> - {{ avyData[station][0].name }}</div>
                 <p>{{ capitalize(avyData[station][0].forecast.danger) }} danger</p>
                 <p>{{ avyData[station][0].forecast.travel_advice }}</p>
-              </span>
-              <hr>
-              <span
-                v-if="forecastData[station] && forecastData[station].forecast"
-              >
-                <div class="content-extra">
-                  <div><strong>NWS Forecast</strong></div>
-                  <div
-                    v-if="
-                      forecastData[station] &&
-                      forecastData[station].forecast.data.hazard.length >= 1
-                    "
-                  >
-                    <div
-                      v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index"
-                    >
-                      <div class="mobile" v-if="index == 0">
-                        {{ forecastData[station].forecast.data.text[0] }}
-                      </div>
-                      <a
-                        target="_blank"
-                        class="hazard"
-                        :title="hazard"
-                        :href="
-                          ampReplace(
-                            forecastData[station].forecast.data.hazardUrl[index]
-                          )
-                        "
-                      >
-                        <font-awesome-icon
-                          icon="exclamation-triangle"
-                        ></font-awesome-icon>
-                        <span class="hazard-text">{{ hazard }} </span>
-                      </a>
-                    </div>
-                  </div>
-                  <p
-                    :title="forecastData[station].forecast.data.text[0]"
-                  >
-                    <div>Created: {{ forecastData[station].forecast.creationDateLocal }}</div>
-                    <div>Area: {{ forecastData[station].forecast.location.areaDescription }}</div>
-                    <p>{{ forecastData[station].forecast.data.text[0] }}</p>
-                  </p>
-                </div>
               </span>
             </td>
           </tr>
@@ -481,9 +480,9 @@ export default {
 
 
       &:nth-of-type(3) {
-        min-width: 150px;
-        width: 150px;
-        max-width: 150px;
+        min-width: 50px;
+        width: 50px;
+        max-width: 50px;
       }
 
       &:nth-of-type(4) {
