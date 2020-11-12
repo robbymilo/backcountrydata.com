@@ -1,6 +1,10 @@
-Source of backcountrydata.com
+A website for tracking your favorite SNOTEL stations, with additional forecast and avalanche data.
 
-# backcountrydata.com frontend app
+![](backcountrydata.com.png)
+
+## backcountrydata.com frontend app
+
+Based off Vue.js CLI.
 
 ```
 cd frontend
@@ -8,27 +12,29 @@ npm i
 npm run serve
 ```
 
-# backcountrydata.com API
+## backcountrydata.com API
+
+Based off Express.
 
 An API for accessing SNOTEL data in JSON format from the current water year. Data is cached and fetched every 15 minutes.
 
-## Development
+### Development
 
 ```
 cd api
-npm i 
+npm i
 node app.js
 ```
 
-## Endpoints
+### Endpoints
 
-### Hourly Data
+#### Hourly Data
 
 Returns hourly data for a SNOTEL station. Points include air temp, snow depth, snow water equivalent, precipitation accumulation, wind direction, wind speed, and wind gust.
 
 **URL** : `/api/hour/:id/?total=:hours`
 
-**Parameters** : 
+**Parameters** :
 
 `id=[integer]` where `id` is the SNOTEL station ID (required).
 
@@ -36,13 +42,13 @@ Returns hourly data for a SNOTEL station. Points include air temp, snow depth, s
 
 Example: /api/hour/978?total=2
 
-### Daily Data
+#### Daily Data
 
 Returns start of day (GMT-8) data for a SNOTEL station. Points include air temp, snow depth, snow water equivalent, precipitation accumulation, wind direction, wind speed, and wind gust.
 
 **URL** : `/api/day/:id/?total=:days`
 
-**Parameters** : 
+**Parameters** :
 
 `id=[integer]` where `id` is the SNOTEL station ID (required).
 
@@ -50,37 +56,37 @@ Returns start of day (GMT-8) data for a SNOTEL station. Points include air temp,
 
 Example: /api/day/978?total=2
 
-### Station Meta
+#### Station Meta
 
 Returns meta data about a SNOTEL station.
 
 **URL** : `/api/station/:id`
 
-**Parameters** : 
+**Parameters** :
 
 `id=[integer]` where `id` is the SNOTEL station ID (required).
 
 Example: /api/station/978
 
-### Nearest from Station
+#### Nearest from Station
 
 Returns an array of the 10 closest stations to a SNOTEL station.
 
 **URL** : `/api/nearest/:id`
 
-**Parameters** : 
+**Parameters** :
 
 `id=[integer]` where `id` is the SNOTEL station ID (required).
 
 Example: /api/nearest/978
 
-### Nearest from Coordinates
+#### Nearest from Coordinates
 
 Returns an array of the 10 closest stations to a lat/lon coordinates.
 
 **URL** : `/api/nearest/?lat=latitude&lon=longitude`
 
-**Parameters** : 
+**Parameters** :
 
 `latitude=[integer]` (required).
 
@@ -88,31 +94,31 @@ Returns an array of the 10 closest stations to a lat/lon coordinates.
 
 Example: /api/nearest/?lat=43.7018976&lon=-116.3025711
 
-### Search
+#### Search
 
 Returns an array of stations that are similar to query.
 
 **URL** : `/api/nearest/?search=query`
 
-**Parameters** : 
+**Parameters** :
 
 `query=[string]` (required).
 
 Example: /api/nearest/?search=boise
 
-### Forecast
+#### Forecast
 
 Returns NWS forecast time series and scientific discussion for a SNOTEL station.
 
 **URL** : `/api/station/:id`
 
-**Parameters** : 
+**Parameters** :
 
 `id=[integer]` where `id` is the SNOTEL station ID (required).
 
 Example: /api/station/978
 
-### Avalanche
+#### Avalanche
 
 Returns the nearest 10 avalanche centers' report for a SNOTEL station.
 

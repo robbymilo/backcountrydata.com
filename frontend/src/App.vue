@@ -13,7 +13,7 @@
       <units></units>
     </div>
     <router-view />
-    <footer>
+    <footer class="py-1">
       <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com">Contribute</a> |
       <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com/issues/new/choose">Request feature / Report bug </a>
     </footer>
