@@ -81,12 +81,14 @@ export default {
           backgroundColor: 'rgb(20, 29, 36)',
           style: {
             fontFamily: 'sans-serif',
-            color: "#f00"
+            color: "white"
           }
         },
         title: {
           text: "",
-          color: 'red',
+          style: {
+            color: 'white',
+          }
         },
         series: [
           {
@@ -100,6 +102,7 @@ export default {
             tooltip: {
               valueSuffix: "",
             },
+
           },
           {
             name: "Snow Water Equivalent",
@@ -119,12 +122,15 @@ export default {
             marker: {
               enabled: false,
             },
+
           },
         ],
         plotOptions: {
           series: {
             turboThreshold: 5000, //larger threshold or set to 0 to disable
+
           },
+
         },
         xAxis: {
           type: "datetime",
@@ -143,7 +149,7 @@ export default {
                 label: {
                   // text: 'Freezing',
                   style: {
-                    color: "rgba(0,0,255, 0.3)",
+                    color: "white",
                     opacity: "0.3",
                   },
                 },
@@ -154,6 +160,9 @@ export default {
             },
             labels: {
               format: "{value}°",
+              style: {
+                color: 'white',
+              }
             },
           },
           {
@@ -163,12 +172,18 @@ export default {
             },
             labels: {
               format: "{value}",
+              style: {
+                color: 'white',
+              }
             },
             opposite: true,
           },
           {
             // Tertiary yAxis
             title: undefined,
+            style: {
+              color: 'white',
+            }
           },
         ],
         tooltip: {

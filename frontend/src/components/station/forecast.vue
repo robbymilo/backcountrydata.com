@@ -139,3 +139,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.discussion-wrap {
+  max-width: 500px
+}
+</style>
