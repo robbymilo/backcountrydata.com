@@ -1,6 +1,8 @@
 A website for tracking your favorite SNOTEL stations, with additional forecast and avalanche data.
 
-![https://backcountrydata.com/list/978,637,312,490,489,830,845,338,550,769,766,1082,1245,335,679,954](backcountrydata.com.png)
+[Try it](https://backcountrydata.com/list/978,637,312,490,489,830,845,338,550,769,766,1082,1245,335,679,954)
+
+![](backcountrydata.com.png)
 
 ## backcountrydata.com frontend app
 
