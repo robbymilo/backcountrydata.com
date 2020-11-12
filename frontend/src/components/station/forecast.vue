@@ -11,7 +11,7 @@
         class="hazard"
         v-if="forecast.forecast && forecast.forecast.data.hazard[0]"
       >
-        <div v-for="(hazard, index) in forecast.forecast.data.hazard">
+        <div class="py-1" v-for="(hazard, index) in forecast.forecast.data.hazard">
           <a
             class="hazard"
             :href="ampReplace(forecast.forecast.data.hazardUrl[index])"
@@ -139,9 +139,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.discussion-wrap {
-  max-width: 500px
-}
-</style>

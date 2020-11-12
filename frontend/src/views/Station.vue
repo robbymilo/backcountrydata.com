@@ -39,7 +39,7 @@
         <h3>
           Current conditions
         </h3>
-        <div class="d-flex justify-content-space-between" v-if="data.date_time">
+        <div class="d-md-flex justify-content-space-between" v-if="data.date_time">
           <div>
             <div>Air temperature</div>
             <h2>{{ c_to_f(air_temp[0]) }}<small class="unit">{{ c_f() }}</small></h2>
@@ -70,12 +70,14 @@
       <hourly></hourly>
     </div>
 
-    <div class="container">
-      <forecast></forecast>
-    </div>
+    <div class="d-md-flex justify-content-space-between">
+      <div class="container container-narrow">
+        <forecast></forecast>
+      </div>
 
-    <div class="container">
-      <avy></avy>
+      <div class="container container-narrow">
+        <avy></avy>
+      </div>
     </div>
 
   </div>

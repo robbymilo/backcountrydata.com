@@ -538,4 +538,14 @@ p {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+
+.d-md-flex {
+  @media (min-width: 800px) {
+    display: flex;
+  }
+}
+
+.container-narrow {
+  max-width: 500px;
+}
 </style>
