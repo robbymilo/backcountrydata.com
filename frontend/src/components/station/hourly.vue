@@ -78,9 +78,17 @@ export default {
       chartOptions: {
         chart: {
           zoomType: "x",
+          backgroundColor: 'rgb(20, 29, 36)',
+          style: {
+            fontFamily: 'sans-serif',
+            color: "white"
+          }
         },
         title: {
           text: "",
+          style: {
+            color: 'white',
+          }
         },
         series: [
           {
@@ -94,6 +102,7 @@ export default {
             tooltip: {
               valueSuffix: "",
             },
+
           },
           {
             name: "Snow Water Equivalent",
@@ -113,12 +122,15 @@ export default {
             marker: {
               enabled: false,
             },
+
           },
         ],
         plotOptions: {
           series: {
             turboThreshold: 5000, //larger threshold or set to 0 to disable
+
           },
+
         },
         xAxis: {
           type: "datetime",
@@ -137,7 +149,7 @@ export default {
                 label: {
                   // text: 'Freezing',
                   style: {
-                    color: "rgba(0,0,255, 0.3)",
+                    color: "white",
                     opacity: "0.3",
                   },
                 },
@@ -148,6 +160,9 @@ export default {
             },
             labels: {
               format: "{value}°",
+              style: {
+                color: 'white',
+              }
             },
           },
           {
@@ -157,12 +172,18 @@ export default {
             },
             labels: {
               format: "{value}",
+              style: {
+                color: 'white',
+              }
             },
             opposite: true,
           },
           {
             // Tertiary yAxis
             title: undefined,
+            style: {
+              color: 'white',
+            }
           },
         ],
         tooltip: {
@@ -242,25 +263,9 @@ export default {
       }
     },
     changeSlider(value) {
-      console.log(value);
       this.getData(parseInt(value.target.value) * 24);
     },
   },
 };
 </script>
 
-<style lang="scss">
-.trend {
-  width: 200px;
-}
-.loading {
-  float: right;
-}
-.days-select {
-  display: flex;
-  padding: 8px 0;
-  .vs-component {
-    padding: 0 8px 0 0;
-  }
-}
-</style>

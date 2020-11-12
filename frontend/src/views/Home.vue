@@ -4,32 +4,34 @@
       title="Backcountry Data"
       description="Follow and visualize the snowpack, weather, and forecast of your favorite backcountry locations in the western US."
     />
-    <tableDetail :station-list="stationMaster"></tableDetail>
-    <div v-if="stationMaster">
+    <div class="wrap">
+      <tableDetail :station-list="stationMaster"></tableDetail>
+    </div>
+    <div v-if="stationMaster.length">
       <div v-if="stationMaster.length > 0">
         <a target="_blank" :href="'/list/' + stationMaster">Share</a>
       </div>
     </div>
-    <div v-if="!stationMaster">
+    <div v-if="!stationMaster.length">
       No favorite SNOTEL sites :( Try searching!
-      <br />
-      <br />
       <nearuser></nearuser>
     </div>
   </div>
 </template>
 
 <script>
-import navbar from "@/components/header/navbar.vue";
 import search from "@/components/header/search.vue";
+import nearuser from "@/components/header/nearuser.vue";
 import tableDetail from "@/components/list/table-detail.vue";
+import mapDetail from "@/components/map-detail.vue";
 
 export default {
   name: "Home",
   components: {
-    navbar,
     search,
+    nearuser,
     tableDetail,
+    mapDetail,
   },
   data() {
     return {
@@ -73,9 +75,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.float-right {
-  float: right;
-}
-</style>

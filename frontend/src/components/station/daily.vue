@@ -134,9 +134,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.trend {
-  width: 200px;
-}
-</style>

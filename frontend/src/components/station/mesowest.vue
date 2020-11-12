@@ -182,21 +182,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.station-data {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
-  border: 1px solid gray;
-
-  .station {
-    display: inline-block;
-    max-width: 250px;
-    vertical-align: top;
-    padding: 8px;
-    border-right: 1px solid grey;
-    overflow: hidden;
-  }
-}
-</style>

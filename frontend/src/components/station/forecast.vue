@@ -11,7 +11,7 @@
         class="hazard"
         v-if="forecast.forecast && forecast.forecast.data.hazard[0]"
       >
-        <div v-for="(hazard, index) in forecast.forecast.data.hazard">
+        <div class="py-1" v-for="(hazard, index) in forecast.forecast.data.hazard">
           <a
             class="hazard"
             :href="ampReplace(forecast.forecast.data.hazardUrl[index])"
@@ -22,7 +22,6 @@
           </a>
         </div>
       </div>
-      <hr />
       <div class="discussion-wrap">
         <h3>Forecast Discussion</h3>
         <a :href="forecast.discussion.rss.channel.item.link">{{
@@ -31,42 +30,6 @@
         <div class="discussion-wrap">
           <div class="discussion" v-bind:class="{ expanded: expanded }">
             {{ forecast.discussion.rss.channel.item.description }}
-          </div>
-          <div class="expand-wrap">
-            <button @click="expand" class="expand">
-              <div v-if="!expanded">Read more...</div>
-              <div v-else>Close</div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    &nbsp;
-    <div class="expandableBox">
-      <div class="discussion-wrap">
-        <div class="discussion limit">
-          <h3>Local Reports</h3>
-          <div v-if="local.length > 0">
-            <div v-for="(report, index) in local.slice().reverse()">
-              <div>
-                <small
-                  >{{ report.properties.valid }} -
-                  {{ report.properties.city }} ({{
-                    report.properties.source
-                  }})</small
-                >
-              </div>
-              <div>
-                <small
-                  >{{ report.properties.typetext }},
-                  {{ report.properties.magnitude }}
-                  <span v-if="report.properties.remark"
-                    >- {{ report.properties.remark }}</span
-                  ></small
-                >
-              </div>
-              <hr />
-            </div>
           </div>
         </div>
       </div>
@@ -176,55 +139,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.expandableBox {
-  padding: 8px;
-  border: 1px solid gray;
-  .discussion {
-    white-space: pre-wrap;
-    max-height: 200px;
-    overflow: hidden;
-    position: relative;
-    // font-family: monospace;
-    &:before {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      bottom: 0;
-      left: 0;
-      pointer-events: none;
-      background-image: linear-gradient(
-        to top,
-        rgba(255, 255, 255, 1),
-        rgba(255, 255, 255, 0) 90%
-      );
-      width: 100%;
-      height: 4em;
-    }
-  }
-  .expand-wrap {
-    margin: 8px 0 0 0;
-  }
-  .expanded {
-    max-height: 100%;
-    &:before {
-      background: none;
-    }
-  }
-}
-
-.fa-exclamation-triangle {
-  padding-right: 4px;
-}
-
-.discussion-wrap {
-  margin-top: 8px;
-  h3 {
-    padding-left: 0;
-  }
-}
-.current {
-  padding: 4px 0;
-}
-</style>

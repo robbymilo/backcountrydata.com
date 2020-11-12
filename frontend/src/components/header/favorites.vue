@@ -1,10 +1,11 @@
 <template>
   <div class="favorites">
-    <font-awesome-icon
-      icon="heart"
+    <button
       class="favsBox"
       @click="hidden = !hidden"
-    ></font-awesome-icon>
+    >
+      <font-awesome-icon icon="heart"></font-awesome-icon>
+    </button>
     <div class="hidden favorites-box" v-if="!hidden">
       <div class="container" v-if="favorites">
         <div>
@@ -21,12 +22,18 @@
           </draggable>
         </div>
       </div>
+      <div class="container" v-else>
+        No favorites :(
+      </div>
       <button
         v-if="!isFavorite && this.$route.name == 'station'"
         @click="addFav"
       >
         Add as Favorite
       </button>
+      <div v-else>
+        Favorites can be added from a station detail page.
+      </div>
       <!-- <div v-if="favorites">
                 <div v-if="favorites.length > 0">
                     <a target="_blank" :href="'/multi/' + favorites">Share</a>
@@ -132,6 +139,16 @@ export default {
 </script>
 
 <style lang="scss">
+.favorites {
+  div {
+    color: black;
+  }
+}
+
+.favorite a {
+  color: black;
+}
+
 .sortable-chosen {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
@@ -140,12 +157,17 @@ export default {
   margin-left: 4px;
 }
 .favsBox {
-  cursor: pointer;
+  background: none;
+  border: none;
+  svg {
+    color: white;
+  }
 }
 .favorites-box {
   position: absolute;
   background: white;
   z-index: 10;
   border: 1px solid gray;
+  padding: 1rem;
 }
 </style>

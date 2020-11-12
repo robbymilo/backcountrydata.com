@@ -112,7 +112,7 @@ export default {
   max-width: 500px;
 
   border: 1px solid rgba(3, 3, 3, 0.2);
-  background: white;
+  background: gray;
   padding: 8px;
   overflow-y: scroll;
   position: absolute;

@@ -2,7 +2,6 @@
   <div class="avy">
     <div class="container">
       <h3>Nearest Avalanche Forecast Regions</h3>
-      <hr />
       <div class="item" v-if="avyForecast.length > 0">
         <div v-for="(region, index) in avyForecast">
           <div>
@@ -31,7 +30,6 @@
             - {{ region.forecast.travel_advice }}
           </div>
           <div v-else>No data reported</div>
-          <hr />
         </div>
       </div>
     </div>
@@ -90,10 +88,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.fa-external-link-alt {
-  margin-left: 5px;
-  font-size: 12px;
-}
-</style>
