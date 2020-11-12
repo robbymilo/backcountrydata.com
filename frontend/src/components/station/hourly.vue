@@ -78,9 +78,15 @@ export default {
       chartOptions: {
         chart: {
           zoomType: "x",
+          backgroundColor: 'rgb(20, 29, 36)',
+          style: {
+            fontFamily: 'sans-serif',
+            color: "#f00"
+          }
         },
         title: {
           text: "",
+          color: 'red',
         },
         series: [
           {
@@ -242,7 +248,6 @@ export default {
       }
     },
     changeSlider(value) {
-      console.log(value);
       this.getData(parseInt(value.target.value) * 24);
     },
   },

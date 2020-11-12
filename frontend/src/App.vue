@@ -69,6 +69,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+
 /* make sure to set some focus styles for accessibility */
 :focus {
     outline: 0;
@@ -78,10 +79,6 @@ time, mark, audio, video {
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
-}
-
-body {
-	line-height: 1;
 }
 
 ol, ul {
@@ -401,7 +398,40 @@ body {
   background-color: rgb(20, 29, 36);
   color: white;
   padding: 1rem;
-  font-size: 14px;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* Change heading typefaces here */
+  font-family: sans-serif;
+  margin-bottom: 0;
+  line-height: 1.5rem;
+}
+
+h1 {
+  font-size: 3.242rem;
+  line-height: 4.5rem;
+}
+h2 {
+  font-size: 2.828rem;
+  line-height: 3rem;
+}
+h3 {
+  font-size: 1.414rem;
+}
+h4 {
+  font-size: 0.707rem;
+}
+h5 {
+  font-size: 0.4713333333333333rem;
+}
+h6 {
+  font-size: 0.3535rem;
 }
 
 span, div, a, p {
@@ -431,6 +461,28 @@ hr {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+}
+
+.station-data {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  .station {
+    display: inline-block;
+    max-width: 250px;
+    vertical-align: top;
+    padding: 8px;
+    border-right: .5px solid grey;
+    overflow: hidden;
+  }
+
+  h3 {
+    padding-top: .5rem;
+    padding-left: .5rem;
+  }
 }
 
 .text-left {
@@ -469,5 +521,15 @@ p {
   @media (min-width: 1300px) {
     display: flex;
   }
+}
+
+.py-1 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 </style>

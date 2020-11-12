@@ -31,41 +31,6 @@
           <div class="discussion" v-bind:class="{ expanded: expanded }">
             {{ forecast.discussion.rss.channel.item.description }}
           </div>
-          <div class="expand-wrap">
-            <button @click="expand" class="expand">
-              <div v-if="!expanded">Read more...</div>
-              <div v-else>Close</div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    &nbsp;
-    <div class="expandableBox">
-      <div class="discussion-wrap">
-        <div class="discussion limit">
-          <h3>Local Reports</h3>
-          <div v-if="local.length > 0">
-            <div v-for="(report, index) in local.slice().reverse()">
-              <div>
-                <small
-                  >{{ report.properties.valid }} -
-                  {{ report.properties.city }} ({{
-                    report.properties.source
-                  }})</small
-                >
-              </div>
-              <div>
-                <small
-                  >{{ report.properties.typetext }},
-                  {{ report.properties.magnitude }}
-                  <span v-if="report.properties.remark"
-                    >- {{ report.properties.remark }}</span
-                  ></small
-                >
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
