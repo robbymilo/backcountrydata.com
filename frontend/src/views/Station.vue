@@ -4,7 +4,7 @@
 
     <div class="container">
       <div class="current-station">
-        <h1>{{ station.site_name }} ({{ station.station }})</h1>
+        <h1>{{ station.site_name }} <small class="units">{{ station.station }}</small></h1>
         <div class="item" v-if="station.info">
           {{ station.info.trim() }}, {{ station.county.trim() }},
           {{ station.state.trim() }}
@@ -59,8 +59,8 @@
           <div v-if="wind_speed[1] !== 0">
             <div>Wind</div>
             <h3>{{ degToCompass(wind_direction[1]) }} <small class="units">direction</small></h3>
-            <h3>{{ ms_to_mph(wind_speed[1]) }}<small class="units">{{ ms_mph() }}</small>  <small class="units">speed</small></h3>
-            {{ ms_to_mph(wind_gust[1]) }}<small class="units">{{ ms_mph() }}  <small class="units">gust</small></small>
+            <h3>{{ ms_to_mph(wind_speed[1]) }}<small class="units">{{ ms_mph() }}</small> <small class="units">speed</small></h3>
+            <h3>{{ ms_to_mph(wind_gust[1]) }}<small class="units">{{ ms_mph() }}</small> <small class="units">gust</small></h3>
           </div>
         </div>
       </div>

@@ -416,10 +416,16 @@ h6 {
 h1 {
   font-size: 3.242rem;
   line-height: 4.5rem;
+  small {
+    font-size: 50%
+  }
 }
 h2 {
   font-size: 2.828rem;
   line-height: 3rem;
+  small {
+    font-size: 60%
+  }
 }
 h3 {
   font-size: 1.414rem;
@@ -443,7 +449,7 @@ strong {
 }
 
 small {
-  font-size: 10px;
+  font-size: 75%;
 }
 
 a {
