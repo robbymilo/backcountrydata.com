@@ -4,15 +4,15 @@
       title="Backcountry Data"
       description="Follow and visualize the snowpack, weather, and forecast of your favorite backcountry locations in the western US."
     />
-    <div class="wrap">
-      <tableDetail :station-list="stationMaster"></tableDetail>
-    </div>
-    <div v-if="stationMaster.length">
+    <div v-if="stationMaster">
       <div v-if="stationMaster.length > 0">
+        <div class="wrap">
+          <tableDetail :station-list="stationMaster"></tableDetail>
+        </div>
         <a target="_blank" :href="'/list/' + stationMaster">Share</a>
       </div>
     </div>
-    <div v-if="!stationMaster.length">
+    <div v-if="!stationMaster">
       No favorite SNOTEL sites :( Try searching!
       <nearuser></nearuser>
     </div>
