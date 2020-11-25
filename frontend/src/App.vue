@@ -69,7 +69,6 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-
 /* make sure to set some focus styles for accessibility */
 :focus {
     outline: 0;

@@ -5,10 +5,10 @@
         <thead>
           <th></th>
           <th class="column text-left">SNOTEL station</th>
-          <th class="column ">Depth of snow:<br><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small></th>
-          <th class="column text-center">Temp<br><small>current</small></th>
-          <th class="column data">Forecast<br><small>NWS</small></th>
-          <th class="column data">Forecast snow<br><small>12 / 24-hr</small></th>
+          <th class="column ">Depth of snow: <div><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small></div></th>
+          <th class="column text-center">Temp <div><small>current</small></div></th>
+          <th class="column data">Forecast <div><small>NWS</small></div></th>
+          <th class="column data">Forecast snow <div><small>12 / 24-hr</small></div></th>
           <th class="column data">Avalanche</th>
         </thead>
       </table>
@@ -44,7 +44,13 @@
               <router-link class="content" :to="{ path: '/station/' + station }">{{ getMeta(station).site_name.trim() }}</router-link> <small class="unit">({{ station }})</small>
             </td>
             <td class="column depth">
-              <span class="mobile">Depth of snow:<br><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small> </span>
+              <span class="mobile">
+                <div class="text-center">Depth of snow:
+                  <div>
+                    <small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small>
+                  </div>
+                </div>
+              </span>
               <div class="content">
                 <span
                   v-if="weeklyData[station] && weeklyData[station].data.snow_depth"
@@ -104,7 +110,11 @@
             </td>
             <td class="column temp">
               <div class="content">
-                <span class="mobile">Temp current: </span>
+                <span class="mobile">
+                  <div class="text-center">
+                    Temp current:
+                  </div>
+                </span>
                 <span
                   v-if="hourlyData[station] && hourlyData[station].data.air_temp"
                   :title="'Reported: ' + lastArray(hourlyData[station].data.date_time)"
@@ -116,11 +126,13 @@
             </td>
             <td class="column forecast">
                 <div v-if="forecastData[station] && forecastData[station].forecast" class="content">
-                  <div class="mobile">NWS forecast:</div>
                   <div v-if="forecastData[station] && forecastData[station].forecast.data.hazard.length >= 1" class="hazard-wrap">
+                    <span class="mobile">
+                      NWS forecast:
+                    </span>
                     <span v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index">
                       <div class="mobile" v-if="index == 0">
-                        {{ forecastData[station].forecast.data.text[0] }}
+                        {{ forecastData[station].forecast.data.weather[0] }}
                       </div>
                       <a
                         target="_blank"
@@ -132,8 +144,7 @@
                           )
                         "
                       >
-                        <span class="mobile">{{ hazard }} </span>
-                        <font-awesome-icon icon="exclamation-triangle"></font-awesome-icon>
+                        <font-awesome-icon icon="exclamation-triangle"></font-awesome-icon> <span class="mobile">{{ hazard }}</span>
                       </a>
                     </span>
                   </div>
@@ -152,7 +163,9 @@
             </td>
             <td class="column forecast-small">
               <div class="content">
-                <span class="mobile">12 / 24-hr Snow forecast: </span>
+                <span class="mobile">
+                  <div class="text-left">12 / 24-hr snow forecast:</div>
+                </span>
                 <div>
                   <span v-if="forecastData[station] && forecastData[station].forecastSnow.length >= 1">
                     <span :class="{ increase: inCheck(forecastData[station].forecastSnow[0]) > 0 }" :title="inCheck(forecastData[station].forecastSnow[0]) + cm_in()">
@@ -188,7 +201,7 @@
                   class="mobile"
                 >
                   <div>
-                    <h5>{{ avyData[station][0].center }}</h5>
+                    <div>{{ avyData[station][0].center }}</div>
                     <div>
                       <small>{{ avyData[station][0].name }}</small>
                     </div>
@@ -199,7 +212,7 @@
             </td>
           </tr>
           <tr class="content-expand" v-show="expanded[station]" >
-            <td>&nbsp;</td>
+            <td class="desktop">&nbsp;</td>
             <td colspan="2">
               <div class="content-extra">
                 {{ getMeta(station).county }}, {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small class="unit">{{ m_ft() }}</small>
@@ -225,16 +238,15 @@
                   v-if="forecastData[station] && forecastData[station].forecast"
                 >
                   <div class="content-extra">
-                    <div><strong>NWS Forecast</strong></div>
+                    <div><strong>NWS forecast:</strong></div>
                     <div
                       v-if="forecastData[station] && forecastData[station].forecast.data.hazard.length >= 1"
                     >
                       <div
-                        v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index"
+                        v-for="(hazard, index) in forecastData[station].forecast.data.hazard"
+                        :key="index"
+                        class="desktop"
                       >
-                        <div class="mobile" v-if="index == 0">
-                          {{ forecastData[station].forecast.data.text[0] }}
-                        </div>
                         <a
                           target="_blank"
                           class="hazard"
@@ -261,7 +273,7 @@
 
               </div>
             </td>
-            <td colspan="4">
+            <td colspan="4" class="desktop">
               <span v-if="avyData[station] && avyData[station][0]">
                 <div><strong>{{ avyData[station][0].center }}</strong> - {{ avyData[station][0].name }}</div>
                 <p>{{ capitalize(avyData[station][0].forecast.danger) }} danger</p>
@@ -513,6 +525,8 @@ export default {
       flex-wrap: wrap;
       margin: 0;
       border: 1px solid rgba(3, 3, 3, 0.2);
+      white-space: normal;
+      height: 100%;
     }
     td {
       flex: 1 1 500px;
@@ -652,6 +666,7 @@ export default {
   justify-content: space-around;
   max-width: 200px;
   margin: auto;
+
 }
 
 .temp {
@@ -662,13 +677,21 @@ export default {
   .content {
     display: flex;
     justify-content: space-between;
-    overflow: scroll;
+    &.avy {
+      @media (max-width: 800px) {
+        display: block;
+      }
+    }
   }
 }
 
 .forecast-small {
   .content {
     text-align: right;
+    @media (max-width: 800px) {
+      text-align: left;
+    }
   }
 }
+
 </style>
