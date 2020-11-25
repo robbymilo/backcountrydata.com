@@ -12,38 +12,35 @@
           <th class="column data">Avalanche</th>
         </thead>
       </table>
-      <draggable
+      <table
         class="table draggable"
         v-if="stationList.length > 0"
-        @start="drag=true"
-        @end="endDrag"
-        :list="stationList"
-        tag="table"
-        :class="{ dragging: drag }"
       >
         <tbody
           v-for="station of stationList"
           :key="station.id"
         >
           <tr
-            class="station expand"
+            class="station"
             :class="{ 'expanded': expanded[station] === true }"
-            @click="expandStation(station)"
           >
             <td class="column order">
               <div class="btn-row">
-                <button class="btn remove" @click="removeStation(station)" title="Remove station">
+                <button class="btn remove" @click="removeStation(station)" title="Remove station from list">
                   <font-awesome-icon icon="times-circle"></font-awesome-icon>
                 </button>
-                <button class="btn move" title="Drag to reorder station">
-                  <font-awesome-icon icon="grip-lines"></font-awesome-icon>
+                <button class="btn up" @click="moveUp(station)" title="Move station up in list">
+                  <font-awesome-icon icon="arrow-alt-circle-up"></font-awesome-icon>
+                </button>
+                <button class="btn down" @click="moveDown(station)" title="Move station down in list">
+                  <font-awesome-icon icon="arrow-alt-circle-down"></font-awesome-icon>
                 </button>
               </div>
             </td>
-            <td class="column name">
+            <td class="column expand name" @click="expandStation(station)">
               <router-link class="content" :to="{ path: '/station/' + station }">{{ getMeta(station).site_name.trim() }}</router-link> <small class="unit">({{ station }})</small>
             </td>
-            <td class="column depth">
+            <td class="column expand depth" @click="expandStation(station)">
               <span class="mobile">
                 <div class="text-center">Depth of snow:
                   <div>
@@ -108,7 +105,7 @@
                 </span>
               </div>
             </td>
-            <td class="column temp">
+            <td class="column expand temp" @click="expandStation(station)">
               <div class="content">
                 <span class="mobile">
                   <div class="text-center">
@@ -124,7 +121,7 @@
                 </span>
               </div>
             </td>
-            <td class="column forecast">
+            <td class="column expand forecast" @click="expandStation(station)">
                 <div v-if="forecastData[station] && forecastData[station].forecast" class="content">
                   <div v-if="forecastData[station] && forecastData[station].forecast.data.hazard.length >= 1" class="hazard-wrap">
                     <span class="mobile">
@@ -161,7 +158,7 @@
                   <div>NWS API error</div>
                 </div>
             </td>
-            <td class="column forecast-small">
+            <td class="column expand forecast-small" @click="expandStation(station)">
               <div class="content">
                 <span class="mobile">
                   <div class="text-left">12 / 24-hr snow forecast:</div>
@@ -179,7 +176,7 @@
                 </div>
               </div>
             </td>
-            <td class="column forecast">
+            <td class="column expand forecast" @click="expandStation(station)">
               <div v-if="avyData[station] && avyData[station][0]" class="content avy">
                 <div
                   class="avy-box"
@@ -211,7 +208,7 @@
               </div>
             </td>
           </tr>
-          <tr class="content-expand" v-show="expanded[station]" >
+          <tr class="content-expand expand" :class="{ 'expanded': expanded[station] === true }" v-show="expanded[station]" @click="expandStation(station)">
             <td class="desktop">&nbsp;</td>
             <td colspan="2">
               <div class="content-extra">
@@ -282,7 +279,7 @@
             </td>
           </tr>
         </tbody>
-      </draggable>
+      </table>
     </div>
   </div>
 </template>
@@ -358,6 +355,22 @@ export default {
     removeStation(station) {
       this.$root.$emit("removeStation", station);
     },
+    moveUp(station) {
+      const index = this.stationList.indexOf(station);
+      if (index !== 0) {
+        // console.log(this.stationList, index, index - 1)
+        // console.log(this.array_move(this.stationList, index, index - 1))
+        this.$root.$emit("reorderStations", this.array_move(this.stationList, index, index - 1));
+      }
+    },
+    moveDown(station) {
+      const index = this.stationList.indexOf(station);
+      if (index !== this.stationList.length - 1) {
+        // console.log(this.stationList, index, index + 1)
+        // console.log(this.array_move(this.stationList, index, index + 1))
+        this.$root.$emit("reorderStations", this.array_move(this.stationList, index, index + 1));
+      }
+    },
     endDrag() {
       this.$root.$emit("reorderStations", this.stationList);
       this.drag = false;
@@ -377,7 +390,24 @@ export default {
         finalValues.push({ sd: value })
       })
       return finalValues;
-    }
+    },
+    // https://stackoverflow.com/questions/5306680/move-an-array-element-from-one-array-position-to-another
+    array_move(arr, old_index, new_index) {
+        while (old_index < 0) {
+            old_index += arr.length;
+        }
+        while (new_index < 0) {
+            new_index += arr.length;
+        }
+        if (new_index >= arr.length) {
+            var k = new_index - arr.length + 1;
+            while (k--) {
+                arr.push(undefined);
+            }
+        }
+        arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+        return arr; // for testing purposes
+    },
   },
 };
 </script>
@@ -651,6 +681,10 @@ export default {
 
 .expand {
   cursor: zoom-in;
+}
+
+.expanded.expand, .expanded .expand {
+  cursor: zoom-out;
 }
 
 .hazard-wrap {

@@ -8,6 +8,8 @@ import { Laue } from 'laue';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faArrowAltCircleUp  } from "@fortawesome/free-solid-svg-icons";
+import { faArrowAltCircleDown  } from "@fortawesome/free-solid-svg-icons";
 import { faGripLines } from "@fortawesome/free-solid-svg-icons";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -24,6 +26,8 @@ library.add(faHeart);
 library.add(faExpand);
 library.add(faCompress);
 library.add(faExternalLinkAlt);
+library.add(faArrowAltCircleUp);
+library.add(faArrowAltCircleDown);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 // end font awesome
