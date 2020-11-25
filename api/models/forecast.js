@@ -16,7 +16,8 @@ async function stationLookup(stationLookupUrl) {
   return axios({
     method: 'get',
     url: stationLookupUrl,
-  }).then((response) => response.data['properties']['forecastOffice']);
+  }).then((response) => response.data['properties']['forecastOffice'])
+    .catch((error) => console.log(error));
 }
 
 // get forecast discussion from NWS
@@ -24,7 +25,8 @@ async function getDiscussion(discussionLookupUrl) {
   return axios({
     method: 'get',
     url: discussionLookupUrl,
-  }).then((response) => response.data);
+  }).then((response) => response.data)
+    .catch((error) => console.log(error));
 }
 
 // get human-readable forecast
@@ -32,7 +34,14 @@ async function getForecast(forecastLookupUrl) {
   return axios({
     method: 'get',
     url: forecastLookupUrl,
-  }).then((response) => response.data);
+  }).then(function(response) {
+    if (typeof response.data === 'string' && response.data.includes('<script')) {
+      return null;
+    } else {
+      return response.data
+    }
+  })
+    .catch((error) => console.log(error));
 }
 
 // get forecast data for charting
@@ -40,14 +49,16 @@ async function getForecastGraphical(graphicalLookupUrl) {
   return axios({
     method: 'get',
     url: graphicalLookupUrl,
-  }).then((response) => response.data);
+  }).then((response) => response.data)
+    .catch((error) => console.log(error));
 }
 
 async function getHazard(hazardUrl) {
   return axios({
     method: 'get',
     url: hazardUrl,
-  }).then((response) => response.data);
+  }).then((response) => response.data)
+    .catch((error) => console.log(error));
 }
 
 module.exports = async (req, res, next, id) => {
@@ -91,7 +102,7 @@ module.exports = async (req, res, next, id) => {
 
     let snowForecast = [];
 
-    if (forecast.data && forecast.data.text) {
+    if (forecast && forecast.data && forecast.data.text) {
       forecast.data.text.forEach(function (element) {
         if (element.includes('accumulation of')) {
           const snowRaw = element.split('accumulation of ');
@@ -102,14 +113,11 @@ module.exports = async (req, res, next, id) => {
             const snowAverage = average(snowArray);
             snowForecast.push(snowAverage);
           }
-          // console.log(snowArray)
         } else {
           snowForecast.push(0);
-          // console.log(0)
         }
       });
     }
-    // console.log(snowForecast);
 
     const graphicalLookupUrl =
       'https://forecast.weather.gov/MapClick.php?lat=' +
@@ -123,7 +131,7 @@ module.exports = async (req, res, next, id) => {
     });
 
     let hazardFinal = '';
-    if (forecast && forecast.data && forecast.data.hazard && !forecast.data.hazard == []) {
+    if (forecast && forecast.data && !forecast.data.hazard == []) {
       const hazardUrl =
         'http://forecast.weather.gov/showsigwx.php?warnzone=CAZ069&warncounty=CAC003&firewxzone=CAZ269&local_place1=7+Miles+SSE+Carson+Pass+CA&product1=Winter+Storm+Warning';
       const hazard = await getHazard(hazardUrl);
@@ -141,7 +149,11 @@ module.exports = async (req, res, next, id) => {
     result['forecastLookupUrl'] = forecastLookupUrl;
     result['forecast'] = forecast;
     result['forecastGraphicalUrl'] = graphicalLookupUrl;
-    result['forecastGraphical'] = graphicalForecast.dwml.data.parameters;
+    if (graphicalForecast && graphicalForecast.dwml && graphicalForecast.dwml.data.parameters) {
+      result['forecastGraphical'] = graphicalForecast.dwml.data.parameters;
+    } else {
+      result['forecastGraphical'] = null;
+    }
     result['forecastSnow'] = snowForecast;
     if (!hazardFinal == null) {
       result['hazard'] = hazardFinal.toString();

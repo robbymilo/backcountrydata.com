@@ -5,6 +5,7 @@ module.exports = hour_detail;
 
 function hour_detail(req, res, next) {
   if (Functions.isStation(req.params.id)) {
+    const type = 'hour'
     Data(req, res, next, type, req.params.id);
   } else {
     var err = new Error('invalid api usage');

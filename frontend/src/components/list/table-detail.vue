@@ -151,9 +151,7 @@
                     forecastData[station].forecast.data.hazard.length >= 1
                   "
                 >
-                  <span
-                    v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index"
-                  >
+                  <span v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index">
                     <div class="mobile" v-if="index == 0">
                       {{ forecastData[station].forecast.data.text[0] }}
                     </div>
@@ -174,13 +172,15 @@
                     </a>
                   </span>
                 </div>
-                <div v-else>&nbsp;</div>
                 <div
                   class="desktop"
                   :title="forecastData[station].forecast.data.text[0]"
                 >
                   {{ forecastData[station].forecast.data.weather[0] }}
                 </div>
+              </div>
+              <div v-if="forecastData[station] && forecastData[station].forecast === null">
+                NWS API error
               </div>
               <!-- <span class="external">
                 <a
