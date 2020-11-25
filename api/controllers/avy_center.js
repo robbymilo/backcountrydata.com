@@ -17,14 +17,13 @@ async function avyLookup() {
   }).then(function (response) {
     // check master cache
     if (Functions.isCacheValid('avy', 'master')) {
-      console.log('avy master cache exists');
+      // console.log('avy master cache exists');
       const json = JSON.parse(
         fs.readFileSync(path.join(__dirname, '../data/avy/master.json'))
       );
 
       return json;
     } else {
-      console.log('caching avy master');
       fs.writeFile(
         path.join(__dirname, '../data/avy/master.json'),
         JSON.stringify(response.data),
@@ -32,7 +31,7 @@ async function avyLookup() {
           if (err) {
             return console.log('cache error: ' + err);
           } else {
-            console.log('cache write: success');
+            // console.log('cache write: success');
           }
         }
       );
@@ -43,11 +42,10 @@ async function avyLookup() {
 }
 
 module.exports = async (req, res, next) => {
-  console.log('finding station avy center');
+
   if (Functions.isStation(req.params.id)) {
     // check cache
     if (Functions.isCacheValid('avy', req.params.id)) {
-      console.log('avy cache valid');
       const json = JSON.parse(
         fs.readFileSync(
           path.join(__dirname, '../data/avy/' + req.params.id + '.json')
@@ -117,7 +115,7 @@ module.exports = async (req, res, next) => {
           if (err) {
             return console.log('cache error: ' + err);
           } else {
-            console.log('cache write: success');
+            // console.log('cache write: success');
           }
         }
       );

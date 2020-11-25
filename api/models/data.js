@@ -16,12 +16,11 @@ async function getData(req, res, next, type, id, url) {
     .then((response) =>
       CSV.saveData(req, res, next, type, id, url, response.data)
     )
-    .catch((response) => console.log(response));
+    .catch((error) => console.log(error));
 }
 
 module.exports = async (req, res, next, type, id) => {
   if (Functions.isCacheValid(type, id)) {
-    console.log('sending cached data');
     var json = JSON.parse(
       fs.readFileSync(
         path.join(__dirname, '../data/' + type + '/' + id + '.json')
@@ -36,7 +35,6 @@ module.exports = async (req, res, next, type, id) => {
 
     res.send(data);
   } else {
-    console.log('getting new data');
     const url = Functions.buildRequest(Station, type, id);
     const newData = await getData(req, res, next, type, id, url);
     return newData;

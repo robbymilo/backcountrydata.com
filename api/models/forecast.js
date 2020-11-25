@@ -44,7 +44,6 @@ async function getForecastGraphical(graphicalLookupUrl) {
 }
 
 async function getHazard(hazardUrl) {
-  console.log('fetching hazard text');
   return axios({
     method: 'get',
     url: hazardUrl,
@@ -54,7 +53,6 @@ async function getHazard(hazardUrl) {
 module.exports = async (req, res, next, id) => {
   // check cache
   if (Functions.isCacheValid('forecast', id)) {
-    console.log('forecast cache valid');
     const json = JSON.parse(
       fs.readFileSync(path.join(__dirname, '../data/forecast/' + id + '.json'))
     );
@@ -93,23 +91,24 @@ module.exports = async (req, res, next, id) => {
 
     let snowForecast = [];
 
-    forecast.data.text.forEach(function (element) {
-      if (element.includes('accumulation of')) {
-        const snowRaw = element.split('accumulation of ');
-        const snowArray = snowRaw.pop().match(/\d+/g);
-        if (snowArray === null) {
-          snowForecast.push(0);
+    if (forecast.data && forecast.data.text) {
+      forecast.data.text.forEach(function (element) {
+        if (element.includes('accumulation of')) {
+          const snowRaw = element.split('accumulation of ');
+          const snowArray = snowRaw.pop().match(/\d+/g);
+          if (snowArray === null) {
+            snowForecast.push(0);
+          } else {
+            const snowAverage = average(snowArray);
+            snowForecast.push(snowAverage);
+          }
+          // console.log(snowArray)
         } else {
-          const snowAverage = average(snowArray);
-          snowForecast.push(snowAverage);
+          snowForecast.push(0);
+          // console.log(0)
         }
-        // console.log(snowArray)
-      } else {
-        snowForecast.push(0);
-        // console.log(0)
-      }
-    });
-
+      });
+    }
     // console.log(snowForecast);
 
     const graphicalLookupUrl =
@@ -124,12 +123,14 @@ module.exports = async (req, res, next, id) => {
     });
 
     let hazardFinal = '';
-    if (!forecast.data.hazard == []) {
+    if (forecast && forecast.data && forecast.data.hazard && !forecast.data.hazard == []) {
       const hazardUrl =
         'http://forecast.weather.gov/showsigwx.php?warnzone=CAZ069&warncounty=CAC003&firewxzone=CAZ269&local_place1=7+Miles+SSE+Carson+Pass+CA&product1=Winter+Storm+Warning';
       const hazard = await getHazard(hazardUrl);
       const hazardParsed = parse(hazard, {pre: true});
       hazardFinal = hazardParsed.querySelector('#content pre');
+    } else {
+      hazardFinal = null
     }
 
     const result = {};
@@ -155,8 +156,6 @@ module.exports = async (req, res, next, id) => {
       function (err) {
         if (err) {
           return console.log('cache error: ' + err);
-        } else {
-          console.log('cache write: success');
         }
       }
     );

@@ -11,9 +11,6 @@ function station_nearest(req, res, next) {
   // station entered
   // returns nearest to station's point
   if (req.params.id && Functions.isStation(req.params.id)) {
-    console.log(
-      'getting nearest station to ' + Station[req.params.id].site_name
-    );
 
     var lat = Station[req.params.id].latitude;
     var lon = Station[req.params.id].longitude;
@@ -30,7 +27,6 @@ function station_nearest(req, res, next) {
   // search
   // returns via query
   else if (req.query.search) {
-    console.log('search term: ' + req.query.search);
     var searchArray = [];
     for (var key in StationSearch) {
       if (StationSearch.hasOwnProperty(key)) {
@@ -50,7 +46,6 @@ function station_nearest(req, res, next) {
       }
     }
 
-    console.log(searchArray.length + ' results for ' + req.query.search);
     results = searchArray;
   } else {
     var err = new Error('invalid api usage');

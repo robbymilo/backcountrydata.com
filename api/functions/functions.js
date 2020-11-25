@@ -14,10 +14,10 @@ function doesFileExist(type, id) {
   if (
     fs.existsSync(path.join(__dirname, '../data/' + type + '/' + id + '.json'))
   ) {
-    console.log('file exists');
+    // console.log('file exists');
     return true;
   } else {
-    console.log('file does not exist');
+    // console.log('file does not exist');
     return false;
   }
 }
@@ -37,10 +37,8 @@ function formatDate(date) {
 module.exports = {
   isStation: function (id) {
     if (isNumeric(id) && id in Station) {
-      console.log('station exists');
       return true;
     } else {
-      console.log('station does not exist');
       return false;
     }
   },
@@ -77,10 +75,8 @@ module.exports = {
       var age = fivemin;
 
       if (Date.now() - stats.mtimeMs < age) {
-        console.log('cache is valid');
         return true;
       } else {
-        console.log('cache is not valid');
         return false;
       }
     } else {
@@ -129,21 +125,16 @@ module.exports = {
     // today's date
     // var today = new Date('2018-12-31T00:00:02.019Z');
     var today = new Date();
-    console.log(today);
     var currentDays = getDOY(today);
 
     var waterYearStart = new Date(today.getFullYear(), 9, 1);
     var waterYearDays = getDOY(waterYearStart);
-
-    console.log('current day of year: ' + currentDays);
-    console.log('new water year days: ' + waterYearDays);
 
     if (currentDays < waterYearDays) {
       var waterYear = today.getFullYear() - 1;
     } else {
       var waterYear = today.getFullYear();
     }
-    console.log('start of water year: Oct-1-' + waterYear);
 
     var start = waterYear + '-10-01';
     var end = formatDate(today);
@@ -174,7 +165,6 @@ module.exports = {
     var wind_direction = [];
     var wind_speed = [];
     var wind_gust = [];
-    console.log(empty);
 
     rawData.forEach(function (item, index) {
       date_stamp.push(item.date);
@@ -303,7 +293,6 @@ module.exports = {
         (response) => {
           vm.loading = false;
           if (response.data.SUMMARY.RESPONSE_CODE == 1) {
-            console.warn('Success: mesowest by stid found');
             vm.responseOw = '';
             vm.error = '';
 
@@ -328,7 +317,6 @@ module.exports = {
             // Temp Comparison
             if (current_temp > previous_temp) {
               vm.isIncrease = true;
-              console.log(current_temp + ' > ' + previous_temp);
               vm.interval = setInterval(
                 function () {
                   vm.isIncrease = false;
@@ -337,7 +325,6 @@ module.exports = {
               );
             } else if (current_temp < previous_temp) {
               vm.isDecrease = true;
-              console.log(current_temp + ' < ' + previous_temp);
               vm.interval = setInterval(
                 function () {
                   vm.isDecrease = false;
@@ -417,7 +404,6 @@ module.exports = {
               );
             }
           } else {
-            console.warn('no mesowest station found ');
             vm.mesowest = '';
             vm.mesowestNear = '';
 

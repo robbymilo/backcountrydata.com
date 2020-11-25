@@ -20,7 +20,6 @@ module.exports = {
       .fromString(filtered)
       .then((json) => {
         var raw = json;
-        console.log('caching data');
         fs.writeFile(
           path.join(__dirname, '../data/' + type + '/' + id + '.json'),
           JSON.stringify(raw),
@@ -28,12 +27,11 @@ module.exports = {
             if (err) {
               return console.log('cache error: ' + err);
             } else {
-              console.log('cache write: success');
+              // console.log('cache write: success');
             }
           }
         );
         // send to browser
-        console.log('sending fresh data to browser');
         var total = req.query.total;
         var empty = req.query.empty;
 
