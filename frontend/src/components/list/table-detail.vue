@@ -4,12 +4,12 @@
       <table class="table" v-if="stationList.length > 0">
         <thead>
           <th></th>
-          <th class="column text-left">SNOTEL station</th>
-          <th class="column ">Depth of snow: <div><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small></div></th>
-          <th class="column text-center">Temp <div><small>current</small></div></th>
-          <th class="column data">Forecast <div><small>NWS</small></div></th>
-          <th class="column data">Forecast snow <div><small>12 / 24-hr</small></div></th>
-          <th class="column data">Avalanche</th>
+          <th class="column text-left"><div>SNOTEL station</div></th>
+          <th class="column "><div>Depth of snow: <div><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small></div></div></th>
+          <th class="column text-center"><div>Temp <div><small>current</small></div></div></th>
+          <th class="column data"><div>Forecast <div><small>NWS</small></div></div></th>
+          <th class="column data"><div>Forecast snow <div><small>12 / 24-hr</small></div></div></th>
+          <th class="column data"><div>Avalanche</div></th>
         </thead>
       </table>
       <table
@@ -17,7 +17,7 @@
         v-if="stationList.length > 0"
       >
         <tbody
-          v-for="station of stationList"
+          v-for="(station, index) of stationList"
           :key="station.id"
         >
           <tr
@@ -26,13 +26,13 @@
           >
             <td class="column order">
               <div class="btn-row">
+                <button class="btn up" :disabled="index === 0" @click="moveUp(station)" title="Move station up in list">
+                  <font-awesome-icon icon="arrow-alt-circle-up"></font-awesome-icon>
+                </button>
                 <button class="btn remove" @click="removeStation(station)" title="Remove station from list">
                   <font-awesome-icon icon="times-circle"></font-awesome-icon>
                 </button>
-                <button class="btn up" @click="moveUp(station)" title="Move station up in list">
-                  <font-awesome-icon icon="arrow-alt-circle-up"></font-awesome-icon>
-                </button>
-                <button class="btn down" @click="moveDown(station)" title="Move station down in list">
+                <button class="btn down" :disabled="index === (stationList.length - 1)" @click="moveDown(station)" title="Move station down in list">
                   <font-awesome-icon icon="arrow-alt-circle-down"></font-awesome-icon>
                 </button>
               </div>
@@ -492,6 +492,9 @@ export default {
     display: table-cell;
     vertical-align: middle;
     background: #31404c;
+    div {
+      padding: 0 .5rem;
+    }
   }
 
   td, th {
@@ -648,6 +651,12 @@ export default {
   padding: 3px;
   svg {
     color: white;
+  }
+}
+
+button[disabled].btn {
+  svg {
+    color: grey;
   }
 }
 

@@ -2,7 +2,7 @@ module.exports = {
   devServer: {
     proxy: {
       '^/api': {
-        target: 'http://localhost:3000',
+        target: 'https://backcountrydata.com/api',
         ws: true,
         changeOrigin: true
       },
