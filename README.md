@@ -133,4 +133,4 @@ Example: /api/avy/978
 
 ---
 
-To fix the avalanche report at the beginning of winter, run `node geo.js`.
+To fix the avalanche report at the beginning of winter, run `cd api && node geo.js`.
