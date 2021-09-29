@@ -1,8 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import VueAnalytics from "vue-analytics";
-import { Laue } from 'laue';
 
 // begin font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -31,14 +29,6 @@ library.add(faArrowAltCircleDown);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 // end font awesome
-
-// google analytics
-Vue.use(VueAnalytics, {
-  id: "UA-110511455-1",
-  router,
-});
-
-Vue.use(Laue);
 
 Vue.config.productionTip = false;
 
