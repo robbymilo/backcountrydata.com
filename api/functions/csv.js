@@ -7,9 +7,9 @@ var Functions = require('../functions/functions');
 module.exports = {
   saveData: function (req, res, next, type, id, url, data) {
     if (type == 'hour') {
-      var filtered = data.split('\n').slice(59).join('\n');
+      var filtered = data.split('\n').slice(64).join('\n');
     } else {
-      var filtered = data.split('\n').slice(60).join('\n');
+      var filtered = data.split('\n').slice(65).join('\n');
     }
 
     csvtojson({
