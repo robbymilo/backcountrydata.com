@@ -13,7 +13,7 @@ const avyRegions = require('../data/static/avy-center-points.json');
 async function avyLookup() {
   return axios({
     method: 'get',
-    url: 'https://avalanche.org/wp-admin/admin-ajax.php?action=map_layer',
+    url: 'https://api.avalanche.org/v2/public/products/map-layer',
   }).then(function (response) {
     // check master cache
     if (Functions.isCacheValid('avy', 'master')) {
@@ -103,6 +103,8 @@ module.exports = async (req, res, next) => {
         });
         if (found) {
           finalRegions[i].forecast = found.properties;
+        } else {
+          finalRegions[i].forecast = null;
         }
       }
 
