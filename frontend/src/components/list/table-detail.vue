@@ -177,7 +177,7 @@
               </div>
             </td>
             <td class="column expand forecast" @click="expandStation(station)">
-              <div v-if="avyData[station] && avyData[station][0]" class="content avy">
+              <div v-if="avyData[station] && avyData[station][0] && avyData[station][0].forecast" class="content avy">
                 <div
                   class="avy-box"
                   :style="{ background: avyData[station][0].forecast.color }"
@@ -204,6 +204,15 @@
                     </div>
                     <div>{{ avyData[station][0].forecast.travel_advice }}</div>
                   </div>
+                </div>
+              </div>
+              <div v-if="avyData[station] && avyData[station][0] && !avyData[station][0].forecast" class="content avy">
+                <div
+                  class="avy-box"
+                  style="background: rgb(136, 136, 136) none repeat scroll 0% 0%;"
+                ></div>
+                <div class="avy-rating">
+                  No rating
                 </div>
               </div>
             </td>
@@ -273,8 +282,8 @@
             <td colspan="4" class="desktop">
               <span v-if="avyData[station] && avyData[station][0]">
                 <div><strong>{{ avyData[station][0].center }}</strong> - {{ avyData[station][0].name }}</div>
-                <p>{{ capitalize(avyData[station][0].forecast.danger) }} danger</p>
-                <p>{{ avyData[station][0].forecast.travel_advice }}</p>
+                <p v-if="avyData[station][0].forecast">{{ capitalize(avyData[station][0].forecast.danger) }} danger</p>
+                <p v-if="avyData[station][0].forecast">{{ avyData[station][0].forecast.travel_advice }}</p>
               </span>
             </td>
           </tr>
