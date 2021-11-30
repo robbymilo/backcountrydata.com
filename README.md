@@ -1,4 +1,3 @@
-
 [![Build Status](https://ci.rmilo.dev/api/badges/robbymilo/backcountrydata.com/status.svg)](https://ci.rmilo.dev/robbymilo/backcountrydata.com)
 
 A website for tracking your favorite SNOTEL stations, with additional forecast and avalanche data.
