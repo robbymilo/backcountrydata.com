@@ -27,7 +27,7 @@ An API for accessing SNOTEL data in JSON format from the current water year. Dat
 ```
 cd api
 npm i
-node app.js
+npm run serve
 ```
 
 ### Endpoints

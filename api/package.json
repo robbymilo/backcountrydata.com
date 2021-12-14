@@ -15,7 +15,7 @@
   "homepage": "https://backcountrydata.com",
   "private": false,
   "scripts": {
-    "start": "node app.js",
+    "serve": "node app.js",
     "prettier": "prettier --check '**/*.js' --write"
   },
   "dependencies": {
