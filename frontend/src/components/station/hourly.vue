@@ -76,6 +76,14 @@ export default {
       sliderValue: 30,
       loading: false,
       chartOptions: {
+        legend: {
+          itemHoverStyle: {
+            color: "white",
+          },
+          itemStyle: {
+            color: "white",
+          }
+        },
         chart: {
           zoomType: "x",
           backgroundColor: 'rgb(20, 29, 36)',
@@ -128,15 +136,18 @@ export default {
         plotOptions: {
           series: {
             turboThreshold: 5000, //larger threshold or set to 0 to disable
-
           },
-
         },
         xAxis: {
           type: "datetime",
           crosshair: true,
           tickInterval: 4,
           tickLength: 5,
+          labels: {
+              style: {
+              color: 'white',
+            }
+          }
         },
         yAxis: [
           {
@@ -177,13 +188,6 @@ export default {
               }
             },
             opposite: true,
-          },
-          {
-            // Tertiary yAxis
-            title: undefined,
-            style: {
-              color: 'white',
-            }
           },
         ],
         tooltip: {
