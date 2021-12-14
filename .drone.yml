@@ -13,6 +13,12 @@ steps:
     commands:
       - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- api); then exit 78; fi
 
+  - name: tag
+    image: alpine/git
+    commands:
+    - echo "$(git rev-parse --short HEAD)" > .tags
+    - echo latest >> .tags
+
   - name: build_push_image
     image: plugins/docker
     settings:
@@ -21,7 +27,6 @@ steps:
       password:
         from_secret: docker_password
       repo: robbymilo/backcountrydata
-      tags: latest
       dockerfile: api/Dockerfile
 
 trigger:
