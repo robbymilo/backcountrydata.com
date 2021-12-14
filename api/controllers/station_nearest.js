@@ -11,7 +11,6 @@ function station_nearest(req, res, next) {
   // station entered
   // returns nearest to station's point
   if (req.params.id && Functions.isStation(req.params.id)) {
-
     var lat = Station[req.params.id].latitude;
     var lon = Station[req.params.id].longitude;
     results = Location.nearStation(req, res, next, lat, lon);

@@ -42,7 +42,6 @@ async function avyLookup() {
 }
 
 module.exports = async (req, res, next) => {
-
   if (Functions.isStation(req.params.id)) {
     // check cache
     if (Functions.isCacheValid('avy', req.params.id)) {

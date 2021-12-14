@@ -1,5 +1,5 @@
 var axios = require('axios');
-var parser = require('xml2json');
+const parser = require('xml-js');
 var {parse} = require('node-html-parser');
 var Station = require('../data/static/station-master.json');
 
@@ -16,7 +16,8 @@ async function stationLookup(stationLookupUrl) {
   return axios({
     method: 'get',
     url: stationLookupUrl,
-  }).then((response) => response.data['properties']['forecastOffice'])
+  })
+    .then((response) => response.data['properties']['forecastOffice'])
     .catch((error) => console.log(error));
 }
 
@@ -25,7 +26,8 @@ async function getDiscussion(discussionLookupUrl) {
   return axios({
     method: 'get',
     url: discussionLookupUrl,
-  }).then((response) => response.data)
+  })
+    .then((response) => response.data)
     .catch((error) => console.log(error));
 }
 
@@ -34,13 +36,17 @@ async function getForecast(forecastLookupUrl) {
   return axios({
     method: 'get',
     url: forecastLookupUrl,
-  }).then(function(response) {
-    if (typeof response.data === 'string' && response.data.includes('<script')) {
-      return null;
-    } else {
-      return response.data
-    }
   })
+    .then(function (response) {
+      if (
+        typeof response.data === 'string' &&
+        response.data.includes('<script')
+      ) {
+        return null;
+      } else {
+        return response.data;
+      }
+    })
     .catch((error) => console.log(error));
 }
 
@@ -49,7 +55,8 @@ async function getForecastGraphical(graphicalLookupUrl) {
   return axios({
     method: 'get',
     url: graphicalLookupUrl,
-  }).then((response) => response.data)
+  })
+    .then((response) => response.data)
     .catch((error) => console.log(error));
 }
 
@@ -57,7 +64,8 @@ async function getHazard(hazardUrl) {
   return axios({
     method: 'get',
     url: hazardUrl,
-  }).then((response) => response.data)
+  })
+    .then((response) => response.data)
     .catch((error) => console.log(error));
 }
 
@@ -85,9 +93,7 @@ module.exports = async (req, res, next, id) => {
       nwsOffice +
       '&xml';
     let discussion = await getDiscussion(discussionLookupUrl);
-    discussion = parser.toJson(discussion, {
-      object: true,
-    });
+    discussion = parser.xml2json(discussion);
 
     const forecastLookupUrl =
       'https://forecast.weather.gov/MapClick.php?lat=' +
@@ -126,9 +132,7 @@ module.exports = async (req, res, next, id) => {
       lon +
       '&unit=1&lg=english&FcstType=digitalDWML';
     let graphicalForecast = await getForecastGraphical(graphicalLookupUrl);
-    graphicalForecast = parser.toJson(graphicalForecast, {
-      object: true,
-    });
+    graphicalForecast = parser.xml2json(graphicalForecast);
 
     let hazardFinal = '';
     if (forecast && forecast.data && !forecast.data.hazard == []) {
@@ -138,7 +142,7 @@ module.exports = async (req, res, next, id) => {
       const hazardParsed = parse(hazard, {pre: true});
       hazardFinal = hazardParsed.querySelector('#content pre');
     } else {
-      hazardFinal = null
+      hazardFinal = null;
     }
 
     const result = {};
@@ -149,7 +153,11 @@ module.exports = async (req, res, next, id) => {
     result['forecastLookupUrl'] = forecastLookupUrl;
     result['forecast'] = forecast;
     result['forecastGraphicalUrl'] = graphicalLookupUrl;
-    if (graphicalForecast && graphicalForecast.dwml && graphicalForecast.dwml.data.parameters) {
+    if (
+      graphicalForecast &&
+      graphicalForecast.dwml &&
+      graphicalForecast.dwml.data.parameters
+    ) {
       result['forecastGraphical'] = graphicalForecast.dwml.data.parameters;
     } else {
       result['forecastGraphical'] = null;
