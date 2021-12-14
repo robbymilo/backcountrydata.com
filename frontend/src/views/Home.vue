@@ -23,7 +23,6 @@
 import search from "@/components/header/search.vue";
 import nearuser from "@/components/header/nearuser.vue";
 import tableDetail from "@/components/list/table-detail.vue";
-import mapDetail from "@/components/map-detail.vue";
 
 export default {
   name: "Home",
@@ -31,7 +30,6 @@ export default {
     search,
     nearuser,
     tableDetail,
-    mapDetail,
   },
   data() {
     return {

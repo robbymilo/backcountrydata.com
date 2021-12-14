@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import './assets/scss/main.scss';
 
 // begin font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";

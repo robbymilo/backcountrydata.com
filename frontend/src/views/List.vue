@@ -7,13 +7,11 @@
 <script>
 import stations from "@/assets/stations.json";
 import tableDetail from "@/components/list/table-detail.vue";
-import mapDetail from "@/components/map-detail.vue";
 
 export default {
   name: "List",
   components: {
     tableDetail,
-    mapDetail,
   },
   data() {
     return {

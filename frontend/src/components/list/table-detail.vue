@@ -5,7 +5,7 @@
         <thead>
           <th></th>
           <th class="column text-left"><div>SNOTEL station</div></th>
-          <th class="column "><div>Depth of snow: <div><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small></div></div></th>
+          <th class="column text-center"><div>Depth of snow: <div><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small></div></div></th>
           <th class="column text-center"><div>Temp <div><small>current</small></div></div></th>
           <th class="column data"><div>Forecast <div><small>NWS</small></div></div></th>
           <th class="column data"><div>Forecast snow <div><small>12 / 24-hr</small></div></div></th>
@@ -222,7 +222,6 @@
             <td colspan="2">
               <div class="content-extra">
                 {{ getMeta(station).county }}, {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small class="unit">{{ m_ft() }}</small>
-                <hr>
                 <div v-if="hourlyData[station] && hourlyData[station].data.snow_depth">
                   <!-- <la-cartesian :data="remapData(hourlyData[station].data.snow_depth)">
                     <la-line dot curve :label="`Snow depth`" prop="sd"></la-line>

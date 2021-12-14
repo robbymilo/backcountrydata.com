@@ -1,6 +1,6 @@
 <template>
   <div class="hourly-data">
-    <div class="container">
+    <div class="container-fluid">
       <div class="loading">
         <span v-if="loading">Loading...</span>
       </div>

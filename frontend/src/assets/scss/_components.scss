@@ -1,0 +1,27 @@
+.search {
+  width: 500px;
+  position: relative;
+}
+.results-list {
+  max-height: 100px;
+  max-width: 500px;
+
+  border: 1px solid rgba(3, 3, 3, 0.2);
+  background: $main-blue;
+  padding: 8px;
+  overflow-y: scroll;
+  position: absolute;
+}
+#autosuggest__input {
+  outline: none;
+  position: relative;
+  display: block;
+  border: 1px solid rgba(3, 3, 3, 0.2);
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  &.autosuggest__input-open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
