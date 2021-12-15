@@ -38,9 +38,9 @@
               </div>
             </td>
             <td class="column expand name" @click="expandStation(station)">
-              <h2>
+              <span>
                <router-link class="content" :to="{ path: '/station/' + station }">{{ getMeta(station).site_name.trim() }}</router-link> <small class="unit">({{ station }})</small>
-              </h2>
+              </span>
             </td>
             <td class="column expand depth" @click="expandStation(station)">
               <span class="mobile">
