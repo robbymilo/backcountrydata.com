@@ -45,7 +45,7 @@
             <td class="column expand depth" @click="expandStation(station)">
               <span class="mobile">
                 <div class="content">
-                  <h5>Depth of snow</h5>
+                  <div class="param">Depth of snow</div>
                   <strong>
                     <small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> now</small>
                   </strong>
@@ -111,9 +111,9 @@
             <td class="column expand temp" @click="expandStation(station)">
               <div class="content">
                 <span class="mobile">
-                  <h5>
+                  <div class="param">
                     Air temp
-                  </h5>
+                  </div>
                 </span>
                 <span
                   v-if="hourlyData[station] && hourlyData[station].data.air_temp"
@@ -127,9 +127,9 @@
             <td class="column expand forecast" @click="expandStation(station)">
                 <div v-if="forecastData[station] && forecastData[station].forecast" class="content">
                   <div v-if="forecastData[station] && forecastData[station].forecast.data.hazard.length >= 1" class="hazard-wrap">
-                    <h5 class="mobile">
+                    <div class="mobile param">
                       NWS forecast
-                    </h5>
+                    </div>
                     <span v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index">
                       <div class="mobile" v-if="index == 0">
                         {{ forecastData[station].forecast.data.weather[0] }}
@@ -165,8 +165,8 @@
             </td>
             <td class="column expand forecast-small" @click="expandStation(station)">
               <div class="content">
-                <span class="mobile">
-                  <h5>12 / 24-hr snow forecast</h5>
+                <span class="mobile param">
+                  <div>12 / 24-hr snow forecast</div>
                 </span>
                 <div>
                   <span v-if="forecastData[station] && forecastData[station].forecastSnow.length >= 1">
@@ -183,10 +183,15 @@
             </td>
             <td class="column expand forecast" @click="expandStation(station)">
               <div v-if="avyData[station] && avyData[station][0] && avyData[station][0].forecast" class="content avy">
-                <div
-                  class="avy-box"
-                  :style="{ background: avyData[station][0].forecast.color }"
-                ></div>
+                <div class="d-flex">
+                  <div
+                    class="avy-box"
+                    :style="{ background: avyData[station][0].forecast.color }"
+                  ></div>
+                  <div class="mobile mx-2">
+                    {{ capitalize(avyData[station][0].forecast.danger) }}
+                  </div>
+                </div>
                 <div
                   :title="
                     avyData[station][0].forecast.name +
@@ -202,22 +207,11 @@
                 <div
                   class="mobile"
                 >
-                  <div class="pt-2 pb-3">
-                    <h5>{{ avyData[station][0].center }}</h5>
-                    <div>
-                      {{ avyData[station][0].name }}
-                    </div>
+                  <div class="param pt-2">
+                    <div>{{ avyData[station][0].center }}</div>
+                    <div>{{ avyData[station][0].name }}</div>
                     <div>{{ avyData[station][0].forecast.travel_advice }}</div>
                   </div>
-                </div>
-              </div>
-              <div v-if="avyData[station] && avyData[station][0] && !avyData[station][0].forecast" class="content avy">
-                <div
-                  class="avy-box"
-                  style="background: rgb(136, 136, 136) none repeat scroll 0% 0%;"
-                ></div>
-                <div class="avy-rating">
-                  No rating
                 </div>
               </div>
             </td>
@@ -228,22 +222,6 @@
               <div class="content-extra">
                 {{ getMeta(station).county }}, {{ getMeta(station).state }} - {{ metersCheck(getMeta(station).elev) }}<small class="unit">{{ m_ft() }}</small>
                 <div v-if="hourlyData[station] && hourlyData[station].data.snow_depth">
-                  <!-- <la-cartesian :data="remapData(hourlyData[station].data.snow_depth)">
-                    <la-line dot curve :label="`Snow depth`" prop="sd"></la-line>
-                    <la-tooltip>
-                      <div class="tooltip" slot-scope="props">
-                        <div class="title">{{ props.label }}</div>
-                        <ul class="list">
-                          <li
-                            :key="item.label"
-                            v-for="item in props.actived"
-                            :style="{ borderTop: '3px solid ' + item.color }">
-                            <div class="label">{{ item.label }} - {{ cm_to_in(item.value) }}<small class="unit">{{ cm_in() }}</small></div>
-                          </li>
-                        </ul>
-                      </div>
-                    </la-tooltip>
-                  </la-cartesian> -->
                 <span
                   v-if="forecastData[station] && forecastData[station].forecast"
                 >
@@ -625,6 +603,8 @@ export default {
 
 .arrow {
   color: gray;
+  margin-right: 1px;
+  margin-left: 3px;
 }
 
 .unit {
@@ -763,5 +743,9 @@ button[disabled].btn {
   &:hover {
     background: #263139;
   }
+}
+
+.param {
+  margin-bottom: .5rem;
 }
 </style>
