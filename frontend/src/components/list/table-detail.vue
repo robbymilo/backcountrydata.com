@@ -5,9 +5,9 @@
         <thead>
           <th></th>
           <th class="column text-left"><div>SNOTEL station</div></th>
-          <th class="column text-center"><div>Depth of snow: <div><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small></div></div></th>
-          <th class="column text-center"><div>Temp <div><small>current</small></div></div></th>
-          <th class="column data"><div>Forecast <div><small>NWS</small></div></div></th>
+          <th class="column text-center"><div>Snow depth <div><small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> now</small></div></div></th>
+          <th class="column text-center"><div>Air temp <div><small>now</small></div></div></th>
+          <th class="column data"><div>Forecast <small>NWS</small></div></th>
           <th class="column data"><div>Forecast snow <div><small>12 / 24-hr</small></div></div></th>
           <th class="column data"><div>Avalanche</div></th>
         </thead>
@@ -38,14 +38,17 @@
               </div>
             </td>
             <td class="column expand name" @click="expandStation(station)">
-              <router-link class="content" :to="{ path: '/station/' + station }">{{ getMeta(station).site_name.trim() }}</router-link> <small class="unit">({{ station }})</small>
+              <h2>
+               <router-link class="content" :to="{ path: '/station/' + station }">{{ getMeta(station).site_name.trim() }}</router-link> <small class="unit">({{ station }})</small>
+              </h2>
             </td>
             <td class="column expand depth" @click="expandStation(station)">
               <span class="mobile">
-                <div class="text-center">Depth of snow:
-                  <div>
-                    <small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> current</small>
-                  </div>
+                <div class="content">
+                  <h5>Depth of snow</h5>
+                  <strong>
+                    <small>7-day <span class="arrow">&rarr;</span> 24-hour <span class="arrow">&rarr;</span> now</small>
+                  </strong>
                 </div>
               </span>
               <div class="content">
@@ -108,9 +111,9 @@
             <td class="column expand temp" @click="expandStation(station)">
               <div class="content">
                 <span class="mobile">
-                  <div class="text-center">
-                    Temp current:
-                  </div>
+                  <h5>
+                    Air temp
+                  </h5>
                 </span>
                 <span
                   v-if="hourlyData[station] && hourlyData[station].data.air_temp"
@@ -124,9 +127,9 @@
             <td class="column expand forecast" @click="expandStation(station)">
                 <div v-if="forecastData[station] && forecastData[station].forecast" class="content">
                   <div v-if="forecastData[station] && forecastData[station].forecast.data.hazard.length >= 1" class="hazard-wrap">
-                    <span class="mobile">
-                      NWS forecast:
-                    </span>
+                    <h5 class="mobile">
+                      NWS forecast
+                    </h5>
                     <span v-for="(hazard, index) in forecastData[station].forecast.data.hazard" :key="index">
                       <div class="mobile" v-if="index == 0">
                         {{ forecastData[station].forecast.data.weather[0] }}
@@ -150,7 +153,9 @@
                     class="desktop"
                     :title="forecastData[station].forecast.data.text[0]"
                   >
-                    {{ forecastData[station].forecast.data.weather[0] }}
+                    <div class="forecast-wrap">
+                      {{ forecastData[station].forecast.data.weather[0] }}
+                    </div>
                   </div>
                 </div>
                 <div v-if="forecastData[station] && forecastData[station].forecast === null" class="content">
@@ -161,7 +166,7 @@
             <td class="column expand forecast-small" @click="expandStation(station)">
               <div class="content">
                 <span class="mobile">
-                  <div class="text-left">12 / 24-hr snow forecast:</div>
+                  <h5>12 / 24-hr snow forecast</h5>
                 </span>
                 <div>
                   <span v-if="forecastData[station] && forecastData[station].forecastSnow.length >= 1">
@@ -197,10 +202,10 @@
                 <div
                   class="mobile"
                 >
-                  <div>
-                    <div>{{ avyData[station][0].center }}</div>
+                  <div class="pt-2 pb-3">
+                    <h5>{{ avyData[station][0].center }}</h5>
                     <div>
-                      <small>{{ avyData[station][0].name }}</small>
+                      {{ avyData[station][0].name }}
                     </div>
                     <div>{{ avyData[station][0].forecast.travel_advice }}</div>
                   </div>
@@ -600,7 +605,7 @@ export default {
 
 }
 .hazard {
-  color: red;
+  color: #ff3939;
   padding: 0 2px;
   &-text {
     padding-left: .5rem;
@@ -710,6 +715,9 @@ button[disabled].btn {
 
 .content {
   padding: 0 .5rem;
+  @media (max-width: 800px) {
+    padding: 0 1rem;
+  }
 }
 
 .depth .content {
@@ -717,14 +725,20 @@ button[disabled].btn {
   justify-content: space-around;
   max-width: 200px;
   margin: auto;
-
+  @media (max-width: 800px) {
+    display: block;
+    margin: 0;
+  }
 }
 
 .temp {
-  text-align: center;
+  @media (min-width: 800px) {
+    text-align: center;
+  }
 }
 
 .forecast {
+  overflow: hidden;
   .content {
     display: flex;
     justify-content: space-between;
@@ -745,4 +759,9 @@ button[disabled].btn {
   }
 }
 
+.station {
+  &:hover {
+    background: #263139;
+  }
+}
 </style>
