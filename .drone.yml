@@ -58,7 +58,8 @@ steps:
     - docker build . -t backcountrydata-frontend:latest
 
   - name: build_frontend
-    image: robbymilo/node-netlify
+    image: backcountrydata-frontend:latest
+    pull: if-not-exists
     environment:
       TOKEN:
         from_secret: netlify_auth_token
