@@ -1,35 +1,35 @@
 <template>
   <div class="avy">
-    <div class="container">
+    <div class="">
       <h3>Nearest Avalanche Forecast Regions</h3>
-      <div class="item" v-if="avyForecast.length > 0">
+      <div class="item" v-if="avyForecast">
         <div v-for="(region, index) in avyForecast">
           <div>
-            <div>
-              <strong>{{ region.name }}</strong>
-              <span v-if="region.forecast.link">
+            <strong>{{ region.name }}</strong>
+            <span v-if="region.forecast && region.forecast.link">
                 <a target="_blank" :href="region.forecast.link">
-                  <font-awesome-icon
-                    icon="external-link-alt"
-                  ></font-awesome-icon>
-                </a>
-              </span>
-            </div>
-            {{ kmCheck(region.distance) }}<small>{{ mi_km() }}</small> away by
-            {{ region.center }}
-            <span v-if="region.forecast.center_link">
-              <a target="_blank" :href="region.forecast.center_link">
-                <font-awesome-icon icon="external-link-alt"></font-awesome-icon>
+                &nbsp;
+                <font-awesome-icon
+                  icon="external-link-alt"
+                ></font-awesome-icon>
               </a>
             </span>
           </div>
-          <div v-if="region.forecast">
-            <span :style="{ color: region.forecast.stroke }">{{
-              titleCase(region.forecast.danger)
-            }}</span>
+          {{ kmCheck(region.distance) }}<small>{{ mi_km() }}</small> away by
+          {{ region.center }}
+          <span v-if="region.forecast && region.forecast.center_link">
+            <a target="_blank" :href="region.forecast.center_link">
+              <font-awesome-icon icon="external-link-alt"></font-awesome-icon>
+            </a>
+          </span>
+          <div class="content-narrow" v-if="region.forecast">
+            <span :style="{ color: region.forecast.stroke }">
+              {{ titleCase(region.forecast.danger) }}
+            </span>
             - {{ region.forecast.travel_advice }}
           </div>
           <div v-else>No data reported</div>
+          <hr>
         </div>
       </div>
     </div>

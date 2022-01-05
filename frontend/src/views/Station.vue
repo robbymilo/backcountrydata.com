@@ -1,8 +1,8 @@
 <template>
   <div class="station">
-    <vue-headful :title="station.site_name + '| SNOTEL and Winter Weather Data'" />
+    <vue-headful :title="station.site_name + '| SNOTEL, avalanche, and winter weather data'" />
 
-    <div class="container-fluid">
+    <div class="container">
       <div class="current-station">
         <h1>{{ station.site_name }} <small class="units">{{ station.station }}</small></h1>
         <div class="item" v-if="station.info">
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="container-fluid item">
+    <div class="container item">
       <div>
         <a
           v-bind:href="`https://caltopo.com/map.html#ll=${station.latitude},${station.longitude}&z=16&b=mbt&a=sf`"
@@ -33,8 +33,8 @@
         </a>
       </div>
     </div>
-
-    <div class="container-fluid">
+    <hr>
+    <div class="container">
       <div>
         <h3>
           Current conditions
@@ -65,17 +65,16 @@
         </div>
       </div>
     </div>
-
+    <hr>
     <div class="container-fluid">
       <hourly></hourly>
     </div>
 
-    <div class="d-md-flex justify-content-space-between">
-      <div class="container-fluid container-narrow">
+    <div class="">
+      <div class="container">
+        <hr>
         <forecast></forecast>
-      </div>
-
-      <div class="container-fluid container-narrow">
+        <hr>
         <avy></avy>
       </div>
     </div>

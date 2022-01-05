@@ -21,7 +21,7 @@
           :key="station.id"
         >
           <tr
-            class="station"
+            class="station station-row"
             :class="{ 'expanded': expanded[station] === true }"
           >
             <td class="column order">
@@ -739,7 +739,7 @@ button[disabled].btn {
   }
 }
 
-.station {
+.station-row {
   &:hover {
     background: #263139;
   }

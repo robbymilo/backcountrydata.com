@@ -97,9 +97,4 @@ export default {
     display: flex;
   }
 }
-
-
-.container-narrow {
-  max-width: 500px;
-}
 </style>

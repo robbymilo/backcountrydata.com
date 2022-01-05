@@ -2,7 +2,7 @@
   <div>
     <div class="expandableBox">
       <div
-        class="current"
+        class="current content-narrow"
         v-if="forecast.forecast && forecast.forecast.data.text[0]"
       >
         {{ forecast.forecast.data.text[0] }}
@@ -22,14 +22,12 @@
           </a>
         </div>
       </div>
-      <div class="discussion-wrap">
+      <div class="">
         <h3>Forecast Discussion</h3>
-        <a :href="forecast.discussion.rss.channel.item.link">{{
-          forecast.discussion.rss.channel.item.title
-        }}</a>
+
         <div class="discussion-wrap">
-          <div class="discussion" v-bind:class="{ expanded: expanded }">
-            {{ forecast.discussion.rss.channel.item.description }}
+          <div class="discussion content-narrow" v-if="discussion.elements">
+            {{ discussion.elements[0].elements[0].elements[8].elements[2].elements[0].text }}
           </div>
         </div>
       </div>
@@ -49,18 +47,8 @@ export default {
     return {
       forecast: {
         forecastGraphical: {},
-        discussion: {
-          rss: {
-            channel: {
-              item: {
-                link: "",
-                title: "",
-                description: "",
-              },
-            },
-          },
-        },
       },
+      discussion: "",
       isMetric: "",
       expanded: false,
       local: [],
@@ -88,6 +76,7 @@ export default {
         )
         .then((response) => {
           vm.forecast = response.data;
+          vm.discussion = JSON.parse(response.data.discussion);
           vm.getLocalReports();
         })
         .catch((error) => {
