@@ -49,6 +49,14 @@ steps:
     commands:
       - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- frontend); then exit 78; fi
 
+  - name: build-container
+    image: docker
+    volumes:
+    - name: dockersock
+      path: /var/run/docker.sock
+    commands:
+    - docker build . -t backcountrydata-frontend:latest
+
   - name: build_frontend
     image: robbymilo/node-netlify
     environment:
@@ -58,7 +66,8 @@ steps:
       - make build-frontend
 
   - name: deploy_production_frontend
-    image: robbymilo/node-netlify
+    image: backcountrydata-frontend:latest
+    pull: if-not-exists
     when:
       branch:
         include:
@@ -70,7 +79,8 @@ steps:
       - netlify deploy --dir frontend/dist --site c227ef54-b0f6-434b-9c19-7db3ff8e416c --auth $TOKEN --prod
 
   - name: deploy_staging_frontend
-    image: robbymilo/node-netlify
+    image: backcountrydata-frontend:latest
+    pull: if-not-exists
     when:
       branch:
         exclude:
@@ -84,3 +94,8 @@ steps:
 trigger:
   event:
   - push
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
