@@ -1,13 +1,11 @@
-FROM node:16
+FROM node:16.13.1
 
 WORKDIR /usr/src/app
-RUN ls -al
-COPY api/package*.json ./
-
-RUN npm i
 
 COPY api ./
 
+RUN npm i
+RUN ls -al
 ENV PORT 3000
 ENV HOST 0.0.0.0
 EXPOSE 3000
