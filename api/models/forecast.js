@@ -93,7 +93,7 @@ module.exports = async (req, res, next, id) => {
       nwsOffice +
       '&xml';
     let discussion = await getDiscussion(discussionLookupUrl);
-    discussion = parser.xml2json(discussion);
+    discussion = '';
 
     const forecastLookupUrl =
       'https://forecast.weather.gov/MapClick.php?lat=' +
@@ -149,7 +149,9 @@ module.exports = async (req, res, next, id) => {
     result['stationLookupUrl'] = stationLookupUrl;
     result['nwsOffice'] = nwsOfficeURL;
     result['discussionLookupUrl'] = discussionLookupUrl;
-    result['discussion'] = discussion;
+    if (discussion) {
+      result['discussion'] = discussion;
+    }
     result['forecastLookupUrl'] = forecastLookupUrl;
     result['forecast'] = forecast;
     result['forecastGraphicalUrl'] = graphicalLookupUrl;
