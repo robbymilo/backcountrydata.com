@@ -56,5 +56,18 @@ export default {
       }
     },
   },
+  metaInfo() {
+    let names = [];
+    this.stationMaster.forEach(s => {
+      names.push(stations[s].site_name.slice(0, -1))
+    })
+    return {
+      title: `${names.join(', ')} SNOTEL data`,
+      htmlAttrs: {
+        lang: 'en',
+      }
+    }
+
+  }
 };
 </script>

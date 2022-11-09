@@ -3,9 +3,12 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 
 import stations from "@/assets/stations.json";
-import vueHeadful from "vue-headful";
+import VueMeta from 'vue-meta'
 
-Vue.component("vue-headful", vueHeadful);
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  refreshOnceOnNavigation: true
+})
 
 Vue.use(Router);
 

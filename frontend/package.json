@@ -18,17 +18,17 @@
     "lodash.debounce": "^4.0.8",
     "sass": "^1.27.0",
     "sass-loader": "^10.0.3",
-    "vue": "^2.7.13r",
+    "vue": "^2.7.13",
     "vue-autosuggest": "^2.2.0",
-    "vue-headful": "^2.1.0",
+    "vue-meta": "^2.4.0",
     "vue-router": "^3.4.7",
     "vuedraggable": "^2.24.2"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
-    "@babel/eslint-parser": "^7.19.1",
     "eslint": "^8.27.0",
     "eslint-plugin-vue": "^9.7.0",
     "vue-template-compiler": "^2.7.13"

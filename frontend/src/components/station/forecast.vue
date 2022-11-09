@@ -76,7 +76,9 @@ export default {
         )
         .then((response) => {
           vm.forecast = response.data;
-          vm.discussion = JSON.parse(response.data.discussion);
+          if (response.data.discussion) {
+            vm.discussion = JSON.parse(JSON.stringify(response.data.discussion));
+          }
           vm.getLocalReports();
         })
         .catch((error) => {

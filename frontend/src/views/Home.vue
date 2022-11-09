@@ -1,9 +1,5 @@
 <template>
   <div class="home">
-    <vue-headful
-      title="Backcountry Data"
-      description="Follow and visualize the snowpack, weather, and forecast of your favorite backcountry locations in the western US."
-    />
     <div v-if="stationMaster">
       <div v-if="stationMaster.length > 0">
         <div class="wrap">
@@ -71,5 +67,17 @@ export default {
       localStorage.setItem("bcd-favorites", JSON.stringify(this.stationMaster));
     },
   },
+  metaInfo: {
+    title: 'Backcountry Data',
+    meta: [
+      {
+        name: 'description',
+        content: 'Follow and visualize the snowpack, weather, and forecast of your favorite backcountry locations in the United States.'
+      }
+    ],
+    htmlAttrs: {
+      lang: 'en',
+    }
+  }
 };
 </script>

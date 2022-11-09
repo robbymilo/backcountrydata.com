@@ -1,7 +1,5 @@
 <template>
   <div class="station">
-    <vue-headful :title="station.site_name + '| SNOTEL, avalanche, and winter weather data'" />
-
     <div class="container">
       <div class="current-station">
         <h1>{{ station.site_name }} <small class="units">{{ station.station }}</small></h1>
@@ -200,6 +198,21 @@ export default {
 
     },
   },
+  metaInfo() {
+    return {
+      title: `${this.station.site_name} (${this.station.station}) SNOTEL, avalanche, and winter weather data`,
+      meta: [
+        {
+          name: 'description',
+          content: `SNOTEL, avalanche, and weather data for ${this.station.site_name} (${this.station.station}) in ${this.station.county}, ${this.station.state}`
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en',
+      }
+    }
+
+  }
 };
 </script>
 
