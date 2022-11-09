@@ -9,7 +9,7 @@ platform:
 
 steps:
   - name: build_push_image
-    image: plugins/gcr
+    image: plugins/docker
     settings:
       username:
         from_secret: docker_username
@@ -88,7 +88,7 @@ trigger:
   - push
   paths:
     include:
-      - api/**
+      - frontend/**
 
 volumes:
 - name: dockersock
