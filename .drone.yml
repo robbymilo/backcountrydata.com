@@ -8,18 +8,8 @@ platform:
   arch: amd64
 
 steps:
-  - name: api_only
-    image: alpine/git
-    commands:
-      - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- api); then exit 78; fi
-
-  - name: tag
-    image: alpine/git
-    commands:
-    - echo "$(git rev-parse --short HEAD),latest" > .tags
-
   - name: build_push_image
-    image: plugins/docker
+    image: plugins/gcr
     settings:
       username:
         from_secret: docker_username
@@ -27,12 +17,18 @@ steps:
         from_secret: docker_password
       repo: robbymilo/backcountrydata
       dockerfile: api/Dockerfile
+      tags:
+        - ${DRONE_COMMIT_SHA:0:7}
+        - latest
 
 trigger:
   event:
   - push
   branch:
   - master
+  paths:
+    include:
+      - api/**
 
 ---
 kind: pipeline
@@ -44,11 +40,6 @@ platform:
   arch: amd64
 
 steps:
-  - name: frontend_only
-    image: alpine/git
-    commands:
-      - if (git diff --exit-code $(git rev-parse --short "HEAD^") $(git rev-parse --short HEAD) -- frontend); then exit 78; fi
-
   - name: build-container
     image: docker
     volumes:
@@ -95,6 +86,9 @@ steps:
 trigger:
   event:
   - push
+  paths:
+    include:
+      - api/**
 
 volumes:
 - name: dockersock

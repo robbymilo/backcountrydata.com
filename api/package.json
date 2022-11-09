@@ -10,7 +10,7 @@
   ],
   "author": {
     "name": "Robby Milo",
-    "email": "robbymilo@gmail.com"
+    "email": "robbymilo@fastmail.com"
   },
   "homepage": "https://backcountrydata.com",
   "private": false,
@@ -29,7 +29,7 @@
     "xml-js": "^1.6.11"
   },
   "engines": {
-    "node": "16.13.1"
+    "node": "18.12.1"
   },
   "prettier": {
     "trailingComma": "es5",
