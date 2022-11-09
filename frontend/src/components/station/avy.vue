@@ -1,7 +1,7 @@
 <template>
   <div class="avy">
     <div class="">
-      <h3>Nearest Avalanche Forecast Regions</h3>
+      <h3>Nearest avalanche forecast regions</h3>
       <div class="item" v-if="avyForecast">
         <div v-for="(region, index) in avyForecast">
           <div>

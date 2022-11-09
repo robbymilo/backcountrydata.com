@@ -23,11 +23,11 @@
         </div>
       </div>
       <div class="">
-        <h3>Forecast Discussion</h3>
+        <h3>Forecast discussion</h3>
 
         <div class="discussion-wrap">
-          <div class="discussion content-narrow" v-if="discussion.elements">
-            {{ discussion.elements[0].elements[0].elements[8].elements[2].elements[0].text }}
+          <div class="discussion content-narrow" v-if="discussion">
+            <span style="white-space: pre;" v-html="discussion"></span>
           </div>
         </div>
       </div>
