@@ -89,6 +89,7 @@ trigger:
   paths:
     include:
       - frontend/**
+      - Dockerfile
 
 volumes:
 - name: dockersock
