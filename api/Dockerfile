@@ -7,3 +7,4 @@ COPY api ./
 RUN npm ci
 
 CMD [ "node", "app.js" ]
+
