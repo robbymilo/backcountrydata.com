@@ -18,7 +18,7 @@ steps:
       password:
         from_secret: docker_password
       repo: robbymilo/backcountrydata
-      dockerfile: api/Dockerfile`
+      dockerfile: api/Dockerfile
       tags:
         - ${DRONE_COMMIT_SHA:0:7}
         - latest
