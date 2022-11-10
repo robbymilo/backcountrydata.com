@@ -6,5 +6,8 @@ COPY api ./
 
 RUN npm ci
 
+ARG BUILD
+ENV BUILD=$BUILD
+
 CMD [ "node", "app.js" ]
 
