@@ -89,11 +89,9 @@ module.exports = async (req, res, next, id) => {
     );
 
     const discussionLookupUrl =
-      'https://www.wrh.noaa.gov/total_forecast/getprod.php?afos=xxxafd' +
-      nwsOffice +
-      '&xml';
+      `https://forecast.weather.gov/product.php?site=${nwsOffice}&issuedby=${nwsOffice}&product=AFD&format=txt`
     let discussion = await getDiscussion(discussionLookupUrl);
-    discussion = '';
+    discussion = discussion.split('000')[1].split('</pre>')[0]; // thanks nws
 
     const forecastLookupUrl =
       'https://forecast.weather.gov/MapClick.php?lat=' +
