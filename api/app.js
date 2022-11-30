@@ -23,7 +23,9 @@ app.use(function (req, res, next) {
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET');
 
-  res.setHeader('build', process.env.BUILD);
+  if (process.env.BUILD) {
+    res.setHeader('build', process.env.BUILD);
+  }
 
   // Request headers you wish to allow
   res.setHeader(
