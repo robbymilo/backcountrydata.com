@@ -18,6 +18,8 @@ router.get('/forecast/:id/', controller.station_discussion);
 
 router.get('/avy/:id', controller.avy_center);
 
+router.get('/status', controller.status);
+
 // router.get('/state/:state', controller.state);
 
 module.exports = router;

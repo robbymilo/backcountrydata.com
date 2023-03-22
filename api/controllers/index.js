@@ -6,4 +6,5 @@ module.exports = {
   station_discussion: require('./station_discussion'),
   avy_center: require('./avy_center'),
   state: require('./state'),
+  status: require('./status'),
 };

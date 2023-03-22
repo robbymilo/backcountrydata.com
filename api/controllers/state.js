@@ -9,7 +9,7 @@ async function allStations(state) {
   return axios({
     method: 'get',
     url:
-      'https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customMultiTimeSeriesGroupByStationReport,metric/hourly/start_of_period/state=%22' +
+      'https://wcc.sc.eov.usda.gov/reportGenerator/view_csv/customMultiTimeSeriesGroupByStationReport,metric/hourly/start_of_period/state=%22' +
       state +
       '%22%20AND%20network=%22SNTLT%22,%22SNTL%22%20AND%20outServiceDate=%222100-01-01%22%7Cname/-168,0/stationId,name,SNWD::value?fitToScreen=false',
   }).then((response) => response.data);
