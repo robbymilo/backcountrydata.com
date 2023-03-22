@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="m-3">
+    <status></status>
     <div id="nav" class="nav">
       <div class="nav-items d-flex">
         <router-link class="home" to="/">
@@ -14,8 +15,19 @@
     </div>
     <router-view />
     <footer class="py-1">
-      <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com">Contribute</a> |
-      <a rel="noreferrer noopener" target="_blank" href="https://github.com/robbymilo/backcountrydata.com/issues/new/choose">Request feature / Report bug </a>
+      <a
+        rel="noreferrer noopener"
+        target="_blank"
+        href="https://github.com/robbymilo/backcountrydata.com"
+        >Contribute</a
+      >
+      |
+      <a
+        rel="noreferrer noopener"
+        target="_blank"
+        href="https://github.com/robbymilo/backcountrydata.com/issues/new/choose"
+        >Request feature / Report bug
+      </a>
     </footer>
   </div>
 </template>
@@ -24,12 +36,14 @@
 import search from "@/components/header/search.vue";
 import units from "@/components/header/units.vue";
 import favorites from "@/components/header/favorites.vue";
+import status from "@/components/status.vue";
 
 export default {
   components: {
     search,
     units,
     favorites,
+    status,
   },
 };
 </script>
@@ -53,13 +67,13 @@ export default {
     max-width: 250px;
     vertical-align: top;
     padding: 8px;
-    border-right: .5px solid grey;
+    border-right: 0.5px solid grey;
     overflow: hidden;
   }
 
   h3 {
-    padding-top: .5rem;
-    padding-left: .5rem;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
   }
 }
 
@@ -74,7 +88,6 @@ export default {
 .text-center {
   text-align: center;
 }
-
 
 .d-flex {
   display: flex;
