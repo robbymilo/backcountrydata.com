@@ -19,9 +19,17 @@ export const functions = {
   methods: {
     tempCheck: function (array) {
       if (!this.isMetric) {
-        return array.map((x) => Math.round(x * 1.8 + 32));
+        return array.map((x) => {
+          if (x !== "") {
+            Math.round(x * 1.8 + 32);
+          }
+        });
       } else {
-        return array.map((x) => Math.round(x));
+        return array.map((x) => {
+          if (x !== "") {
+            Math.round(x);
+          }
+        });
       }
     },
     timezone(date_time) {

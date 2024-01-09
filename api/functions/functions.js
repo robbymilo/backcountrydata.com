@@ -168,7 +168,9 @@ module.exports = {
 
     rawData.forEach(function (item, index) {
       date_stamp.push(item.date);
-      air_temp.push(item.at);
+      if (item.at !== '') {
+        air_temp.push(item.at);
+      }
 
       // if SNOTEL does not return data for a point in time
       // get the previous value
