@@ -21,13 +21,13 @@ export const functions = {
       if (!this.isMetric) {
         return array.map((x) => {
           if (x !== "") {
-            Math.round(x * 1.8 + 32);
+            return Math.round(x * 1.8 + 32);
           }
         });
       } else {
         return array.map((x) => {
           if (x !== "") {
-            Math.round(x);
+            return Math.round(x);
           }
         });
       }
