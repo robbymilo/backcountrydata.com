@@ -10,3 +10,4 @@ ARG BUILD
 ENV BUILD=$BUILD
 
 CMD [ "node", "app.js" ]
+

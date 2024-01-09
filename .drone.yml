@@ -52,8 +52,6 @@ steps:
 trigger:
   event:
     - push
-  branch:
-    - master
   paths:
     include:
       - api/**
