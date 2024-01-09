@@ -23,11 +23,37 @@ steps:
         - ${DRONE_COMMIT_SHA:0:7}
         - latest
 
+  - name: update-deployments
+    image: robbymilo/git-updater:latest
+    settings:
+      github_user: milorobot
+      github_email: milorobot@fastmail.com
+      config_json: |-
+        {
+          "destination_branch": "master",
+          "repo_owner": "robbymilo",
+          "repo_name": "deployments",
+          "update_jsonnet_attribute_configs": [
+            {
+              "file_path": "environments/eu-vetrno-0/prod/images.libsonnet",
+              "jsonnet_key": "backcountrydata",
+              "jsonnet_value": "robbymilo/backcountrydata:${DRONE_COMMIT_SHA}"
+            }
+          ]
+        }
+      github_token:
+        from_secret: github_token
+    when:
+      branch:
+        - master
+    depends_on:
+      - build_push_image
+
 trigger:
   event:
-  - push
+    - push
   branch:
-  - master
+    - master
   paths:
     include:
       - api/**
@@ -45,10 +71,10 @@ steps:
   - name: build-container
     image: docker
     volumes:
-    - name: dockersock
-      path: /var/run/docker.sock
+      - name: dockersock
+        path: /var/run/docker.sock
     commands:
-    - docker build . -t backcountrydata-frontend:latest
+      - docker build . -t backcountrydata-frontend:latest
 
   - name: build_frontend
     image: backcountrydata-frontend:latest
@@ -87,13 +113,13 @@ steps:
 
 trigger:
   event:
-  - push
+    - push
   paths:
     include:
       - frontend/**
       - Dockerfile
 
 volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
