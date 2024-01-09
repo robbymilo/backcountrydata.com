@@ -75,7 +75,11 @@ module.exports = async (req, res, next, id) => {
     const json = JSON.parse(
       fs.readFileSync(path.join(__dirname, '../data/forecast/' + id + '.json'))
     );
-    res.send(json);
+    if (json) {
+      res.send(json);
+    } else {
+      res.sendStatus(502);
+    }
   } else {
     const lat = Station[id].latitude;
     const lon = Station[id].longitude;

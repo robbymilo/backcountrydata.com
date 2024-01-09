@@ -51,7 +51,11 @@ module.exports = async (req, res, next) => {
           path.join(__dirname, '../data/avy/' + req.params.id + '.json')
         )
       );
-      res.send(json);
+      if (json) {
+        res.send(json);
+      } else {
+        res.sendStatus(502);
+      }
     } else {
       const lat = Station[req.params.id].latitude;
       const lon = Station[req.params.id].longitude;
