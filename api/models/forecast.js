@@ -1,7 +1,7 @@
 var axios = require('axios');
 const parser = require('xml-js');
 var {parse} = require('node-html-parser');
-var Station = require('../data/static/station-master.json');
+var Station = require('../static/station-master.json');
 
 const path = require('path');
 const fs = require('fs');
@@ -88,8 +88,7 @@ module.exports = async (req, res, next, id) => {
       ''
     );
 
-    const discussionLookupUrl =
-      `https://forecast.weather.gov/product.php?site=${nwsOffice}&issuedby=${nwsOffice}&product=AFD&format=txt`
+    const discussionLookupUrl = `https://forecast.weather.gov/product.php?site=${nwsOffice}&issuedby=${nwsOffice}&product=AFD&format=txt`;
     let discussion = await getDiscussion(discussionLookupUrl);
     discussion = discussion.split('000')[1].split('</pre>')[0]; // thanks nws
 
@@ -170,6 +169,7 @@ module.exports = async (req, res, next, id) => {
     }
     res.send(result);
 
+    fs.mkdirSync(path.join(__dirname, '../data/forecast'), {recursive: true});
     fs.writeFile(
       path.join(__dirname, '../data/forecast/' + id + '.json'),
       JSON.stringify(result),

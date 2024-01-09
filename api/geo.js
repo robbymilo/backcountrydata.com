@@ -1,6 +1,6 @@
 const geolib = require('geolib');
 const fs = require('fs');
-const avyMaster = require('./data/static/avy-center-example.json');
+const avyMaster = require('./static/avy-center-example.json');
 
 // Finds the center point of avy center polygons and saves them to a json file
 
@@ -37,7 +37,7 @@ for (i = 0; i < avyMaster.features.length; i++) {
 console.log(centerPoints);
 
 fs.writeFile(
-  './data/static/avy-center-points.json',
+  './static/avy-center-points.json',
   JSON.stringify(centerPoints),
   (err) => {
     if (err) throw err;

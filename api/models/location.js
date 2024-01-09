@@ -1,6 +1,6 @@
 var geolib = require('geolib');
 
-var Station = require('../data/static/station-master.json');
+var Station = require('../static/station-master.json');
 var Functions = require('../functions/functions');
 
 module.exports = {

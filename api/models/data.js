@@ -3,7 +3,7 @@ var fs = require('fs');
 var axios = require('axios');
 var CSV = require('../functions/csv');
 
-var Station = require('../data/static/station-master.json');
+var Station = require('../static/station-master.json');
 var Functions = require('../functions/functions');
 
 // performs cache check

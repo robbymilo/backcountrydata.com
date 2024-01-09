@@ -1,7 +1,7 @@
 var Functions = require('../functions/functions');
 var Location = require('../models/location');
-var Station = require('../data/static/station-master.json');
-var StationSearch = require('../data/static/station-search2.json');
+var Station = require('../static/station-master.json');
+var StationSearch = require('../static/station-search2.json');
 
 module.exports = station_nearest;
 

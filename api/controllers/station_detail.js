@@ -1,5 +1,5 @@
 var Functions = require('../functions/functions');
-var Station = require('../data/static/station-master.json');
+var Station = require('../static/station-master.json');
 
 module.exports = station_detail;
 

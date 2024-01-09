@@ -4,8 +4,8 @@ const path = require('path');
 const fs = require('fs');
 
 const Functions = require('../functions/functions');
-const Station = require('../data/static/station-master.json');
-const avyRegions = require('../data/static/avy-center-points.json');
+const Station = require('../static/station-master.json');
+const avyRegions = require('../static/avy-center-points.json');
 
 // finds nearest avy forecast region
 // returns list of avy regions by distance from center of region vs. station
@@ -24,6 +24,7 @@ async function avyLookup() {
 
       return json;
     } else {
+      fs.mkdirSync(path.join(__dirname, '../data/avy'), {recursive: true});
       fs.writeFile(
         path.join(__dirname, '../data/avy/master.json'),
         JSON.stringify(response.data),
@@ -109,6 +110,7 @@ module.exports = async (req, res, next) => {
 
       res.send(finalRegions);
 
+      fs.mkdirSync(path.join(__dirname, '../data/avy'), {recursive: true});
       fs.writeFile(
         path.join(__dirname, '../data/avy/' + req.params.id + '.json'),
         JSON.stringify(finalRegions),

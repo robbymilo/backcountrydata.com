@@ -20,6 +20,7 @@ module.exports = {
       .fromString(filtered)
       .then((json) => {
         var raw = json;
+        fs.mkdirSync(path.join(__dirname, '../data/', type), {recursive: true});
         fs.writeFile(
           path.join(__dirname, '../data/' + type + '/' + id + '.json'),
           JSON.stringify(raw),
