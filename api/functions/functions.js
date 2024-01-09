@@ -2,7 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var axios = require('axios');
 
-var Station = require('../data/static/station-master.json');
+var Station = require('../static/station-master.json');
 
 // https://stackoverflow.com/questions/18082/validate-decimal-numbers-in-javascript-isnumeric
 
