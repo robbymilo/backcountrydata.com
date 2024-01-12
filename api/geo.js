@@ -4,6 +4,8 @@ const avyMaster = require('./static/avy-center-example.json');
 
 // Finds the center point of avy center polygons and saves them to a json file
 
+// curl https://api.avalanche.org/v2/public/products/map-layer -o api/static/avy-center-example.json && node api/geo.js
+
 // build final data to save
 const centerPoints = [];
 
