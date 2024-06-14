@@ -94,7 +94,11 @@ module.exports = async (req, res, next, id) => {
 
     const discussionLookupUrl = `https://forecast.weather.gov/product.php?site=${nwsOffice}&issuedby=${nwsOffice}&product=AFD&format=txt`;
     let discussion = await getDiscussion(discussionLookupUrl);
-    discussion = discussion.split('000')[1].split('</pre>')[0]; // thanks nws
+
+    if (discussion) {
+      discussion = parse(discussion).querySelector('.glossaryProduct')
+        .innerText; // thanks nws
+    }
 
     const forecastLookupUrl =
       'https://forecast.weather.gov/MapClick.php?lat=' +
