@@ -12,7 +12,8 @@ router.get('/day/:id/', controller.day_detail);
 
 router.get('/station/:id/', controller.station_detail);
 
-router.get('/nearest/:id?/', controller.station_nearest);
+router.get('/nearest/:id/', controller.station_nearest);
+router.get('/nearest/', controller.station_nearest);
 
 router.get('/forecast/:id/', controller.station_discussion);
 
