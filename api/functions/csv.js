@@ -6,14 +6,15 @@ var Functions = require('../functions/functions');
 
 module.exports = {
   saveData: function (req, res, next, type, id, url, data) {
-    if (type == 'hour') {
-      var filtered = data.split('\n').slice(64).join('\n');
-    } else {
-      var filtered = data.split('\n').slice(65).join('\n');
+    const lines = data.split(/\r?\n/);
+    const headerIndex = lines.findIndex((line) => line.startsWith('Date,'));
+    if (headerIndex === -1) {
+      throw new Error("No CSV header found (no line starting with 'Date,').");
     }
+    const filtered = lines.slice(headerIndex).join('\n');
 
     csvtojson({
-      noheader: true,
+      noheader: false,
       headers: ['date', 'sw', 'sd', 'pa', 'at', 'wd', 'ws', 'wg'],
       checkType: true,
     })
